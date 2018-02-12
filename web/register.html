@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Register employee</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+        <form action="r/users/fn&ln&pw&job&perm" method="POST">
+            First name: <input type="text" name="fn"/>
+            Last name: <input type="text" name="ln"/>
+            Job: <input type="number" name="job"/>
+            Permissions: <input type="number" name="perm"/>
+            Password: <input type="password" name="password"/>
+            <input type="submit"/>
+        </form>
+        <br>
+        <form action="r/users">
+            ID: <input type="number" name="id"/>
+            <input type="submit"/>
+        </form>
+        <br>
+        <form action="r/users">
+            Get all users:
+            <input type="submit"/>
+        </form>
+    </body>
+</html>

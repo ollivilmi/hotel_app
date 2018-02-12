@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+	padding: 0;
+    border: 0;
+    box-sizing: border-box;
+	font-size: 14px;
+	font: inherit;
+    vertical-align: baseline;
+    font-family: Poppins-Regular, sans-serif;
+    color: #666;
+}
+
+html, body {
+    height: 100%;
+    min-width: 600px;
+}
+
+.container {
+    height: auto;
+    min-height: 100%;
+    display: -webkit-flex; /* Safari */
+    -webkit-flex-direction: row-reverse; /* Safari 6.1+ */
+    display: flex;
+    flex-direction: column;
+    /*
+    background-color: #E9EAEC;
+    */
+    background-color: #ebeeef;
+}
+
+.center-div {
+    width: 50%;
+    min-width: 700px;
+    margin: 0 auto;
+}
+
+.nav-menu {
+    flex: 0 0 80px;
+    background: #fff;
+    border-bottom: 1px solid #999999;
+}
+
+.container-nav-menu {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-menu-items{
+    height: 100%;
+    margin: auto 0;
+}
+
+#logo:hover {
+    background-color: #666;
+}
+
+#logo-img {
+    height: 70px;
+    margin: 5px 10px;
+}
+
+#profile {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+}
+
+#profile:hover {
+    background-color: #ebeeef;
+}
+
+#profile-img {
+    height: 30px;
+    margin: 10px 5px 10px 0;
+}
+
+input[type=text] {
+    margin: 25px;
+    display: block;
+    width: 200px;
+    box-sizing: border-box;
+    border: 2px solid #eaeaea;
+    border-radius: 5px;
+    background-image: url(/assets/search-icon.png);
+    background-size: 15px;
+    background-position: 60px 5px; 
+    background-color: #FAFAFA;
+    background-repeat: no-repeat;
+    padding: 3px 20px 3px 80px;
+    font-size: 0.8rem;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input:focus {
+    outline: none;
+    padding-left: 25px;
+    background-position: 5px;
+    background-color: #ffffff;
+  }
+
+.main-view {
+    flex: 1;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-notes-tasks {
+    border-radius: 10px;
+    background: #ffffff;
+    flex: 0 0 200px;
+}
+
+.add-title {
+    height: 40px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #999999;
+}
+
+.add-content-container{
+    height: 120px;
+}
+
+#add-icon {
+    height: 15px;
+    margin-left: 15px;
+    margin-right: 10px;
+    opacity: 0.6;
+}
+
+#add-content {
+    height: 120px;
+    width: 100%;
+    padding: 5px 15px 0;
+    resize: none;
+    outline: none;
+    border-bottom: 1px solid #999999;
+}
+
+.add-buttons-container {
+    height: 40px;
+    border-radius: 0 0 10px 10px;
+}
+
+#add-photo-button {
+    float: left;
+    height: 30px;
+    margin: 5px 0px 5px 10px;
+    display: flex;
+    align-items: center;
+    background-color: #FFF;
+    margin-left: 15px; 
+    padding: 0 10px;
+    outline: none;
+}
+
+#photo-icon {
+    height: 15px;
+    margin-right: 10px;
+    opacity: 0.6;
+}
+
+#add-button{
+    margin: 5px 10px 5px 0;
+    background-color: #AB9A70;
+    float: right;
+    height: 30px;
+    width: 100px;
+    text-align: center;
+    outline: none;
+    border-radius: 3px;
+    color: #fff;
+}
+
+#add-button:hover {
+    cursor: pointer;
+    background-color: #333;
+}
+
+
+.main-board {
+    border-radius: 10px;
+    margin-bottom: 10px;
+    flex: 0 0 auto;
+    background-color: #ebeeef;
+}
+
+.notes {
+    margin-top: 10px; 
+    margin-left: auto;
+    margin-right: auto; 
+    width: 100%;
+    background-color: #fff;
+    height: auto;
+    border-radius: 10px;
+}
+
+.notes-header {
+    height: 50px;
+    border-radius: 10px 10px 0 0;
+    align-items: center;
+    border-bottom: 1px solid #999999;
+}
+
+.notes-sender {
+    margin: 5px;
+    height: 40px;
+    float: left;
+    display: flex;
+}
+
+.sender-avatar img {
+    height: 40px;
+    margin-right: 5px;
+}
+
+.sender-name span {
+    font-size: 12px;
+}
+
+.notes-color {
+    margin: 15px;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    float: right;
+}
+
+.red-notes {
+    background: red;
+}
+
+.blue-notes {
+    background: blue;
+}
+
+.notes-content {
+    padding: 10px;
+    border-bottom: 1px solid #999999;
+}
+
+.notes-content img {
+    margin-top: 5px;
+    width: 100%;
+}
+
+.notes-footer {
+    height: 30px;
+    font-size: 12px;
+    padding: 9px;
+}
