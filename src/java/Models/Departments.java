@@ -32,17 +32,18 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Departments.findByTitle", query = "SELECT d FROM Departments d WHERE d.title = :title")})
 public class Departments implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "title")
+    private String title;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "title")
-    private String title;
 
     public Departments() {
     }
@@ -64,13 +65,6 @@ public class Departments implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     @Override
     public int hashCode() {
@@ -95,6 +89,14 @@ public class Departments implements Serializable {
     @Override
     public String toString() {
         return "Models.Departments[ id=" + id + " ]";
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
     
 }

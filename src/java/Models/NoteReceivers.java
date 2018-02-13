@@ -30,13 +30,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "NoteReceivers.findByDepartmentId", query = "SELECT n FROM NoteReceivers n WHERE n.departmentId = :departmentId")})
 public class NoteReceivers implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected NoteReceiversPK noteReceiversPK;
     @Basic(optional = false)
     @NotNull
     @Column(name = "department_id")
     private int departmentId;
+
+    private static final long serialVersionUID = 1L;
+    @EmbeddedId
+    protected NoteReceiversPK noteReceiversPK;
 
     public NoteReceivers() {
     }

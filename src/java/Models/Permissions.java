@@ -32,16 +32,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Permissions.findByDepartmentId", query = "SELECT p FROM Permissions p WHERE p.departmentId = :departmentId")})
 public class Permissions implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "permission")
+    private int permission;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "permission")
-    private int permission;
     @Column(name = "department_id")
     private Integer departmentId;
 
@@ -65,13 +66,6 @@ public class Permissions implements Serializable {
         this.id = id;
     }
 
-    public int getPermission() {
-        return permission;
-    }
-
-    public void setPermission(int permission) {
-        this.permission = permission;
-    }
 
     public Integer getDepartmentId() {
         return departmentId;
@@ -104,6 +98,14 @@ public class Permissions implements Serializable {
     @Override
     public String toString() {
         return "Models.Permissions[ id=" + id + " ]";
+    }
+
+    public int getPermission() {
+        return permission;
+    }
+
+    public void setPermission(int permission) {
+        this.permission = permission;
     }
     
 }

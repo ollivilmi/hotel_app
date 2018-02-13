@@ -36,12 +36,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Notes.findByNoteDate", query = "SELECT n FROM Notes n WHERE n.noteDate = :noteDate")})
 public class Notes implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
     @Lob
     @Size(max = 65535)
     @Column(name = "contents")
@@ -55,6 +49,13 @@ public class Notes implements Serializable {
     @Size(max = 65535)
     @Column(name = "img_url")
     private String imgUrl;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
 
     public Notes() {
     }
@@ -76,13 +77,6 @@ public class Notes implements Serializable {
         this.id = id;
     }
 
-    public String getContents() {
-        return contents;
-    }
-
-    public void setContents(String contents) {
-        this.contents = contents;
-    }
 
     public Date getNoteDate() {
         return noteDate;
@@ -123,6 +117,14 @@ public class Notes implements Serializable {
     @Override
     public String toString() {
         return "Models.Notes[ id=" + id + " ]";
+    }
+
+    public String getContents() {
+        return contents;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
     }
     
 }

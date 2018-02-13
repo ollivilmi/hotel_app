@@ -36,6 +36,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Users.findByJobId", query = "SELECT u FROM Users u WHERE u.jobId = :jobId")})
 public class Users implements Serializable {
 
+    @Size(max = 30)
+    @Column(name = "username")
+    private String username;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -137,6 +141,14 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "Models.Users[ id=" + id + " ]";
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
     
 }

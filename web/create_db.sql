@@ -27,6 +27,7 @@ CREATE TABLE Users (
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     pw_hash TEXT,
+    username VARCHAR(30),
     permissions_id INT REFERENCES Permissions(id),
     job_id INT REFERENCES Jobs(id)
 );
