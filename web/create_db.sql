@@ -28,6 +28,8 @@ CREATE TABLE Users (
     last_name VARCHAR(30) NOT NULL,
     pw_hash TEXT,
     username VARCHAR(30),
+    email TEXT,
+    phone_number VARCHAR(20),
     permissions_id INT REFERENCES Permissions(id),
     job_id INT REFERENCES Jobs(id)
 );
