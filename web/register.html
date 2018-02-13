@@ -13,13 +13,19 @@ and open the template in the editor.
         <form action="r/users/fn&ln&pw&job&perm" method="POST">
             First name: <input type="text" name="fn"/>
             Last name: <input type="text" name="ln"/>
+            Username: <input type="text" name="uname"/>
+            <br>
             Job: <input type="number" name="job"/>
             Permissions: <input type="number" name="perm"/>
+            Email: <input type="email" name ="email"/>
+            <br>
+            Phone: <input type="text" name ="phone"/>
             Password: <input type="password" name="password"/>
             <input type="submit"/>
+            <br>
         </form>
         <br>
-        <form action="r/users">
+        <form action="r/users/u">
             ID: <input type="number" name="id"/>
             <input type="submit"/>
         </form>
