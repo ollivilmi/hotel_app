@@ -20,13 +20,14 @@ import javax.servlet.http.HttpSession;
  *
  * @author Hillo
  */
+
 @WebServlet(name = "register", urlPatterns = {"/register"})
 public class Register extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
-        //response.sendRedirect("/management/register.html");
+        response.sendRedirect("../");
     }
     
     @Override
