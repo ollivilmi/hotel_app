@@ -25,7 +25,7 @@ import javax.ws.rs.core.MediaType;
  * @author Hillo
  */
 @Stateless
-@Path("models.jobs")
+@Path("jobs")
 public class JobsFacadeREST extends AbstractFacade<Jobs> {
 
     @PersistenceContext(unitName = "ManagementPU")
@@ -37,14 +37,14 @@ public class JobsFacadeREST extends AbstractFacade<Jobs> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void create(Jobs entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Jobs entity) {
         super.edit(entity);
     }
@@ -57,21 +57,21 @@ public class JobsFacadeREST extends AbstractFacade<Jobs> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public Jobs find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Jobs> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Jobs> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }

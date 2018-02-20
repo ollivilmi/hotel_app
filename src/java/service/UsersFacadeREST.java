@@ -153,6 +153,14 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
     public String countREST() {
         return String.valueOf(super.count());
     }
+    
+    @GET
+    @Path("byDepartment")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Users> findByDepartment(@QueryParam("department") int department) {
+        Query q = em.createNamedQuery("Users.findByDepartment").setParameter("department", department);
+        return q.getResultList();
+    }
 
     @Override
     protected EntityManager getEntityManager() {

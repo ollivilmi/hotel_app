@@ -10,6 +10,8 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    <h1>This page is for testing purposes.</h1>
+    <h3>Searches are conducted by id, and in the actual program the API will be used with JavaScript to build a list with names instead of ids.</h3>
         <form action="r/users/fn&ln&pw&job&perm" method="POST">
             First name: <input type="text" name="fn"/>
             Last name: <input type="text" name="ln"/>
@@ -32,6 +34,17 @@ and open the template in the editor.
         <br>
         <form action="r/users/all">
             Get all users:
+            <input type="submit"/>
+        </form>
+        <br>
+        <form action="r/jobs">
+            Get all jobs:
+            <input type="submit"/>
+        </form>
+        <br>
+        <form action="r/users/byDepartment">
+            Search by department:
+            <input type="number" name="department"/>
             <input type="submit"/>
         </form>
     </body>
