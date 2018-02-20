@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName")
     , @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName")
     , @NamedQuery(name = "Users.findByPermissionsId", query = "SELECT u FROM Users u WHERE u.permissionsId = :permissionsId")
-    , @NamedQuery(name = "Users.findByJobId", query = "SELECT u FROM Users u WHERE u.jobId = :jobId")})
+    , @NamedQuery(name = "Users.findByJobId", query = "SELECT u FROM Users u WHERE u.jobId = \":jobId\"")
+    , @NamedQuery(name = "Users.findByUsername", query ="SELECT u FROM Users u WHERE u.username = :username")})
 public class Users implements Serializable {
 
     @Column(name = "username")
@@ -144,7 +145,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.Users[ id=" + id + " ]";
+        return username + " " + firstName + " " + lastName + " " + pwHash + " " + email + " " + phoneNumber;
     }
 
 
