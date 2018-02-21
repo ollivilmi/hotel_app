@@ -6,6 +6,9 @@
 package service;
 
 import Models.Notes;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,6 +22,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.FormParam;
+
 
 /**
  *
@@ -27,7 +32,9 @@ import javax.ws.rs.core.MediaType;
 @Stateless
 @Path("models.notes")
 public class NotesFacadeREST extends AbstractFacade<Notes> {
-
+    /** Path to folder that store uploaded files**/
+    private static final String UPLOAD_FOLDER = "C:/uploadedFiles/";
+    
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
 
@@ -36,15 +43,22 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     }
 
     @POST
-    @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Notes entity) {
-        super.create(entity);
+    @Path("{imgUrl}&{noteDate}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Notes insertNote(@FormParam("content")String content, @FormParam("notesDate")String notesDate)
+            throws ParseException, ParseException, ParseException {
+        Notes n = new Notes();
+        n.setContents(content);
+        n.setNoteDate(new SimpleDateFormat("yyyy-MM-dd").parse(notesDate));
+        super.create(n);
+        return n;
+        
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
     public void edit(@PathParam("id") Integer id, Notes entity) {
         super.edit(entity);
     }
@@ -57,21 +71,21 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public Notes find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Notes> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Notes> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
