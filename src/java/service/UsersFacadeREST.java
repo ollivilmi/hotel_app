@@ -83,14 +83,14 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
     @GET
     @Path("/u")
     @Produces({MediaType.APPLICATION_JSON})
-    public Object find(@QueryParam("id") int id) {
+    public String find(@QueryParam("id") int id) {
         Query q = em.createNativeQuery("SELECT Users.id, Users.first_name, Users.last_name,"
             + "Users.username, Users.email, Users.phone_number, Jobs.title, Departments.title "
             + "FROM Users "
             + "JOIN Jobs ON Users.job_id = Jobs.id "
             + "JOIN Departments ON Jobs.department_id = Departments.id "
             + "WHERE Users.id = " + id);
-        return q.getResultList().get(0);
+        return buildUserJSON(q.getResultList());
     }
 
     @GET
@@ -110,12 +110,51 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
             + "JOIN Jobs ON Users.job_id = Jobs.id "
             + "JOIN Departments ON Jobs.department_id = Departments.id");
         
-        
+        return buildUserJSON(q.getResultList());
+    }
+    
+
+
+    @GET
+    @Path("{from}/{to}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Users> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+        return super.findRange(new int[]{from, to});
+    }
+
+    @GET
+    @Path("count")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String countREST() {
+        return String.valueOf(super.count());
+    }
+    
+    @GET
+    @Path("byDepartment")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Users> findByDepartment(@QueryParam("department") int department) {
+        Query q = em.createNamedQuery("Users.findByDepartment").setParameter("department", department);
+        return q.getResultList();
+    }
+    
+    @GET
+    @Path("byUsername")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Users> findByDepartment(@QueryParam("username") String username) {
+        Query q = em.createNamedQuery("Users.findByUsername").setParameter("username", username+"%");
+        return q.getResultList();
+    }
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+    
+    private String buildUserJSON(List<Object[]> results)
+    {
         JsonBuilderFactory jf = Json.createBuilderFactory(null);
         StringWriter sWriter = new StringWriter();
         JsonArrayBuilder jb = jf.createArrayBuilder();
-        
-        List<Object[]> results = q.getResultList();
         
         for (Object[] u : results)
         {
@@ -139,32 +178,4 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
         }
         return sWriter.toString();
     }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public List<Users> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-    
-    @GET
-    @Path("byDepartment")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Users> findByDepartment(@QueryParam("department") int department) {
-        Query q = em.createNamedQuery("Users.findByDepartment").setParameter("department", department);
-        return q.getResultList();
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-    
 }
