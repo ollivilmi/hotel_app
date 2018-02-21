@@ -144,6 +144,38 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
         Query q = em.createNamedQuery("Users.findByUsername").setParameter("username", username+"%");
         return q.getResultList();
     }
+    
+    @GET
+    @Path("byFirstName")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Users> findByFirstName(@QueryParam("firstName") String firstName) {
+        Query q = em.createNamedQuery("Users.findByFirstName").setParameter("firstName", firstName+"%");
+        return q.getResultList();
+    }
+    
+    @GET
+    @Path("byLastName")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Users> findByLastName(@QueryParam("lastName") String lastName) {
+        Query q = em.createNamedQuery("Users.findByLastName").setParameter("lastName", lastName+"%");
+        return q.getResultList();
+    }
+    
+    @GET
+    @Path("byJobId")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Users> findByJobId(@QueryParam("jobId") int jobId) {
+        Query q = em.createNamedQuery("Users.findByJobId").setParameter("jobId", jobId);
+        return q.getResultList();
+    }
+    
+    @GET
+    @Path("byJob")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Users> findByJob(@QueryParam("job") String job) {
+        Query q = em.createNamedQuery("Users.findByJob").setParameter("job", job+"%");
+        return q.getResultList();
+    }
 
     @Override
     protected EntityManager getEntityManager() {

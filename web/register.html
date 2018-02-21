@@ -43,7 +43,7 @@ and open the template in the editor.
         </form>
         <br>
         <form action="r/users/byDepartment">
-            Search users by department:
+            Search users by department id:
             <input type="number" name="department"/>
             <input type="submit"/>
         </form>
@@ -54,5 +54,28 @@ and open the template in the editor.
             <input type="submit"/>
         </form>
         <br>
+        <form action="r/users/byFirstName">
+            Search users by first name:
+            <input type="text" name="firstName"/>
+            <input type="submit"/>
+        </form>
+        <br>
+        <form action="r/users/byLastName">
+            Search users by last name:
+            <input type="text" name="lastName"/>
+            <input type="submit"/>
+        </form>
+        <br>
+        <form action="r/users/byJobId">
+            Search users by job id:
+            <input type="number" name="jobId"/>
+            <input type="submit"/>
+        </form>
+        <br>
+        <form action="r/users/byJob">
+            Search users by job:
+            <input type="text" name="job"/>
+            <input type="submit"/>
+        </form>
     </body>
 </html>
