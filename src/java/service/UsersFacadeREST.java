@@ -9,6 +9,7 @@ import Models.Users;
 import Register.Password;
 import java.io.StringWriter;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -37,6 +38,9 @@ import javax.ws.rs.core.MediaType;
 @Stateless
 @Path("users")
 public class UsersFacadeREST extends AbstractFacade<Users> {
+    
+    @EJB
+    UserBean ub;
 
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
@@ -54,24 +58,7 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
             @FormParam("email") String email, @FormParam("phone") String phone,
             @FormParam("uname") String uname)
     { 
-        Users u = new Users();
-        u.setFirstName(firstName);
-        u.setLastName(lastName);
-        u.setUsername(uname);
-        String hashedPw = Password.hashPassword(password);
-        u.setPwHash(hashedPw);
-        u.setJobId(job);
-        u.setPermissionsId(perm);
-        u.setEmail(email);
-        u.setPhoneNumber(phone);
-        super.create(u);
-    }
-
-    @PUT
-    @Path("{id}")
-    @Consumes({MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Users entity) {
-        super.edit(entity);
+        super.create(ub.addUser(firstName, lastName, uname, password, job, perm, email, phone));
     }
 
     @DELETE
@@ -84,13 +71,7 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
     @Path("/u")
     @Produces({MediaType.APPLICATION_JSON})
     public String find(@QueryParam("id") int id) {
-        Query q = em.createNativeQuery("SELECT Users.id, Users.first_name, Users.last_name,"
-            + "Users.username, Users.email, Users.phone_number, Jobs.title, Departments.title "
-            + "FROM Users "
-            + "JOIN Jobs ON Users.job_id = Jobs.id "
-            + "JOIN Departments ON Jobs.department_id = Departments.id "
-            + "WHERE Users.id = " + id);
-        return buildUserJSON(q.getResultList());
+        return ub.allUserDataById(id);
     }
 
     @GET
@@ -104,16 +85,8 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
     @Path("/all")
     @Produces({MediaType.APPLICATION_JSON})
     public String findAllData() {
-        Query q = em.createNativeQuery("SELECT Users.id, Users.first_name, Users.last_name,"
-            + "Users.username, Users.email, Users.phone_number, Jobs.title, Departments.title "
-            + "FROM Users "
-            + "JOIN Jobs ON Users.job_id = Jobs.id "
-            + "JOIN Departments ON Jobs.department_id = Departments.id");
-        
-        return buildUserJSON(q.getResultList());
+        return ub.allUserData();
     }
-    
-
 
     @GET
     @Path("{from}/{to}")
@@ -182,32 +155,4 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
         return em;
     }
     
-    private String buildUserJSON(List<Object[]> results)
-    {
-        JsonBuilderFactory jf = Json.createBuilderFactory(null);
-        StringWriter sWriter = new StringWriter();
-        JsonArrayBuilder jb = jf.createArrayBuilder();
-        
-        for (Object[] u : results)
-        {
-            jb
-                .add(jf.createObjectBuilder()
-                    .add("id", u[0].toString())
-                    .add("first_name", u[1].toString())
-                    .add("last_name", u[2].toString())
-                    .add("username", u[3].toString())
-                    .add("email", u[4].toString())
-                    .add("phone", u[5].toString())
-                    .add("job", u[6].toString())
-                    .add("department", u[7].toString())
-                );
-        }
-        
-        JsonArray jay = jb.build();
-
-        try (JsonWriter jWriter = Json.createWriter(sWriter)) {
-            jWriter.write(jay);
-        }
-        return sWriter.toString();
-    }
 }
