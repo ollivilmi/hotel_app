@@ -7,6 +7,7 @@ package service;
 
 import Models.Notes;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,9 +26,12 @@ import javax.ws.rs.core.MediaType;
  * @author Hillo
  */
 @Stateless
-@Path("models.notes")
+@Path("notes")
 public class NotesFacadeREST extends AbstractFacade<Notes> {
 
+    @EJB
+    NotesBean nb;
+    
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
 

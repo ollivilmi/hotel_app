@@ -18,12 +18,8 @@ import javax.validation.constraints.NotNull;
 @Embeddable
 public class NoteReceiversPK implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "note_id")
     private int noteId;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "user_id")
     private int userId;
 

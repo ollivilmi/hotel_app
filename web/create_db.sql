@@ -7,13 +7,13 @@ CREATE TABLE Notes (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     contents TEXT,
     note_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    department_id INT NOT NULL REFERENCES Departments(id),
     img_url TEXT
 );
 
 CREATE TABLE Permissions (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    permission INT NOT NULL DEFAULT 0,
-    department_id INT REFERENCES Departments(id)
+    permission TEXT NOT NULL,
 );
 
 CREATE TABLE Jobs(
@@ -26,8 +26,8 @@ CREATE TABLE Users (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    pw_hash TEXT,
-    username VARCHAR(30),
+    pw_hash CHAR(60),
+    username VARCHAR(30) UNIQUE,
     email TEXT,
     phone_number VARCHAR(20),
     permissions_id INT REFERENCES Permissions(id),
@@ -37,6 +37,5 @@ CREATE TABLE Users (
 CREATE TABLE Note_Receivers (
     note_id INT NOT NULL REFERENCES Notes(id),
     user_id INT NOT NULL REFERENCES Users(id),
-    department_id INT NOT NULL REFERENCES Departments(id),
     PRIMARY KEY (note_id, user_id)
 );
