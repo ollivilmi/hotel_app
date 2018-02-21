@@ -26,13 +26,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "NoteReceivers.findAll", query = "SELECT n FROM NoteReceivers n")
     , @NamedQuery(name = "NoteReceivers.findByNoteId", query = "SELECT n FROM NoteReceivers n WHERE n.noteReceiversPK.noteId = :noteId")
-    , @NamedQuery(name = "NoteReceivers.findByUserId", query = "SELECT n FROM NoteReceivers n WHERE n.noteReceiversPK.userId = :userId")
-    , @NamedQuery(name = "NoteReceivers.findByDepartmentId", query = "SELECT n FROM NoteReceivers n WHERE n.departmentId = :departmentId")})
+    , @NamedQuery(name = "NoteReceivers.findByUserId", query = "SELECT n FROM NoteReceivers n WHERE n.noteReceiversPK.userId = :userId")})
 public class NoteReceivers implements Serializable {
 
-    @Basic(optional = false)
-    @Column(name = "department_id")
-    private int departmentId;
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -45,11 +41,6 @@ public class NoteReceivers implements Serializable {
         this.noteReceiversPK = noteReceiversPK;
     }
 
-    public NoteReceivers(NoteReceiversPK noteReceiversPK, int departmentId) {
-        this.noteReceiversPK = noteReceiversPK;
-        this.departmentId = departmentId;
-    }
-
     public NoteReceivers(int noteId, int userId) {
         this.noteReceiversPK = new NoteReceiversPK(noteId, userId);
     }
@@ -60,14 +51,6 @@ public class NoteReceivers implements Serializable {
 
     public void setNoteReceiversPK(NoteReceiversPK noteReceiversPK) {
         this.noteReceiversPK = noteReceiversPK;
-    }
-
-    public int getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
     }
 
     @Override

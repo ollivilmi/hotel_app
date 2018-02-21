@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Notes.findByNoteDate", query = "SELECT n FROM Notes n WHERE n.noteDate = :noteDate")})
 public class Notes implements Serializable {
 
+    @Column(name = "department_id")
+    private Integer departmentId;
+
     @Column(name = "contents")
     private String contents;
     @Column(name = "note_date")
@@ -118,6 +121,14 @@ public class Notes implements Serializable {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
 }

@@ -7,6 +7,7 @@ CREATE TABLE Notes (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     contents TEXT,
     note_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    department_id INT NOT NULL REFERENCES Departments(id),
     img_url TEXT
 );
 
@@ -36,6 +37,5 @@ CREATE TABLE Users (
 CREATE TABLE Note_Receivers (
     note_id INT NOT NULL REFERENCES Notes(id),
     user_id INT NOT NULL REFERENCES Users(id),
-    department_id INT NOT NULL REFERENCES Departments(id),
     PRIMARY KEY (note_id, user_id)
 );
