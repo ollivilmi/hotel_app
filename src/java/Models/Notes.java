@@ -36,24 +36,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Notes.findByNoteDate", query = "SELECT n FROM Notes n WHERE n.noteDate = :noteDate")})
 public class Notes implements Serializable {
 
-    @Lob
-    @Size(max = 65535)
     @Column(name = "contents")
     private String contents;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "note_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date noteDate;
-    @Lob
-    @Size(max = 65535)
     @Column(name = "img_url")
     private String imgUrl;
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
 

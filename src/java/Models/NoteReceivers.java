@@ -31,7 +31,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NoteReceivers implements Serializable {
 
     @Basic(optional = false)
-    @NotNull
     @Column(name = "department_id")
     private int departmentId;
 
