@@ -33,7 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Notes.findAll", query = "SELECT n FROM Notes n")
     , @NamedQuery(name = "Notes.findById", query = "SELECT n FROM Notes n WHERE n.id = :id")
-    , @NamedQuery(name = "Notes.findByNoteDate", query = "SELECT n FROM Notes n WHERE n.noteDate = :noteDate")})
+    , @NamedQuery(name = "Notes.findByNoteDate", query = "SELECT n FROM Notes n WHERE n.noteDate = :noteDate")
+    , @NamedQuery(name = "Notes.findByImgUrl", query = "SELECT n FROM Notes n WHERE n.imgUrl = :imgUrl")
+    , @NamedQuery(name = "Notes.findByDepartmentId", query = "SELECT n FROM Notes n WHERE n.departmentId = :departmentId")})
 public class Notes implements Serializable {
 
     @Column(name = "department_id")
