@@ -40,12 +40,13 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
         super(Notes.class);
     }
 
-    @POST
-    @Override
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void create(Notes entity) {
-        super.create(entity);
-    }
+//
+//    @POST
+//    @Override
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public void create(Notes entity) {
+//        super.create(entity);
+//    }
 
     @PUT
     @Path("{id}")
