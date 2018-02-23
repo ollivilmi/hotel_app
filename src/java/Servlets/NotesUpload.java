@@ -51,7 +51,7 @@ public class NotesUpload extends HttpServlet {
 
         response.setContentType("application/json");
         
-        File uploads = new File("/Pictures"); //define storage location
+        File uploads = new File("E:\\Study\\hotel_app\\Pictures"); //define storage location
         try (PrintWriter out = response.getWriter()) {
             try {
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date")); //transform HTML String date to Java Date Object
