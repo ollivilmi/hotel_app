@@ -68,7 +68,7 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
         return super.find(id);
     }
 
-    @GET
+    @GET    
     @Override
     @Produces(MediaType.APPLICATION_JSON)
     public List<Notes> findAll() {

@@ -8,12 +8,15 @@
 </head>
 <body>
   <h1>Testing notes requests</h1>
-  <form enctype="multipart/form-data" method="POST">
+  <form enctype="multipart/form-data" method="POST" action="r/notes/new">
     Content: <input type="text" name="content">
     Date: <input type="date" name="date">
     Department Id: <input type="number" name="departmentId">
     Your Picture: <input type="file" name="file">
+    <input type="submit">
   </form>
-  
+  <form method="GET" action="r/notes">
+    Get all notes: <input type="submit">
+  </form>
 </body>
 </html>

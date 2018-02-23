@@ -60,14 +60,14 @@ public class NoteReceiversFacadeREST extends AbstractFacade<NoteReceivers> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
     public void create(NoteReceivers entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
     public void edit(@PathParam("id") PathSegment id, NoteReceivers entity) {
         super.edit(entity);
     }
@@ -81,7 +81,7 @@ public class NoteReceiversFacadeREST extends AbstractFacade<NoteReceivers> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public NoteReceivers find(@PathParam("id") PathSegment id) {
         Models.NoteReceiversPK key = getPrimaryKey(id);
         return super.find(key);
@@ -89,14 +89,14 @@ public class NoteReceiversFacadeREST extends AbstractFacade<NoteReceivers> {
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<NoteReceivers> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<NoteReceivers> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
