@@ -61,10 +61,13 @@ public class NotesUpload extends HttpServlet {
                 String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
                 
                 //create the file in the storage location
-                File file = File.createTempFile("imgUrl", fileName, uploads); 
+                File file = File.createTempFile("imgUrl_", fileName, uploads); 
                 try (InputStream input = filePart.getInputStream()) {
                     Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                } catch (Exception ex) {
+                    out.print(ex);
                 }
+                
                 //Using bean to create Notes from the POST request parameters
                 Models.Notes notes =  nb.createNote(content, date, fileName, departmentId);
                 
