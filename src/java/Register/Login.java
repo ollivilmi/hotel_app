@@ -42,7 +42,7 @@ public class Login extends HttpServlet {
         Users u = bean.getByUsername(uname);
         response.setContentType("text/plain");
         try (PrintWriter out = response.getWriter()) {
-            out.println(Password.checkPassword(pass, u.getPwHash()));
+            out.println(Password.check(pass, u.getPwHash()));
         }
 
     }

@@ -7,13 +7,13 @@ CREATE TABLE Notes (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     contents TEXT,
     note_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    department_id INT NOT NULL REFERENCES Departments(id),
+    department_id INT REFERENCES Departments(id),
     img_url TEXT
 );
 
 CREATE TABLE Permissions (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    permission TEXT NOT NULL,
+    permission TEXT NOT NULL
 );
 
 CREATE TABLE Jobs(
