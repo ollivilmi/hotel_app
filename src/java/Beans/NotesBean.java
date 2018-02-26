@@ -45,13 +45,14 @@ public class NotesBean {
         n.setContents(text);
         n.setNoteDate(date);
         n.setImgUrl(imgUrl);
-        n.setDepartmentId(departmentId);
+        /*if (departmentId != 0)*/ n.setDepartmentId(departmentId);  
         em.persist(n);
-        return n;
-    }
+        return n; 
+   }
     
     public void addReceiver(Notes note, int receiver)
     {
+        refreshEM();
         NoteReceiversPK pk = new NoteReceiversPK(note.getId(), receiver);
         NoteReceivers rec = new NoteReceivers(pk);
         em.persist(rec);

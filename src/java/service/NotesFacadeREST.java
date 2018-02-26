@@ -64,8 +64,8 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Notes find(@PathParam("id") Integer id) {
-        return super.find(id);
+    public List<Notes> find(@PathParam("id") Integer id) {
+        return nb.getNotesByUserId(id);
     }
 
     @GET    

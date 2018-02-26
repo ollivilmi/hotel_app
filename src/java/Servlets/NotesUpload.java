@@ -58,6 +58,7 @@ public class NotesUpload extends HttpServlet {
                 Part filePart = request.getPart("file");
                 String content = request.getParameter("content");
                 int departmentId = Integer.parseInt(request.getParameter("departmentId"));
+                
                 String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
                 
                 //create the file in the storage location
@@ -70,7 +71,7 @@ public class NotesUpload extends HttpServlet {
                 
                 //Using bean to create Notes from the POST request parameters
                 Models.Notes notes =  nb.createNote(content, date, fileName, departmentId);
-                
+                nb.addReceiver(notes, 1);
                 out.print(notes);
             } catch (ParseException ex) {
                 Logger.getLogger(NotesUpload.class.getName()).log(Level.SEVERE, null, ex);
