@@ -12,6 +12,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.json.Json;
+import javax.json.JsonObject;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonBuilderFactory;
@@ -30,6 +31,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -50,15 +53,35 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
     }
     
     @POST
-    @Path("{fn}&{ln}&{pw}&{job}&{perm}")
+    @Path("/register")
     @Produces(MediaType.TEXT_PLAIN)
-    public void insertUser(@FormParam("fn") String firstName, 
-            @FormParam("ln") String lastName, @FormParam("pw") String password,
+    public String insertUser(@FormParam("fn") String firstName, 
+            @FormParam("ln") String lastName, @FormParam("password") String password,
             @FormParam("job") int job, @FormParam("perm") int perm,
             @FormParam("email") String email, @FormParam("phone") String phone,
             @FormParam("uname") String uname)
     { 
-        super.create(ub.addUser(firstName, lastName, uname, password, job, perm, email, phone));
+        try 
+        {
+            super.create(ub.addUser(firstName, lastName, uname, password, job, perm, email, phone));
+        }
+        catch (Exception e)
+        {
+            e.toString();
+        }
+        return "User added";
+    }
+    
+    @POST
+    @Path("/login")
+    @Produces (MediaType.TEXT_PLAIN)
+    public String login(@FormParam ("username") String username, @FormParam("pass") String pass)
+    {
+        Users u = ub.getByUsername(username);
+        if (BCrypt.checkpw(pass, u.getPwHash()))
+            return "match";
+        else
+            return "no match";
     }
 
     @DELETE
@@ -155,4 +178,10 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
         return em;
     }
     
+    private Response badRequest()
+    {
+        return Response.status(Response.Status.BAD_REQUEST)
+                .entity("{message\":\bad request\"}")
+                .build();
+    }
 }

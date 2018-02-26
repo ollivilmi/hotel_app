@@ -37,17 +37,24 @@ public class UserBean {
     
     public Users addUser(String firstName, String lastName, String uname, String password, int job, int perm, String email, String phone)
     {
-        Users u = new Users();
-        u.setFirstName(firstName);
-        u.setLastName(lastName);
-        u.setUsername(uname);
-        String hashedPw = Password.hashPassword(password);
-        u.setPwHash(hashedPw);
-        u.setJobId(job);
-        u.setPermissionsId(perm);
-        u.setEmail(email);
-        u.setPhoneNumber(phone);
-        return u;
+        if (uname.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || email.isEmpty())
+            return null;
+        try { 
+            Users u = new Users();
+            u.setFirstName(firstName);
+            u.setLastName(lastName);
+            u.setUsername(uname);
+            u.setPwHash(Password.hash(password));
+            u.setJobId(job);
+            u.setPermissionsId(perm);
+            u.setEmail(email);
+            u.setPhoneNumber(phone);
+            return u;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
     
     public String allUserData() {
