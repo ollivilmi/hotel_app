@@ -57,7 +57,8 @@ public class NotesUpload extends HttpServlet {
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date")); //transform HTML String date to Java Date Object
                 Part filePart = request.getPart("file");
                 String content = request.getParameter("content");
-                int departmentId = Integer.parseInt(request.getParameter("departmentId"));
+                int departmentId = 0;
+                if (!request.getParameter("departmentId").isEmpty()) Integer.parseInt(request.getParameter("departmentId"));
                 
                 String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
                 

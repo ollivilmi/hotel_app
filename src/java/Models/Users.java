@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Users.findByUsername", query ="SELECT u FROM Users u WHERE u.username LIKE :username")
     , @NamedQuery(name = "Users.findByDepartment", query ="SELECT u FROM Users u JOIN Jobs j ON u.jobId = j.id WHERE j.departmentId = :department")
     , @NamedQuery(name = "Users.findByJob", query = "SELECT u FROM Users u JOIN Jobs j ON u.jobId = j.id WHERE j.title LIKE :job")
+    , @NamedQuery(name = "Users.findIdByName", query = "SELECT u.id FROM Users u WHERE u.username = :username")
 })
 public class Users implements Serializable {
 

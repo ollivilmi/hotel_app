@@ -25,19 +25,6 @@ public class NotesBean {
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
     
-    public List<Notes> getNotesByUserId(int userId) {
-        refreshEM();
-        
-        List<Integer> noteIds = em.createNamedQuery("NoteReceivers.findByUserId").setParameter("userId", userId).getResultList();
-        List<Notes> results = new ArrayList<>(noteIds.size());
-        
-        for (int id : noteIds) {
-            results.add((Notes) em.createNamedQuery("Notes.findById").setParameter("id", id).getSingleResult());
-        }
-        
-        return results;
-    }
-    
     public Notes createNote(String text, Date date, String imgUrl, int departmentId)
     {
         refreshEM();
@@ -45,7 +32,7 @@ public class NotesBean {
         n.setContents(text);
         n.setNoteDate(date);
         n.setImgUrl(imgUrl);
-        /*if (departmentId != 0)*/ n.setDepartmentId(departmentId);  
+        if (departmentId != 0) n.setDepartmentId(departmentId);  
         em.persist(n);
         return n; 
    }
@@ -62,6 +49,31 @@ public class NotesBean {
     public Notes getByImgUrl(String imgUrl) {
         refreshEM();
         return (Notes) em.createNamedQuery("Notes.findByImgUrl").setParameter("imgUrl", imgUrl).getSingleResult();
+    }
+    
+    public List<Notes> getNotesByUserId(int userId) {
+        refreshEM();
+        
+        List<Integer> noteIds = em.createNamedQuery("NoteReceivers.findByUserId").setParameter("userId", userId).getResultList();
+        List<Notes> results = new ArrayList<>(noteIds.size());
+        
+        for (int id : noteIds) {
+            results.add((Notes) em.createNamedQuery("Notes.findById").setParameter("id", id).getSingleResult());
+        }
+        
+        return results;
+    }
+    
+    public List<Notes> getNotesByUsername(String name) {
+        refreshEM();
+        int id = (int) em.createNamedQuery("Users.findIdByName").setParameter("username", name).getSingleResult();
+        return getNotesByUserId(id);
+    }
+    
+    public List<Notes> getNotesByDepartment(String departmentName) {
+        refreshEM();
+        int id = (int) em.createNamedQuery("Departments.findIdByTitle").setParameter("title", departmentName).getSingleResult();
+        return (List<Notes>) em.createNamedQuery("Notes.findByDepartmentId").setParameter("departmentId", id).getResultList();
     }
     
     public void refreshEM() {
