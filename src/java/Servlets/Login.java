@@ -43,20 +43,20 @@ public class Login extends HttpServlet {
         String uname = request.getParameter("username");
         String pass = request.getParameter("pass");
         Users u = bean.getByUsername(uname);
-        if (Password.check(pass, u.getPwHash()))
-        {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", u);
-            session.setMaxInactiveInterval(30*60);
-            
-            Cookie username = new Cookie("user", uname);
-            username.setMaxAge(30*60);
-            response.addCookie(username);
-            
-            response.sendRedirect("/management/main");
-        }
-        else
-            response.sendRedirect("/management/login.html");
+        if (u != null)
+            if (Password.check(pass, u.getPwHash()))
+            {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", u);
+                session.setMaxInactiveInterval(30*60);
+
+                Cookie username = new Cookie("user", uname);
+                username.setMaxAge(30*60);
+                response.addCookie(username);
+
+                response.sendRedirect("/management/main");
+            }
+        response.sendRedirect("/management/login.html");
     }
 
 

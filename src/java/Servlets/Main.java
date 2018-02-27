@@ -29,7 +29,7 @@ public class Main extends HttpServlet {
         if (session.getAttribute("user") == null)
             response.sendRedirect("/management/login.html");
         else
-            response.sendRedirect("/management/main.html");
+            response.sendRedirect("/management/secure/main.html");
     }
 
 

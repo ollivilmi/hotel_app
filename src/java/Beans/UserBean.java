@@ -32,6 +32,8 @@ public class UserBean {
     public Users getByUsername(String name)
     {
         Query q = em.createNamedQuery("Users.findByUsername").setParameter("username", name);
+        if (q.getResultList().isEmpty())
+            return null;
         return (Users) q.getResultList().get(0);
     }
     
