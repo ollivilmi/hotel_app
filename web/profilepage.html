@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Profile page</title>
+        <!-- CSS -->
+        <link rel="stylesheet" href="profilestyle.css">
+        <!-- Link to script -->
+        <script src="assets/scripts/profilescript.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="nav-menu">
+                <div class="container-nav-menu center-div">
+                    <div id="logo" class="nav-menu-items">
+                        <img id="logo-img" src="assets/Hotel-Logo.svg" alt="">
+                    </div>
+
+                    <div id="search-bar" class="nav-menu-items">
+                        <input type="text" name="search" placeholder="Search">
+                    </div>
+                    <div id="profile" class="nav-menu-items">
+                        <img id="profile-img" src="assets/person-icon.png" alt="">
+                        <p id="profile-name">Cuong</p>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-menu">
+                <div class="profile-container">
+                    <div class="profile-nav">
+                        <div class="profile-nav-items" id="profile-general">
+                            <p>General Information</p>
+                        </div>
+                        <div class="profile-nav-items" id="divider">
+
+                        </div>
+                        <div class="profile-nav-items" id="profile-management">
+                            <p>Management</p>
+                        </div>
+                    </div>
+                    <div class="info-container">
+                        <div class="info-page" id="general-info">
+                            <form id="info-form">
+
+                                <div class="info-block">
+                                    <label class="profile-label" for="firstname"><b>First Name</b></label>
+                                    <input class="profile-input" type="text" placeholder="Placeholder" name="firstname" readonly>
+                                </div>
+
+                                <div class="info-block">
+                                    <label class="profile-label" for="secondname"><b>Second Name</b></label>
+                                    <input class="profile-input" type="text" placeholder="Placeholder" name="secondname" readonly>
+                                </div>
+
+                                <div class="info-block">
+                                    <label class="profile-label" for="tel"><b>Phone Number</b></label>
+                                    <input class="profile-input" type="tel" placeholder="Placeholder" name="telnumber" readonly>
+                                </div>
+
+                                <div class="info-block">
+                                    <label class="profile-label" for="email"><b>Email</b></label>
+                                    <input class="profile-input" type="text" placeholder="Placeholder" name="email" readonly>
+                                </div>
+
+                                <div class="info-block">
+                                    <label class="profile-label" for="username"><b>User name</b></label>
+                                    <input class="profile-input" type="text" placeholder="Placeholder" name="username" readonly>
+                                </div>
+
+                                <div class="info-block">
+                                    <label class="profile-label" for="password"><b>Password</b></label>
+                                    <input class="profile-input" type="password" placeholder="Placeholder" name="psw" readonly>
+                                </div>
+
+                                <div class="info-block">
+                                    <label class="profile-label" for="psw-repeat"><b>Repeat Password</b></label>
+                                    <input class="profile-input" type="password" placeholder="Placeholder" name="psw-repeat" readonly>
+                                </div>
+
+                                <div class="clearfix">
+                                    <button type="submit" class="profile-btn" id="save-btn" disabled>Save</button>
+                                    <button type="reset" class="profile-btn" id="cancel-btn" disabled>Cancel</button>
+                                    <button class="profile-btn" value="Edit" name="edit-btn" id="edit-btn">Edit</button>
+                                
+                                </div>
+                            </form>
+                        </div>
+                        <div class="info-page" id="managment-info">
+                            <p>management page</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,262 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 26, 2018, 11:38:36 PM
+    Author     : Pyrt
+*/
+
+
+/* STYLES FOR NAVIGATION BAR copied from main */
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: Poppins-Regular, sans-serif;
+    color: #666;
+}
+
+html, body {
+    height: 100%;
+    min-width: 600px;
+}
+
+.container {
+    height: auto;
+    min-height: 100%;
+    display: -webkit-flex; /* Safari */
+    -webkit-flex-direction: row-reverse; /* Safari 6.1+ */
+    display: flex;
+    flex-direction: column;
+    background-color: #ebeeef;
+}
+
+.center-div {
+    width: 50%;
+    min-width: 700px;
+    margin: 0 auto;
+}
+
+.nav-menu {
+    flex: 0 0 80px;
+    background: #fff;
+    border-bottom: 1px solid #999999;
+}
+
+.container-nav-menu {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-menu-items{
+    height: 100%;
+    margin: auto 0;
+}
+
+#logo:hover {
+    background-color: #666;
+}
+
+#logo-img {
+    height: 70px;
+    margin: 5px 10px;
+}
+
+#profile {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+}
+
+#profile:hover {
+    background-color: #ebeeef;
+}
+
+#profile-img {
+    height: 30px;
+    margin: 10px 5px 10px 0;
+}
+
+#search-bar input {
+    margin: 25px;
+    display: block;
+    width: 200px;
+    box-sizing: border-box;
+    border: 2px solid #eaeaea;
+    border-radius: 5px;
+   /* background-image: url(/assets/search-icon.png); */
+    background-size: 15px;
+    background-position: 60px 5px;
+    background-color: #FAFAFA;
+    background-repeat: no-repeat;
+    padding: 3px 20px 3px 80px;
+    font-size: 0.8rem;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+#search-bar input:focus {
+    outline: none;
+    padding-left: 25px;
+    background-position: 5px;
+    background-color: #ffffff;
+}
+
+/* STYLES FOR INFO CONTAINER */
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+/* STYLES FOR INFORMATION NAV */
+
+.profile-container {
+    background-color: #ebeeef;
+}
+
+.profile-nav {
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.profile-nav-items {
+    padding-top: 20px;
+    font-size: 26px;
+    color: #cecece;
+    height: 7%;  
+}
+
+
+#divider {
+    position: fixed;
+    border-left: thick solid #cecece;
+}
+
+/* Some hover color transitions, might not need these */
+
+#profile-general p{
+    -webkit-transition: color .1s;
+    -moz-transition: color .1s;
+    -o-transition: color .1s;
+    transition: color .1s;
+}
+
+#profile-general p:hover {
+    color: #272727!important;
+}
+#profile-management p{
+    -webkit-transition: color .1s;
+    -moz-transition: color .1s;
+    -o-transition: color .1s;
+    transition: color .1s;
+}
+
+#profile-management p:hover {
+    color: #272727!important;
+}
+
+
+
+/* STYLES FOR THE INFORMATION PAGES */
+
+.info-container {
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.info-page {
+    color: grey;
+    height: 100%;
+}
+
+#info-form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 10px;
+}
+
+/* these hold the label and input */
+
+.info-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.profile-label {
+    display: inline-block;
+    padding: 10px;
+}
+
+.profile-input {
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+/*Styles for buttons*/
+
+.clearfix {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #f1f1f1;
+    font-size: 16px;
+}
+
+.profile-btn {
+    border-radius: 4px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#cancel-btn {
+    background-color: grey;
+}
+
+.cancel-enabled {
+    background: #f44336
+}
+
+#save-btn {
+    background-color: grey;
+}
+
+.save-enabled {
+    background: #4CAF50;
+}
+
+#edit-btn {
+    background-color: #008CBA;;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+
