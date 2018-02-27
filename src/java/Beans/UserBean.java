@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package Beans;
 
 import Models.Users;
-import Register.Password;
+import Login.Password;
 import java.io.StringWriter;
 import java.util.List;
 import javax.ejb.Stateless;

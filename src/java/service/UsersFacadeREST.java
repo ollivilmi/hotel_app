@@ -5,8 +5,9 @@
  */
 package service;
 
+import Beans.UserBean;
 import Models.Users;
-import Register.Password;
+import Login.Password;
 import java.io.StringWriter;
 import java.util.List;
 import javax.ejb.EJB;

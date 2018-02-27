@@ -7,8 +7,9 @@
     <property name="keepgenerated" value="true">
       <description>Keep a copy of the generated servlet class' java code.</description>
     </property>
+    <welcome-file-list>
+        <welcome-file>login.html</welcome-file>
+    </welcome-file-list>
   </jsp-config>
-  <welcome-file-list>
-      <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
+
 </glassfish-web-app>

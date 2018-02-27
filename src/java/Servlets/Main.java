@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Register;
+package Servlets;
 
 import Models.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,23 +19,30 @@ import javax.servlet.http.HttpSession;
  *
  * @author Hillo
  */
-
-@WebServlet(name = "register", urlPatterns = {"/register"})
-public class Register extends HttpServlet {
+@WebServlet(name = "main", urlPatterns = {"/main"})
+public class Main extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws IOException, ServletException {
-        response.sendRedirect("/management/register.html");
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") == null)
+            response.sendRedirect("/management/login.html");
+        else
+            response.sendRedirect("/management/main.html");
     }
-    
+
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws IOException, ServletException {
-            try (PrintWriter out = response.getWriter()) {
-        }
+            throws ServletException, IOException {
     }
-    
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

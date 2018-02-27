@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Register;
+package Servlets;
 
 import Models.Users;
 import java.io.IOException;
@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.mindrot.jbcrypt.BCrypt;
-import service.UserBean;
+import Beans.UserBean;
+import Login.Password;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 import service.UsersFacadeREST;
 
 /**
@@ -40,11 +43,20 @@ public class Login extends HttpServlet {
         String uname = request.getParameter("username");
         String pass = request.getParameter("pass");
         Users u = bean.getByUsername(uname);
-        response.setContentType("text/plain");
-        try (PrintWriter out = response.getWriter()) {
-            out.println(Password.check(pass, u.getPwHash()));
+        if (Password.check(pass, u.getPwHash()))
+        {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", u);
+            session.setMaxInactiveInterval(30*60);
+            
+            Cookie username = new Cookie("user", uname);
+            username.setMaxAge(30*60);
+            response.addCookie(username);
+            
+            response.sendRedirect("/management/main");
         }
-
+        else
+            response.sendRedirect("/management/login.html");
     }
 
 
