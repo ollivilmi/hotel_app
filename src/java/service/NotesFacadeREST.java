@@ -15,11 +15,11 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -62,12 +62,26 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     }
 
     @GET
-    @Path("{id}")
+    @Path("byUserId")
     @Produces(MediaType.APPLICATION_JSON)
-    public Notes find(@PathParam("id") Integer id) {
-        return super.find(id);
+    public List<Notes> getByUserId(@QueryParam("id") Integer id) {
+        return nb.getNotesByUserId(id);
     }
-
+    
+    @GET
+    @Path("byUsername")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Notes> getByUsername(@QueryParam("username") String username) {
+        return nb.getNotesByUsername(username);
+    }
+    
+    @GET
+    @Path("byDepartment")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Notes> getByDepartment(@QueryParam("department") String department) {
+        return nb.getNotesByDepartment(department);
+    }
+    
     @GET    
     @Override
     @Produces(MediaType.APPLICATION_JSON)

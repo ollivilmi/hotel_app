@@ -10,13 +10,25 @@
   <h1>Testing notes requests</h1>
   <form enctype="multipart/form-data" method="POST" action="r/notes/new">
     Content: <input type="text" name="content">
-    Date: <input type="date" name="date">
+    Date: <input type="datetime-local" name="date">
     Department Id: <input type="number" name="departmentId">
     Your Picture: <input type="file" name="file">
     <input type="submit">
   </form>
   <form method="GET" action="r/notes">
     Get all notes: <input type="submit">
+  </form>
+  <form method="GET" action="r/notes/byUserId">
+    Get notes by userId: <input type="number" name="id">
+    <input type="submit">
+  </form>
+  <form method="GET" action="r/notes/byUsername">
+    Get notes by username: <input type="text" name="username">
+    <input type="submit">
+  </form>
+  <form method="GET" action="r/notes/byDepartment">
+    Get notes by department: <input type="text" name="department">
+    <input type="submit">
   </form>
 </body>
 </html>

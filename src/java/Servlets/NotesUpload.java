@@ -57,17 +57,22 @@ public class NotesUpload extends HttpServlet {
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date")); //transform HTML String date to Java Date Object
                 Part filePart = request.getPart("file");
                 String content = request.getParameter("content");
-                int departmentId = Integer.parseInt(request.getParameter("departmentId"));
+                int departmentId = 0;
+                if (!request.getParameter("departmentId").isEmpty()) Integer.parseInt(request.getParameter("departmentId"));
+                
                 String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
                 
                 //create the file in the storage location
-                File file = File.createTempFile("imgUrl", fileName, uploads); 
+                File file = File.createTempFile("imgUrl_", fileName, uploads); 
                 try (InputStream input = filePart.getInputStream()) {
                     Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                } catch (Exception ex) {
+                    out.print(ex);
                 }
+                
                 //Using bean to create Notes from the POST request parameters
                 Models.Notes notes =  nb.createNote(content, date, fileName, departmentId);
-                
+                nb.addReceiver(notes, 1);
                 out.print(notes);
             } catch (ParseException ex) {
                 Logger.getLogger(NotesUpload.class.getName()).log(Level.SEVERE, null, ex);

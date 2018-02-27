@@ -25,6 +25,32 @@ public class NotesBean {
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
     
+    public Notes createNote(String text, Date date, String imgUrl, int departmentId)
+    {
+        refreshEM();
+        Notes n = new Notes();
+        n.setContents(text);
+        n.setNoteDate(date);
+        n.setImgUrl(imgUrl);
+        if (departmentId != 0) n.setDepartmentId(departmentId);  
+        em.persist(n);
+        return n; 
+   }
+    
+    public void addReceiver(Notes note, int receiver)
+    {
+        refreshEM();
+        NoteReceiversPK pk = new NoteReceiversPK(note.getId(), receiver);
+        NoteReceivers rec = new NoteReceivers(pk);
+        em.persist(rec);
+    }
+    
+    
+    public Notes getByImgUrl(String imgUrl) {
+        refreshEM();
+        return (Notes) em.createNamedQuery("Notes.findByImgUrl").setParameter("imgUrl", imgUrl).getSingleResult();
+    }
+    
     public List<Notes> getNotesByUserId(int userId) {
         refreshEM();
         
@@ -38,29 +64,16 @@ public class NotesBean {
         return results;
     }
     
-    public Notes createNote(String text, Date date, String imgUrl, int departmentId)
-    {
+    public List<Notes> getNotesByUsername(String name) {
         refreshEM();
-        Notes n = new Notes();
-        n.setContents(text);
-        n.setNoteDate(date);
-        n.setImgUrl(imgUrl);
-        n.setDepartmentId(departmentId);
-        em.persist(n);
-        return n;
+        int id = (int) em.createNamedQuery("Users.findIdByName").setParameter("username", name).getSingleResult();
+        return getNotesByUserId(id);
     }
     
-    public void addReceiver(Notes note, int receiver)
-    {
-        NoteReceiversPK pk = new NoteReceiversPK(note.getId(), receiver);
-        NoteReceivers rec = new NoteReceivers(pk);
-        em.persist(rec);
-    }
-    
-    
-    public Notes getByImgUrl(String imgUrl) {
+    public List<Notes> getNotesByDepartment(String departmentName) {
         refreshEM();
-        return (Notes) em.createNamedQuery("Notes.findByImgUrl").setParameter("imgUrl", imgUrl).getSingleResult();
+        int id = (int) em.createNamedQuery("Departments.findIdByTitle").setParameter("title", departmentName).getSingleResult();
+        return (List<Notes>) em.createNamedQuery("Notes.findByDepartmentId").setParameter("departmentId", id).getResultList();
     }
     
     public void refreshEM() {
