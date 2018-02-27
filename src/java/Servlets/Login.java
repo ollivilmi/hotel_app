@@ -52,11 +52,7 @@ public class Login extends HttpServlet {
                 session.setAttribute("user", u);
                 session.setMaxInactiveInterval(30*60);
 
-                Cookie username = new Cookie("user", uname);
-                username.setMaxAge(30*60);
-                response.addCookie(username);
-
-                response.sendRedirect("/management/main");
+                response.sendRedirect("/management/secure/main.html");
             }
         else response.sendRedirect("/management/login.html");
     }
