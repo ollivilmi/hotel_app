@@ -43,8 +43,10 @@ public class Login extends HttpServlet {
         String uname = request.getParameter("username");
         String pass = request.getParameter("pass");
         Users u = bean.getByUsername(uname);
-        if (u != null)
-            if (Password.check(pass, u.getPwHash()))
+        if (u == null)
+            response.sendRedirect("/management/login.html");
+        
+        if (Password.check(pass, u.getPwHash()))
             {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", u);
@@ -56,7 +58,7 @@ public class Login extends HttpServlet {
 
                 response.sendRedirect("/management/main");
             }
-        response.sendRedirect("/management/login.html");
+        else response.sendRedirect("/management/login.html");
     }
 
 
