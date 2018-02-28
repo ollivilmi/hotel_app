@@ -45,6 +45,6 @@ enableButtons = function () {
 
 enableInputs = function () {
     for (var i = 0; i < formInputFields.length; i++) {
-        formInputFields[i].disable = false;
+        formInputFields[i].disabled = false;
     }
 };

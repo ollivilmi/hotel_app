@@ -258,5 +258,69 @@ html, body {
     display: table;
 }
 
+/* STYLES FOR MANAGEMENT PAGE */
 
+.management-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+}
 
+.divider-horizontal {
+    border-bottom: thick solid #cecece;
+    width: 100%;
+    padding: 5px;
+}
+
+.request-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.request-header p {
+    font-size: 16px;
+}
+
+.request-header em {
+    font-size: 12px;
+    color: grey;
+}
+
+.request-container-element {
+    width: 60%;
+    height: 60%;
+}
+
+.management-new-requests {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.management-edit {
+    padding: 5px;
+}
+
+.request-button {
+    border-radius: 4px;
+    color: white;
+    padding: 2px 3px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px; 
+}
+
+#accept-request-btn {
+    background: #4CAF50;
+}
+
+#decline-request-btn {
+    background: #f44336
+}

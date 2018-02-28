@@ -93,7 +93,31 @@ and open the template in the editor.
                             </form>
                         </div>
                         <div class="info-page" id="managment-info">
-                            <p>management page</p>
+                            <div class="management-container">
+                                <!-- New requests for user permissions are shown here -->
+                                <div class="management-new-requests">
+                                    <div class="request-header">
+                                        <p>New users waiting for approval: <em>(hover for more information)</em> </p>
+                                    </div>
+                                    <div class="request-container">
+                                        <p class="request-container-element" id="request-name">Jane Doe </p>
+                                        <button type="submit" id="accept-request-btn" class="request-container-element request-button" name="request-accept">Accept</button>
+                                        <button type="submit" id="decline-request-btn" class="request-container-element request-button" name="request-decline">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="divider-horizontal">
+                                    
+                                </div>
+                                <!-- admin user can change permissions or departments from workers here -->
+                                <div class="management-edit">
+                                    <div class="edit-header">
+                                        <p>Edit user privileges</p>
+                                    </div>
+                                    <div class="edit-container">
+                                        
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
