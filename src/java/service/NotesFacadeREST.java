@@ -7,6 +7,7 @@ package service;
 
 import Beans.NotesBean;
 import Models.Notes;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -80,6 +81,13 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Notes> getByDepartment(@QueryParam("department") String department) {
         return nb.getNotesByDepartment(department);
+    }
+    
+    @GET
+    @Path("getNoteDate")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getByDepartment(@QueryParam("noteId") int noteId) {
+        return nb.getDateByNotesId(noteId) + " GMT+2";
     }
     
     @GET    

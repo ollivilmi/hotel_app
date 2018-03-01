@@ -8,13 +8,14 @@ package Beans;
 import Models.NoteReceivers;
 import Models.NoteReceiversPK;
 import Models.Notes;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import javax.persistence.Query;
 /**
  *
  * @author Hillo
@@ -76,6 +77,16 @@ public class NotesBean {
         return (List<Notes>) em.createNamedQuery("Notes.findByDepartmentId").setParameter("departmentId", id).getResultList();
     }
     
+    public String getDateByNotesId(int id) {
+        refreshEM();
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm").format((Date) em.createNamedQuery("Notes.getDateByNoteId").setParameter("noteId", id).getSingleResult());
+    }
+   
+    /*
+    This method will just empty the cache,
+    so if you fetch objects changed outside the entity manager, 
+    it will do an actual database query instead of using the outdated cached value.
+    */
     public void refreshEM() {
         em.getEntityManagerFactory().getCache().evictAll();
     }

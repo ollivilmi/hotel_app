@@ -50,29 +50,37 @@ public class NotesUpload extends HttpServlet {
             throws ServletException, IOException {
 
         response.setContentType("application/json");
-        
-        File uploads = new File("E:\\Study\\hotel_app\\Pictures"); //define storage location
+
+        File uploads = new File("E:\\Study\\hotel_app"); //define storage location
         try (PrintWriter out = response.getWriter()) {
             try {
-                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date")); //transform HTML String date to Java Date Object
+                String date = request.getParameter("date"); //transform HTML String date to Java Date Object
+                String time = request.getParameter("time");
+                Date finalDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(date + " " + time);
                 Part filePart = request.getPart("file");
                 String content = request.getParameter("content");
                 int departmentId = 0;
-                if (!request.getParameter("departmentId").isEmpty()) Integer.parseInt(request.getParameter("departmentId"));
-                
+                if (!request.getParameter("departmentId").isEmpty()) {
+                    departmentId = Integer.parseInt(request.getParameter("departmentId"));
+                }
+
                 String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
-                
+
                 //create the file in the storage location
-                File file = File.createTempFile("imgUrl_", fileName, uploads); 
+                File file = new File(uploads, fileName);
                 try (InputStream input = filePart.getInputStream()) {
-                    Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    Files.copy(input, file.toPath());
                 } catch (Exception ex) {
                     out.print(ex);
                 }
-                
+
                 //Using bean to create Notes from the POST request parameters
-                Models.Notes notes =  nb.createNote(content, date, fileName, departmentId);
-                nb.addReceiver(notes, 1);
+                Models.Notes notes = nb.createNote(content, finalDate, fileName, departmentId);
+
+                if (!request.getParameter("userId").isEmpty()) {
+                    int userId = Integer.parseInt(request.getParameter("userId"));
+                    nb.addReceiver(notes, userId);
+                }
                 out.print(notes);
             } catch (ParseException ex) {
                 Logger.getLogger(NotesUpload.class.getName()).log(Level.SEVERE, null, ex);

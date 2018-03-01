@@ -7,20 +7,16 @@ package Models;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -35,7 +31,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Notes.findById", query = "SELECT n FROM Notes n WHERE n.id = :id")
     , @NamedQuery(name = "Notes.findByNoteDate", query = "SELECT n FROM Notes n WHERE n.noteDate = :noteDate")
     , @NamedQuery(name = "Notes.findByImgUrl", query = "SELECT n FROM Notes n WHERE n.imgUrl = :imgUrl")
-    , @NamedQuery(name = "Notes.findByDepartmentId", query = "SELECT n FROM Notes n WHERE n.departmentId = :departmentId")})
+    , @NamedQuery(name = "Notes.findByDepartmentId", query = "SELECT n FROM Notes n WHERE n.departmentId = :departmentId")
+    , @NamedQuery(name = "Notes.getDateByNoteId", query = "SELECT n.noteDate FROM Notes n WHERE n.id = :noteId")})
 public class Notes implements Serializable {
 
     @Column(name = "department_id")
@@ -114,7 +111,14 @@ public class Notes implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.Notes[ id=" + id + " ]";
+        return
+     "{"
+    +" \"id\": \"" + this.getId() + "\"," 
+    +" \"contents\": \"" + this.getContents() + "\","                  
+    +" \"note_date\" : \"" + this.getNoteDate() + "\"," 
+    +" \"img_url\" : \"" + this.getImgUrl() + "\"," 
+    +" \"department_id\" : \"" + this.getDepartmentId() + "\""
+    +"}";
     }
 
     public String getContents() {
