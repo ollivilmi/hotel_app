@@ -273,18 +273,74 @@ html, body {
     padding: 5px;
 }
 
+/* styles for new user requests */
+
 .request-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+}
+
+.request-person {
     background: #f1f1f1;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 5px;
 }
 
+.request-person-static {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.request-person img {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 80px;
+}
+
+/* info card popup styles */ 
+
+
+/* style for the text bubble */
+.popup-text {
+    display: none;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    left: 40%;
+    top: 20%;
+    z-index: 1;
+}
+
+.popup-text .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+
 .request-header p {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .request-header em {
@@ -293,8 +349,9 @@ html, body {
 }
 
 .request-container-element {
-    width: 60%;
-    height: 60%;
+    width: 80%;
+    height: 80%;
+    padding: 5px;
 }
 
 .management-new-requests {
@@ -311,7 +368,6 @@ html, body {
 .request-button {
     border-radius: 4px;
     color: white;
-    padding: 2px 3px;
     text-align: center;
     text-decoration: none;
     font-size: 12px; 
@@ -323,4 +379,107 @@ html, body {
 
 #decline-request-btn {
     background: #f44336
+}
+
+/* EDIT PARTION STYLES */
+
+.management-edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.edit-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.edit-header p {
+    font-size: 18px;
+}
+
+/* search by name styles */
+
+.search-name-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.search-name-input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    
+}
+
+#search-btn {
+    color: white;
+    display: block;
+    width: 60px;
+    box-sizing: border-box;
+    border: 2px solid #eaeaea;
+    border-radius: 5px;
+    background: #4CAF50;
+    padding:2px;
+}
+
+/* styles for search result container */
+
+.search-result-container {
+    /*display: none;*/
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* search by department styles */
+
+.search-department-input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.search-department-dropdown {
+    width: 200px;
+    height: 30px;
+}
+
+.search-person {
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.search-person-static {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.search-person img {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 80px;
+}
+
+#edit-user-btn {
+    background: #008CBA;
+    width: 100px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px; 
 }

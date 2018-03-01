@@ -10,41 +10,72 @@ var editButton;
 var saveButton;
 var cancelButton;
 var formInputFields;
+var requestPicture;
+var profilePopup;
 
 var green = '#4CAF50';
 var red = '#f44336';
 var blue = '#008CBA';
 
 window.onload = function () {
+
     editButton = document.getElementById('edit-btn');
-    editButton.addEventListener('click', editInfo);
+    // editButton.addEventListener('click', editInfo);
+
+    requestPicture = document.getElementById('request-profile-picture');
+
+
+
+    requestPicture.onmouseover = function () {
+        console.log('mouse enter called');
+        ShowInfoCard();
+    };
+    
+    requestPicture.onclick = function (){
+        if (profilePopup.style.display === "none") {
+            profilePopup.style.display = "block";
+        } else {
+            profilePopup.style.display = "none";
+        }
+    };
+
 
     saveButton = document.getElementById('save-btn');
 
     cancelButton = document.getElementById('cancel-btn');
 
-    formInputFields = document.getElementById('info-form').elements;
+    formInputFields = document.getElementsByClassName('profile-input');
+
+    console.log(profilePopup);
 
 };
 
 // Edit user information
-editInfo = function () {
+EditInfo = function () {
     console.log('edit called');
-    enableButtons();
-    enableInputs();
+    //enableButtons();
+    //enableInputs();
 };
 
 //Enable button
 
-enableButtons = function () {
+EnableButtons = function () {
     saveButton.disabled = false;
     saveButton.style.backgroundColor = green;
     cancelButton.disabled = false;
     cancelButton.style.backgroundColor = red;
 };
 
-enableInputs = function () {
+EnableInputs = function () {
     for (var i = 0; i < formInputFields.length; i++) {
         formInputFields[i].disabled = false;
     }
+};
+
+//show info card on hover
+
+ShowInfoCard = function () {
+    console.log('show infocard called');
+    profilePopup = document.getElementById("info-card-popup");
+    profilePopup.classList.toggle('show');
 };

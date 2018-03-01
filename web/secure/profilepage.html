@@ -38,9 +38,6 @@ and open the template in the editor.
                         <div class="profile-nav-items" id="profile-general">
                             <p>General Information</p>
                         </div>
-                        <div class="profile-nav-items" id="divider">
-
-                        </div>
                         <div class="profile-nav-items" id="profile-management">
                             <p>Management</p>
                         </div>
@@ -51,44 +48,44 @@ and open the template in the editor.
 
                                 <div class="info-block">
                                     <label class="profile-label" for="firstname"><b>First Name</b></label>
-                                    <input class="profile-input" type="text" placeholder="Placeholder" name="firstname" readonly>
+                                    <input class="profile-input" type="text" placeholder="Placeholder" name="firstname" disabled>
                                 </div>
 
                                 <div class="info-block">
                                     <label class="profile-label" for="secondname"><b>Second Name</b></label>
-                                    <input class="profile-input" type="text" placeholder="Placeholder" name="secondname" readonly>
+                                    <input class="profile-input" type="text" placeholder="Placeholder" name="secondname" disabled>
                                 </div>
 
                                 <div class="info-block">
                                     <label class="profile-label" for="tel"><b>Phone Number</b></label>
-                                    <input class="profile-input" type="tel" placeholder="Placeholder" name="telnumber" readonly>
+                                    <input class="profile-input" type="tel" placeholder="Placeholder" name="telnumber" disabled>
                                 </div>
 
                                 <div class="info-block">
                                     <label class="profile-label" for="email"><b>Email</b></label>
-                                    <input class="profile-input" type="text" placeholder="Placeholder" name="email" readonly>
+                                    <input class="profile-input" type="text" placeholder="Placeholder" name="email" disabled>
                                 </div>
 
                                 <div class="info-block">
                                     <label class="profile-label" for="username"><b>User name</b></label>
-                                    <input class="profile-input" type="text" placeholder="Placeholder" name="username" readonly>
+                                    <input class="profile-input" type="text" placeholder="Placeholder" name="username" disabled>
                                 </div>
 
                                 <div class="info-block">
                                     <label class="profile-label" for="password"><b>Password</b></label>
-                                    <input class="profile-input" type="password" placeholder="Placeholder" name="psw" readonly>
+                                    <input class="profile-input" type="password" placeholder="Placeholder" name="psw" disabled>
                                 </div>
 
                                 <div class="info-block">
                                     <label class="profile-label" for="psw-repeat"><b>Repeat Password</b></label>
-                                    <input class="profile-input" type="password" placeholder="Placeholder" name="psw-repeat" readonly>
+                                    <input class="profile-input" type="password" placeholder="Placeholder" name="psw-repeat" disabled>
                                 </div>
 
                                 <div class="clearfix">
                                     <button type="submit" class="profile-btn" id="save-btn" disabled>Save</button>
                                     <button type="reset" class="profile-btn" id="cancel-btn" disabled>Cancel</button>
-                                    <button class="profile-btn" value="Edit" name="edit-btn" id="edit-btn">Edit</button>
-                                
+                                    <button class="profile-btn" name="edit-btn" id="edit-btn" onclick="EditInfo()">Edit</button>
+
                                 </div>
                             </form>
                         </div>
@@ -100,13 +97,29 @@ and open the template in the editor.
                                         <p>New users waiting for approval: <em>(hover for more information)</em> </p>
                                     </div>
                                     <div class="request-container">
-                                        <p class="request-container-element" id="request-name">Jane Doe </p>
-                                        <button type="submit" id="accept-request-btn" class="request-container-element request-button" name="request-accept">Accept</button>
-                                        <button type="submit" id="decline-request-btn" class="request-container-element request-button" name="request-decline">Decline</button>
+                                        <!-- examples of new user cards -->
+                                        <div class="request-person">
+                                            <div class="request-person-static">
+                                                <p class="request-container-element" id="request-name">Jane Doe </p>        
+                                                <img class="request-profile-picture" id="request-profile-picture" src="assets/person-icon.png">
+                                                <button type="submit" id="accept-request-btn" class="request-container-element request-button" name="request-accept">Accept</button>
+                                                <button type="submit" id="decline-request-btn" class="request-container-element request-button" name="request-decline">Decline</button>
+                                            </div>
+                                            <span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>
+                                        </div>
+                                        <div class="request-person">
+                                            <div class="request-person-static">
+                                                <p class="request-container-element" id="request-name">Jane Doe </p>        
+                                                <img class="request-profile-picture" id="request-profile-picture" src="assets/person-icon.png">
+                                                <button type="submit" id="accept-request-btn" class="request-container-element request-button" name="request-accept">Accept</button>
+                                                <button type="submit" id="decline-request-btn" class="request-container-element request-button" name="request-decline">Decline</button>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="divider-horizontal">
-                                    
+
                                 </div>
                                 <!-- admin user can change permissions or departments from workers here -->
                                 <div class="management-edit">
@@ -114,7 +127,44 @@ and open the template in the editor.
                                         <p>Edit user privileges</p>
                                     </div>
                                     <div class="edit-container">
-                                        
+                                        <div class="search-name-container">
+                                            <div class="search-name-input-container">
+                                                <label class="search-name-element" for="name-search"><b>Search by name: </b></label>
+                                                <input class="search-name-element" type="text" placeholder="Enter name" name="search-for-name">
+                                                <button type="submit" id="search-btn">Search</button>
+                                            </div>
+                                            <div class="search-result-container">
+                                                <div class="search-person">
+                                                    <div class="search-person-static">
+                                                        <p class="search-container-element" id="search-name">Jane Doe </p>        
+                                                        <img class="search-profile-picture" id="search-profile-picture" src="assets/person-icon.png">
+                                                        <button type="submit" id="edit-user-btn" class="search-container-element" name="request-accept">Edit</button>
+                                                    </div>
+                                                    <span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="search-department-container">
+                                            <div class="search-department-input-container">
+                                                <label for="departmnet" class="search-department-element"><b>Search by department:</b></label>
+                                                <select name="department" class="search-department-dropdown">
+                                                    <option value="kitchen">Kitchen</option>
+                                                    <option value="laundry">Laundry</option>
+                                                    <option value="roomservice">Room service</option>
+                                                </select>
+                                            </div>
+                                            <div class="search-result-container" >
+                                                <div class="search-person">
+                                                    <div class="search-person-static">
+                                                        <p class="search-container-element" id="request-name">Jane Doe </p>        
+                                                        <img class="search-profile-picture" id="search-profile-picture" src="assets/person-icon.png">
+                                                        <button type="submit" id="edit-user-btn" class="search-container-element" name="request-accept">Edit</button>
+
+                                                    </div>
+                                                    <span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>
+                                                </div>
+                                            </div>
+                                        </div>                                        
                                     </div>
                                 </div>
                             </div>
@@ -125,5 +175,6 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
+
     </body>
 </html>
