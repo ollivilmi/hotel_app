@@ -5,7 +5,7 @@
  */
 package service;
 
-import Models.Permissions;
+import Models.Jobs;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,27 +25,27 @@ import javax.ws.rs.core.MediaType;
  * @author Hillo
  */
 @Stateless
-@Path("models.permissions")
-public class PermissionsFacadeREST extends AbstractFacade<Permissions> {
+@Path("jobs")
+public class JobResources extends AbstractFacade<Jobs> {
 
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
 
-    public PermissionsFacadeREST() {
-        super(Permissions.class);
+    public JobResources() {
+        super(Jobs.class);
     }
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Permissions entity) {
+    @Consumes({MediaType.APPLICATION_JSON})
+    public void create(Jobs entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Permissions entity) {
+    @Consumes({MediaType.APPLICATION_JSON})
+    public void edit(@PathParam("id") Integer id, Jobs entity) {
         super.edit(entity);
     }
 
@@ -57,22 +57,22 @@ public class PermissionsFacadeREST extends AbstractFacade<Permissions> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Permissions find(@PathParam("id") Integer id) {
+    @Produces({MediaType.APPLICATION_JSON})
+    public Jobs find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Permissions> findAll() {
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Jobs> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Permissions> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Jobs> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

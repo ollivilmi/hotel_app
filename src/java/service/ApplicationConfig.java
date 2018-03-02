@@ -29,11 +29,9 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(service.DepartmentsFacadeREST.class);
-        resources.add(service.JobsFacadeREST.class);
+        resources.add(service.JobResources.class);
         resources.add(service.NoteReceiversFacadeREST.class);
         resources.add(service.NotesFacadeREST.class);
-        resources.add(service.PermissionsFacadeREST.class);
         resources.add(service.UserResources.class);
     }
     
