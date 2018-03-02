@@ -76,6 +76,14 @@ public class UserResources extends AbstractFacade<Users> {
         u.setJobId(job);
         super.edit(u);
     }
+    
+    @GET
+    @Path("/manager/getNewUsers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<String> getNewUsers()
+    {
+        return em.createNamedQuery("Users.findNew").getResultList();
+    }
 
     @GET
     @Path("/u")
