@@ -5,6 +5,7 @@
  */
 package Login;
 
+import Models.Users;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -19,6 +20,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,8 +39,13 @@ public class SecureFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
         FilterChain chain)
         throws IOException, ServletException {
-            if (((HttpServletRequest) request).getSession().getAttribute("user") == null)
-                    ((HttpServletResponse) response).sendRedirect("/management/login.html");
+            HttpSession session = ((HttpServletRequest) request).getSession();
+            Users u = (Users) session.getAttribute("user");
+            if (u.getPermissionsId() == null)
+            {
+                    request.setAttribute("message", "Insufficient permissions");
+                    request.getRequestDispatcher("/error").forward(request, response);
+            }
             else
                 chain.doFilter(request, response);
     }
