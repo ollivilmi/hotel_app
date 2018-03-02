@@ -27,13 +27,13 @@ import javax.servlet.http.HttpSession;
  * @author Hillo
  */
 @WebFilter(filterName = "SecureFilter", urlPatterns = {"/secure/*", "/r/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
-public class SecureFilter implements Filter {
+public class EmployeeFilter implements Filter {
     
     private static final boolean debug = true;
 
     private FilterConfig filterConfig = null;
     
-    public SecureFilter() {
+    public EmployeeFilter() {
     }    
     
     public void doFilter(ServletRequest request, ServletResponse response,

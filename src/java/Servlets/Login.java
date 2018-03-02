@@ -20,7 +20,7 @@ import Login.Password;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
-import service.UsersFacadeREST;
+import service.UserResources;
 
 /**
  *

@@ -41,7 +41,7 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 @Stateless
 @Path("users")
-public class UsersFacadeREST extends AbstractFacade<Users> {
+public class UserResources extends AbstractFacade<Users> {
     
     @EJB
     UserBean ub;
@@ -49,7 +49,7 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
 
-    public UsersFacadeREST() {
+    public UserResources() {
         super(Users.class);
     }
 
@@ -57,6 +57,24 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
         super.remove(super.find(id));
+    }
+    
+    @POST
+    @Path("/manager/setUserPermissions")
+    public void setUserPermission(@FormParam("username") String username, @FormParam("perm") int perm)
+    {
+        Users u = ub.getByUsername(username);
+        u.setPermissionsId(perm);
+        super.edit(u);
+    }
+    
+    @POST
+    @Path("/manager/setUserJob")
+    public void setUserJob(@FormParam("username") String username, @FormParam("job") int job)
+    {
+        Users u = ub.getByUsername(username);
+        u.setJobId(job);
+        super.edit(u);
     }
 
     @GET
