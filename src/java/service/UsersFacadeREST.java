@@ -52,38 +52,6 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
     public UsersFacadeREST() {
         super(Users.class);
     }
-    
-    @POST
-    @Path("/register")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String insertUser(@FormParam("fn") String firstName, 
-            @FormParam("ln") String lastName, @FormParam("password") String password,
-            @FormParam("job") int job, @FormParam("perm") int perm,
-            @FormParam("email") String email, @FormParam("phone") String phone,
-            @FormParam("uname") String uname)
-    { 
-        try 
-        {
-            super.create(ub.addUser(firstName, lastName, uname, password, job, perm, email, phone));
-        }
-        catch (Exception e)
-        {
-            e.toString();
-        }
-        return "User added";
-    }
-    
-    @POST
-    @Path("/login")
-    @Produces (MediaType.TEXT_PLAIN)
-    public String login(@FormParam ("username") String username, @FormParam("pass") String pass)
-    {
-        Users u = ub.getByUsername(username);
-        if (BCrypt.checkpw(pass, u.getPwHash()))
-            return "match";
-        else
-            return "no match";
-    }
 
     @DELETE
     @Path("{id}")

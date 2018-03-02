@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.mindrot.jbcrypt.BCrypt;
 import Beans.UserBean;
 import Login.Password;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import service.UsersFacadeREST;
@@ -41,7 +42,7 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String uname = request.getParameter("username");
-        String pass = request.getParameter("pass");
+        String pass = request.getParameter("password");
         Users u = bean.getByUsername(uname);
         if (u == null)
             response.sendRedirect("/management/login.html");
@@ -49,6 +50,7 @@ public class Login extends HttpServlet {
         if (Password.check(pass, u.getPwHash()))
             {
                 HttpSession session = request.getSession();
+
                 session.setAttribute("user", u);
                 session.setMaxInactiveInterval(30*60);
 
@@ -56,11 +58,4 @@ public class Login extends HttpServlet {
             }
         else response.sendRedirect("/management/login.html");
     }
-
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

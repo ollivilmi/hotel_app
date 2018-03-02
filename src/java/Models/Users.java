@@ -6,6 +6,8 @@
 package Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -177,4 +179,15 @@ public class Users implements Serializable {
         this.email = email;
     }
     
+    public List<String> registrationForm()
+    {
+        List<String> regForm = new ArrayList<>();
+        regForm.add(firstName);
+        regForm.add(lastName);
+        regForm.add(username);
+        regForm.add(email);
+        regForm.add(phoneNumber);
+        regForm.add(pwHash);
+        return regForm;
+    }
 }

@@ -26,7 +26,7 @@ import javax.persistence.Query;
 @Stateless
 public class UserBean {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
     
     public Users getByUsername(String name)
@@ -37,26 +37,16 @@ public class UserBean {
         return (Users) q.getResultList().get(0);
     }
     
-    public Users addUser(String firstName, String lastName, String uname, String password, int job, int perm, String email, String phone)
+    public boolean addUser(Users user)
     {
-        if (uname.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || email.isEmpty())
-            return null;
         try { 
-            Users u = new Users();
-            u.setFirstName(firstName);
-            u.setLastName(lastName);
-            u.setUsername(uname);
-            u.setPwHash(Password.hash(password));
-            u.setJobId(job);
-            u.setPermissionsId(perm);
-            u.setEmail(email);
-            u.setPhoneNumber(phone);
-            return u;
-        }
+            em.persist(user);
+        } 
         catch (Exception e)
         {
-            return null;
+            return false;
         }
+        return true;
     }
     
     public String allUserData() {

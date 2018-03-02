@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Hillo
  */
-@WebFilter(filterName = "SecureFilter", urlPatterns = {"/secure/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
+@WebFilter(filterName = "SecureFilter", urlPatterns = {"/secure/*", "/r/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
 public class SecureFilter implements Filter {
     
     private static final boolean debug = true;
