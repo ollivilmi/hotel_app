@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-
     <body>
         <div class="container">
             <div class="nav-menu">
@@ -30,25 +29,38 @@
             </div>
             <div class="main-view center-div">
                 <div class="add-notes-tasks">
-                    <div class="add-title">
-                        <img id="add-icon" src="images/main/pen-icon.svg" alt="">
-                        <p>Add Notes or Tasks</p>
-                    </div>
+                    <form action="r/notes/new" enctype="multipart/form-data" method="POST">
+                        <div class="add-title">
+                            <img id="add-icon" src="images/main/pen-icon.svg" alt="">
+                            <p>Add Notes or Tasks</p>
+                        </div>
 
-                    <div class="add-content-container">
-                        <textarea name="" id="add-content" cols="50" rows="5"></textarea>
-                    </div>
+                        <div class="add-content-container">
+                            <textarea name="content" id="add-content" cols="50" rows="5" required></textarea>
+                        </div>
 
-                    <div class="add-buttons-container">
-                        <button id="add-photo-button">
-                            <img id="photo-icon" src="images/main/photo-icon.png" alt="">
-                            <p>Add photo</p>
-                        </button>
-
-                        <button id="add-button">
-                            Post
-                        </button>
-                    </div>
+                        <div class="add-buttons-container">
+                            <label for="file-add" id="add-photo-button">
+                                <img id="photo-icon" src="images/main/photo-icon.png" alt="">
+                                <p id='file-selected'>Add photo</p>
+                            </label>
+                            <input type="file" name="file" id="file-add">
+                            
+                            <label class="features">
+                                <input type="date" name="date">
+                                <input type="time" name="time">
+                                <select name="departmentId" class="dropdown-menu" required>
+                                    <option selected disabled>Choose department</option>
+                                    <option value="">None</option>
+                                    <option value="1">Restaurant</option>
+                                    <option value="2">Management</option>
+                                    <option value="3">Reception</option>
+                                    <option value="4">Maintenance</option>
+                                </select>
+                            </label>
+                            <input type="submit" id="add-button" value="Post">
+                        </div>
+                    </form>
                 </div>
 
                 <div class="main-board">
@@ -70,45 +82,52 @@
                         </div>
 
                         <div class="notes-content">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat deserunt officia ut enim voluptatum! Autem, beatae voluptatibus quo, adipisci dolor porro aspernatur a maxime cum, fuga numquam dolore repellat ad.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat deserunt officia ut enim voluptatum!
+                                Autem, beatae voluptatibus quo, adipisci dolor porro aspernatur a maxime cum, fuga numquam
+                                dolore repellat ad.</p>
                             <img src="images/main/notes-example-1.jpg" alt="">
                         </div>
 
                         <div class="notes-footer">
-                            Seen by <a href="">6 people</a>
+                            Seen by
+                            <a href="">6 people</a>
                         </div>
                     </div>
 
                     <div id="note-2" class="notes">
-                            <div class="notes-header">
-                                <div class="notes-sender">
-                                    <div class="sender-avatar">
-                                        <img src="images/main/person2.png" alt="">
-                                    </div>
-                                    <div class="sender-name">
-                                        <h5>Phuoc Nguyen</h5>
-                                        <span>5 February 2018 at 15:00</span>
-                                    </div>
+                        <div class="notes-header">
+                            <div class="notes-sender">
+                                <div class="sender-avatar">
+                                    <img src="images/main/person2.png" alt="">
                                 </div>
-
-                                <div class="notes-color blue-notes">
+                                <div class="sender-name">
+                                    <h5>Phuoc Nguyen</h5>
+                                    <span>5 February 2018 at 15:00</span>
                                 </div>
                             </div>
 
-                            <div class="notes-content">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, laborum ipsam. Cupiditate asperiores adipisci a eveniet numquam ipsa libero unde cumque corrupti, eaque quibusdam fuga deleniti impedit ipsum debitis iusto nobis eum alias? Tempora optio dolores corporis neque atque delectus, earum necessitatibus doloribus ratione labore perferendis! Veniam soluta pariatur cum!</p>
-                                <img src="images/main/notes-example-2.jpg" alt="">
-                            </div>
-
-                            <div class="notes-footer">
-                                Seen by <a href="">666 people</a>
+                            <div class="notes-color blue-notes">
                             </div>
                         </div>
+
+                        <div class="notes-content">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, laborum ipsam. Cupiditate asperiores
+                                adipisci a eveniet numquam ipsa libero unde cumque corrupti, eaque quibusdam fuga deleniti
+                                impedit ipsum debitis iusto nobis eum alias? Tempora optio dolores corporis neque atque delectus,
+                                earum necessitatibus doloribus ratione labore perferendis! Veniam soluta pariatur cum!</p>
+                            <img src="images/main/notes-example-2.jpg" alt="">
+                        </div>
+
+                        <div class="notes-footer">
+                            Seen by
+                            <a href="">666 people</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-
+    <script src='../secure/scripts/notes.js'> </script>
     </body>
 
 </html>

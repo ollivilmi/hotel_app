@@ -9,7 +9,7 @@
 <body>
   <h1>Testing notes requests</h1>
   <form enctype="multipart/form-data" method="POST" action="r/notes/new">
-    Content: <input type="text" name="content">
+    <textarea name="content" id="add-content" cols="50" rows="5" required></textarea>
     Date: <input type="date" name="date">
     <input type="time" name="time">
     Department Id: <input type="number" name="departmentId">
