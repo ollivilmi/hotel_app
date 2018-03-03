@@ -58,7 +58,7 @@ window.onload = function () {
     })
             .then(response => response.json())
             .then(function(json) {
-                console.log(json);
+                fillProfile(json);
             })
             .catch(error => console.log(error));
             
@@ -108,4 +108,13 @@ const getCookie = (cname) => {
         }
     }
     return "";
+};
+
+const fillProfile = (info) => {
+  let department = document.querySelector("#department");
+  let job = document.querySelector("#job");
+  
+  department.innerHTML = info[0].department;
+  job.innerHTML = info[0].job;
+  
 };
