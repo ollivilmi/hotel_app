@@ -49,18 +49,23 @@ public class NotesUpload extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
 
-        File uploads = new File("E:\\Study\\hotel_app"); //define storage location
+        File uploads = new File("E:\\Study\\hotel_app\\Pictures"); //define storage location
         try (PrintWriter out = response.getWriter()) {
             try {
-                String date = request.getParameter("date"); //transform HTML String date to Java Date Object
+                //transform HTML String date to Java Date Object
+                String date = request.getParameter("date");
                 String time = request.getParameter("time");
                 Date finalDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(date + " " + time);
+
                 Part filePart = request.getPart("file");
                 String content = request.getParameter("content");
+                content = content.replace("\n", "<br>");
+                Logger.getLogger(NotesUpload.class.getName()).log(Level.INFO, content, content);
                 int departmentId = 0;
-                if (!request.getParameter("departmentId").isEmpty()) {
+                if (!request.getParameter("departmentId").isEmpty() || !request.getParameter("departmentId").equals("0")) {
                     departmentId = Integer.parseInt(request.getParameter("departmentId"));
                 }
 
