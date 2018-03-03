@@ -13,22 +13,22 @@ and open the template in the editor.
         <!-- CSS -->
         <link rel="stylesheet" href="profilestyle.css">
         <!-- Link to script -->
-        <script src="assets/scripts/profilescript.js"></script>
+        <script src="scripts/profilescript.js"></script>
     </head>
     <body>
         <div class="container">
             <div class="nav-menu">
                 <div class="container-nav-menu center-div">
                     <div id="logo" class="nav-menu-items">
-                        <img id="logo-img" src="assets/Hotel-Logo.svg" alt="">
+                        <a href="main.html"><img id="logo-img" src="images/Hotel-Logo.svg" alt=""></a>
                     </div>
 
                     <div id="search-bar" class="nav-menu-items">
                         <input type="text" name="search" placeholder="Search">
                     </div>
                     <div id="profile" class="nav-menu-items">
-                        <img id="profile-img" src="assets/person-icon.png" alt="">
-                        <p id="profile-name">Cuong</p>
+                        <img id="profile-img" alt="">
+                        <a href="profilepage.html" id="profile-name">Cuong</a>
                     </div>
                 </div>
             </div>
@@ -37,6 +37,7 @@ and open the template in the editor.
                     <div class="profile-nav">
                         <div class="profile-nav-items" id="profile-general">
                             <p>General Information</p>
+                            <p><span id="department"></span>, <span id="job"></span></p>
                         </div>
                         <div class="profile-nav-items" id="profile-management">
                             <p>Management</p>
@@ -48,37 +49,37 @@ and open the template in the editor.
 
                                 <div class="info-block">
                                     <label class="profile-label" for="firstname"><b>First Name</b></label>
-                                    <input class="profile-input" type="text" placeholder="Placeholder" name="firstname" disabled>
+                                    <input class="profile-input" type="text" name="firstname" disabled>
                                 </div>
 
                                 <div class="info-block">
-                                    <label class="profile-label" for="secondname"><b>Second Name</b></label>
-                                    <input class="profile-input" type="text" placeholder="Placeholder" name="secondname" disabled>
+                                    <label class="profile-label" for="secondname"><b>Last Name</b></label>
+                                    <input class="profile-input" type="text" name="lastname" disabled>
                                 </div>
 
                                 <div class="info-block">
                                     <label class="profile-label" for="tel"><b>Phone Number</b></label>
-                                    <input class="profile-input" type="tel" placeholder="Placeholder" name="telnumber" disabled>
+                                    <input class="profile-input" type="tel" name="telnumber" disabled>
                                 </div>
 
                                 <div class="info-block">
                                     <label class="profile-label" for="email"><b>Email</b></label>
-                                    <input class="profile-input" type="text" placeholder="Placeholder" name="email" disabled>
+                                    <input class="profile-input" type="email" name="email" disabled>
                                 </div>
 
                                 <div class="info-block">
                                     <label class="profile-label" for="username"><b>User name</b></label>
-                                    <input class="profile-input" type="text" placeholder="Placeholder" name="username" disabled>
+                                    <input class="profile-input" type="text" name="username" disabled>
                                 </div>
 
                                 <div class="info-block">
                                     <label class="profile-label" for="password"><b>Password</b></label>
-                                    <input class="profile-input" type="password" placeholder="Placeholder" name="psw" disabled>
+                                    <input class="profile-input" type="password" name="psw" disabled>
                                 </div>
 
                                 <div class="info-block">
                                     <label class="profile-label" for="psw-repeat"><b>Repeat Password</b></label>
-                                    <input class="profile-input" type="password" placeholder="Placeholder" name="psw-repeat" disabled>
+                                    <input class="profile-input" type="password" name="psw-repeat" disabled>
                                 </div>
 
                                 <div class="clearfix">
@@ -101,7 +102,7 @@ and open the template in the editor.
                                         <div class="request-person">
                                             <div class="request-person-static">
                                                 <p class="request-container-element" id="request-name">Jane Doe </p>        
-                                                <img class="request-profile-picture" id="request-profile-picture" src="assets/person-icon.png">
+                                                <img class="request-profile-picture" id="request-profile-picture" src="images/person-icon.png">
                                                 <button type="submit" id="accept-request-btn" class="request-container-element request-button" name="request-accept">Accept</button>
                                                 <button type="submit" id="decline-request-btn" class="request-container-element request-button" name="request-decline">Decline</button>
                                             </div>
@@ -110,7 +111,7 @@ and open the template in the editor.
                                         <div class="request-person">
                                             <div class="request-person-static">
                                                 <p class="request-container-element" id="request-name">Jane Doe </p>        
-                                                <img class="request-profile-picture" id="request-profile-picture" src="assets/person-icon.png">
+                                                <img class="request-profile-picture" id="request-profile-picture" src="images/person-icon.png">
                                                 <button type="submit" id="accept-request-btn" class="request-container-element request-button" name="request-accept">Accept</button>
                                                 <button type="submit" id="decline-request-btn" class="request-container-element request-button" name="request-decline">Decline</button>
                                             </div>
@@ -137,7 +138,7 @@ and open the template in the editor.
                                                 <div class="search-person">
                                                     <div class="search-person-static">
                                                         <p class="search-container-element" id="search-name">Jane Doe </p>        
-                                                        <img class="search-profile-picture" id="search-profile-picture" src="assets/person-icon.png">
+                                                        <img class="search-profile-picture" id="search-profile-picture" src="images/person-icon.png">
                                                         <button type="submit" id="edit-user-btn" class="search-container-element" name="request-accept">Edit</button>
                                                     </div>
                                                     <span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>
@@ -157,7 +158,7 @@ and open the template in the editor.
                                                 <div class="search-person">
                                                     <div class="search-person-static">
                                                         <p class="search-container-element" id="request-name">Jane Doe </p>        
-                                                        <img class="search-profile-picture" id="search-profile-picture" src="assets/person-icon.png">
+                                                        <img class="search-profile-picture" id="search-profile-picture" src="images/person-icon.png">
                                                         <button type="submit" id="edit-user-btn" class="search-container-element" name="request-accept">Edit</button>
 
                                                     </div>

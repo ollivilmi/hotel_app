@@ -47,7 +47,16 @@ window.onload = function () {
     formInputFields = document.getElementsByClassName('profile-input');
 
     console.log(profilePopup);
-
+    
+    let currentUser;
+    fetch("/management/currentUser")
+            .then(response => response.json())
+            .then(function(json){
+                console.log(json);
+            })
+            .catch(error => console.log(error));
+            
+            
 };
 
 // Edit user information
