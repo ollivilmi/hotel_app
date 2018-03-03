@@ -113,8 +113,18 @@ const getCookie = (cname) => {
 const fillProfile = (info) => {
   let department = document.querySelector("#department");
   let job = document.querySelector("#job");
+  let firstname = document.querySelector("#firstname");
+  let lastname = document.querySelector("#lastname");
+  let username = document.querySelector("#username");
+  let telnumber = document.querySelector("#telnumber");
+  let email = document.querySelector("#email");
   
   department.innerHTML = info[0].department;
   job.innerHTML = info[0].job;
+  firstname.value = info[0].first_name;
+  lastname.value = info[0].last_name;
+  username.value = info[0].username;
+  telnumber.value = info[0].phone;
+  email.value = info[0].email;
   
 };
