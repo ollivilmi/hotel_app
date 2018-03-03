@@ -85,9 +85,11 @@ public class UserResources extends AbstractFacade<Users> {
     @GET
     @Path("/manager/getNewUsers")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<String> getNewUsers()
+    public List<String> getNewUsers(@HeaderParam("user") String user)
     {
-        return em.createNamedQuery("Users.findNew").getResultList();
+        if (checkManager(user))
+            return em.createNamedQuery("Users.findNew").getResultList();
+        return null;
     }
 
     @GET
@@ -192,5 +194,11 @@ public class UserResources extends AbstractFacade<Users> {
     private boolean check(String user)
     {
         return (ub.getByUsername(user) != null);
+    }
+    
+    private boolean checkManager(String user)
+    {
+        Users u = ub.getByUsername(user);
+        return (u != null && u.getPermissionsId() != 1);
     }
 }

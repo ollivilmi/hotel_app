@@ -22,23 +22,6 @@ window.onload = function () {
     editButton = document.getElementById('edit-btn');
     // editButton.addEventListener('click', editInfo);
 
-    requestPicture = document.getElementById('request-profile-picture');
-
-
-
-    requestPicture.onmouseover = function () {
-        console.log('mouse enter called');
-        ShowInfoCard();
-    };
-    
-    requestPicture.onclick = function (){
-        if (profilePopup.style.display === "none") {
-            profilePopup.style.display = "block";
-        } else {
-            profilePopup.style.display = "none";
-        }
-    };
-
 
     saveButton = document.getElementById('save-btn');
 
@@ -62,6 +45,31 @@ window.onload = function () {
             })
             .catch(error => console.log(error));
             
+    fetch("/management/r/users/manager/getNewUsers", {
+        headers: {
+            'user': user
+        }
+    })
+            .then(response => response.json())
+            .then(function(json) {
+                newUsers(json);
+    })
+            .catch(error => console.log(error));
+    
+    requestPicture = document.getElementById('request-profile-picture');
+
+    requestPicture.onmouseover = function () {
+        console.log('mouse enter called');
+        ShowInfoCard();
+    };
+    
+    requestPicture.onclick = function (){
+        if (profilePopup.style.display === "none") {
+            profilePopup.style.display = "block";
+        } else {
+            profilePopup.style.display = "none";
+        }
+    };
 };
 
 // Edit user information
@@ -125,6 +133,23 @@ const fillProfile = (info) => {
   lastname.value = info[0].last_name;
   username.value = info[0].username;
   telnumber.value = info[0].phone;
-  email.value = info[0].email;
-  
+  email.value = info[0].email;  
+};
+
+const newUsers = (info) => {
+    let requestString = "";
+    for (let item of info)
+    {
+        console.log(item);
+        requestString += "<div class='request-person'"
+        +"div class='request-person-static'>"
+        +"<p class='request-container-element' id='request-name'>" + item.firstName + " " + item.lastName + "</p>"
+        +"<img class='request-profile-picture' id='request-profile-picture' src='images/person-icon.png'>"
+        +"<button type='submit' id='accept-request-btn' class='request-container-element request-button' name='request-accept'>Accept</button>"
+        +'<button type="submit" id="decline-request-btn" class="request-container-element request-button" name="request-decline">Decline</button>'
+        +"</div>"
+        +'<span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>'
+        +"</div>";
+    }
+    document.querySelector(".request-container").innerHTML = requestString;
 };

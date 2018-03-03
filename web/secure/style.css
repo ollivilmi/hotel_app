@@ -47,8 +47,11 @@ html, body {
 }
 
 .nav-menu-items{
-    height: 100%;
     margin: auto 0;
+}
+
+.nav-menu-items a {
+    text-decoration: none;
 }
 
 #logo:hover {
@@ -83,7 +86,7 @@ input[type=text] {
     box-sizing: border-box;
     border: 2px solid #eaeaea;
     border-radius: 5px;
-    background-image: url(/assets/search-icon.png);
+    background-image: url(/images/search-icon.png);
     background-size: 15px;
     background-position: 60px 5px;
     background-color: #FAFAFA;
