@@ -37,14 +37,14 @@ public class JobResources extends AbstractFacade<Jobs> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
     public void create(Jobs entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
     public void edit(@PathParam("id") Integer id, Jobs entity) {
         super.edit(entity);
     }
@@ -56,22 +56,23 @@ public class JobResources extends AbstractFacade<Jobs> {
     }
 
     @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Jobs find(@PathParam("id") Integer id) {
-        return super.find(id);
+    @Path("get/{dptId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Jobs> findJobsByDepartmentId(@PathParam("dptId") int dptId) {
+        return (List<Jobs>) em.createNamedQuery("Jobs.findByDepartmentId").setParameter("departmentId", dptId).getResultList();
     }
 
     @GET
+    @Path("get/all")
     @Override
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Jobs> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Jobs> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
@@ -87,5 +88,5 @@ public class JobResources extends AbstractFacade<Jobs> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

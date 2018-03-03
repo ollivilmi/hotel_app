@@ -6,16 +6,16 @@
 
 
 
-var editButton;
-var saveButton;
-var cancelButton;
-var formInputFields;
-var requestPicture;
-var profilePopup;
+let editButton;
+let saveButton;
+let cancelButton;
+let formInputFields;
+let requestPicture;
+let profilePopup;
 
-var green = '#4CAF50';
-var red = '#f44336';
-var blue = '#008CBA';
+const green = '#4CAF50';
+const red = '#f44336';
+const blue = '#008CBA';
 
 window.onload = function () {
 
@@ -67,7 +67,7 @@ EnableButtons = function () {
 };
 
 EnableInputs = function () {
-    for (var i = 0; i < formInputFields.length; i++) {
+    for (let i = 0; i < formInputFields.length; i++) {
         formInputFields[i].disabled = false;
     }
 };
