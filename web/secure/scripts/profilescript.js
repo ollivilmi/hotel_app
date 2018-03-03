@@ -63,7 +63,7 @@ window.onload = function () {
         ShowInfoCard();
     };
     
-    requestPicture.onclick = function (){
+    requestPicture.onclick = function () {
         if (profilePopup.style.display === "none") {
             profilePopup.style.display = "block";
         } else {
