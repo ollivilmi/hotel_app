@@ -40,6 +40,7 @@ public class ManagerFilter implements Filter {
         FilterChain chain)
         throws IOException, ServletException {
             HttpSession session = ((HttpServletRequest) request).getSession();
+            try {
             Users u = (Users) session.getAttribute("user");
             if (u.getPermissionsId() == 1)
             {
@@ -48,6 +49,11 @@ public class ManagerFilter implements Filter {
             }
             else
                 chain.doFilter(request, response);
+            }
+            catch (Exception e) {
+                request.setAttribute("message", "Insufficient permissions");
+                request.getRequestDispatcher("/error").forward(request, response);
+            }
     }
 
         

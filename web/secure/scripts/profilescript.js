@@ -48,14 +48,19 @@ window.onload = function () {
 
     console.log(profilePopup);
     
-    let currentUser;
-    fetch("/management/currentUser")
+    let user = getCookie("user");
+    console.log(user);
+    
+    fetch("/management/r/users/u", {
+        headers: {
+            'user': user
+        }
+    })
             .then(response => response.json())
-            .then(function(json){
+            .then(function(json) {
                 console.log(json);
             })
             .catch(error => console.log(error));
-            
             
 };
 
@@ -87,4 +92,20 @@ ShowInfoCard = function () {
     console.log('show infocard called');
     profilePopup = document.getElementById("info-card-popup");
     profilePopup.classList.toggle('show');
+};
+
+const getCookie = (cname) => {
+    const name = cname + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 };
