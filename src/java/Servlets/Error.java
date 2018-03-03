@@ -31,6 +31,7 @@ public class Error extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>" + request.getAttribute("message") + "</h1>");
+            out.println("<a href='/management/login'>Back to login</a>");
             out.println("</body>");
             out.println("</html>");
         }

@@ -25,6 +25,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -61,11 +62,15 @@ public class UserResources extends AbstractFacade<Users> {
     
     @POST
     @Path("/manager/setUserPermissions")
-    public void setUserPermission(@FormParam("username") String username, @FormParam("perm") int perm)
+    public void setUserPermission(@FormParam("username") String username, @FormParam("perm") int perm,
+            @HeaderParam("user") String user)
     {
-        Users u = ub.getByUsername(username);
-        u.setPermissionsId(perm);
-        super.edit(u);
+        if (check(user))
+        {
+            Users u = ub.getByUsername(username);
+            u.setPermissionsId(perm);
+            super.edit(u);
+        }
     }
     
     @POST
@@ -80,16 +85,20 @@ public class UserResources extends AbstractFacade<Users> {
     @GET
     @Path("/manager/getNewUsers")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<String> getNewUsers()
+    public List<String> getNewUsers(@HeaderParam("user") String user)
     {
-        return em.createNamedQuery("Users.findNew").getResultList();
+        if (checkManager(user))
+            return em.createNamedQuery("Users.findNew").getResultList();
+        return null;
     }
 
     @GET
     @Path("/u")
     @Produces({MediaType.APPLICATION_JSON})
-    public String find(@QueryParam("id") int id) {
-        return ub.allUserDataById(id);
+    public String find(@HeaderParam("user") String user) {
+        if (check(user))
+            return ub.allUserDataById(ub.getByUsername(user).getId());
+        return null;
     }
 
     @GET
@@ -102,8 +111,10 @@ public class UserResources extends AbstractFacade<Users> {
     @GET
     @Path("/all")
     @Produces({MediaType.APPLICATION_JSON})
-    public String findAllData() {
-        return ub.allUserData();
+    public String findAllData(@HeaderParam("user") String user) {
+        if (check(user))
+            return ub.allUserData();
+        return null;
     }
 
     @GET
@@ -178,5 +189,16 @@ public class UserResources extends AbstractFacade<Users> {
         return Response.status(Response.Status.BAD_REQUEST)
                 .entity("{message\":\bad request\"}")
                 .build();
+    }
+    
+    private boolean check(String user)
+    {
+        return (ub.getByUsername(user) != null);
+    }
+    
+    private boolean checkManager(String user)
+    {
+        Users u = ub.getByUsername(user);
+        return (u != null && u.getPermissionsId() != 1);
     }
 }

@@ -57,8 +57,11 @@ html, body {
 }
 
 .nav-menu-items{
-    height: 100%;
     margin: auto 0;
+}
+
+.nav-menu-items a {
+    text-decoration: none;
 }
 
 #logo:hover {
