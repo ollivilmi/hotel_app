@@ -1,4 +1,3 @@
-/*
 //get ref to modal on load
 var modal;
 var registerContainer;
@@ -31,4 +30,3 @@ window.onclick = function(event) {
         registerContainer.style.display = 'flex';
     };
 };
----------------------------------*/
