@@ -79,14 +79,14 @@ html, body {
     margin: 10px 5px 10px 0;
 }
 
-input[type=text] {
+#search-bar input[type=text] {
     margin: 25px;
     display: block;
     width: 200px;
     box-sizing: border-box;
     border: 2px solid #eaeaea;
     border-radius: 5px;
-    background-image: url(/images/search-icon.png);
+    background-image: url("./images/search-icon.png");
     background-size: 15px;
     background-position: 60px 5px;
     background-color: #FAFAFA;
@@ -97,7 +97,7 @@ input[type=text] {
     transition: width 0.4s ease-in-out;
 }
 
-input:focus {
+#search-bar input:focus {
     outline: none;
     padding-left: 25px;
     background-position: 5px;
@@ -147,18 +147,30 @@ input:focus {
 }
 
 .add-buttons-container {
-    height: 40px;
+    padding-top: 10px;
     border-radius: 0 0 10px 10px;
+    display: flex;
+    align-content: space-around;
+}
+
+input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
 }
 
 #add-photo-button {
     float: left;
     height: 30px;
-    margin: 5px 0px 5px 10px;
+    margin: 25px 0px 5px 15px;
     display: flex;
     align-items: center;
     background-color: #FFF;
-    margin-left: 15px;
     padding: 0 10px;
     outline: none;
 }
@@ -170,15 +182,27 @@ input:focus {
 }
 
 #add-button{
-    margin: 5px 10px 5px 0;
+    margin: 25px 10px 5px 25px;
     background-color: #AB9A70;
-    float: right;
     height: 30px;
     width: 100px;
     text-align: center;
     outline: none;
     border-radius: 3px;
     color: #fff;
+}
+
+.features {
+    height: 80%;
+    padding: 8px;
+}
+
+.features input, select {
+    color: black;
+    margin: 5px 10px;
+    margin-left: 15px;
+    border: 2px solid #eaeaea;
+    border-radius: 5px;
 }
 
 #add-button:hover {

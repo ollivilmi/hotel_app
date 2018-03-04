@@ -1,11 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-
 var editButton;
 var saveButton;
 var cancelButton;
@@ -31,9 +23,11 @@ window.onload = function () {
 
     console.log(profilePopup);
     
+    //Current session cookie to identify we are logged in for resources
     let user = getCookie("user");
     console.log(user);
     
+    //Fetch profile information for the logged in user
     fetch("/management/r/users/u", {
         headers: {
             'user': user
@@ -45,6 +39,7 @@ window.onload = function () {
             })
             .catch(error => console.log(error));
             
+    //Fetch users without permissions to log in for managers to accept
     fetch("/management/r/users/manager/getNewUsers", {
         headers: {
             'user': user
@@ -63,13 +58,15 @@ window.onload = function () {
         ShowInfoCard();
     };
     
-    requestPicture.onclick = function (){
+    requestPicture.onclick = function () {
         if (profilePopup.style.display === "none") {
             profilePopup.style.display = "block";
         } else {
             profilePopup.style.display = "none";
         }
     };
+    
+    
 };
 
 // Edit user information
@@ -141,15 +138,18 @@ const newUsers = (info) => {
     for (let item of info)
     {
         console.log(item);
-        requestString += "<div class='request-person'"
-        +"div class='request-person-static'>"
+        requestString += "<form action='/management/r/users/manager/acceptUser' method='POST' onsubmit=\"this.style.display = 'none'\">"
+        +'<input type="hidden" name="username" value="'+item.username+'"/>'
+        +"<div class='request-person'>"
+        +"<div class='request-person-static'>"
         +"<p class='request-container-element' id='request-name'>" + item.firstName + " " + item.lastName + "</p>"
         +"<img class='request-profile-picture' id='request-profile-picture' src='images/person-icon.png'>"
-        +"<button type='submit' id='accept-request-btn' class='request-container-element request-button' name='request-accept'>Accept</button>"
-        +'<button type="submit" id="decline-request-btn" class="request-container-element request-button" name="request-decline">Decline</button>'
+        +"<button type='submit' id='accept-request-btn' class='request-container-element request-button' name='accept' value='accept'>Accept</button>"
+        +'<button type="submit" id="decline-request-btn" class="request-container-element request-button">Decline</button>'
         +"</div>"
         +'<span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>'
-        +"</div>";
+        +"</div>"
+        +"</form>";
     }
     document.querySelector(".request-container").innerHTML = requestString;
 };
