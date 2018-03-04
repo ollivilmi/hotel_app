@@ -30,7 +30,7 @@ import javax.servlet.http.Part;
  *
  * @author rangigo
  */
-@WebServlet(urlPatterns = "/r/notes/new")
+@WebServlet(urlPatterns = "/secure/r/notes/new")
 @MultipartConfig
 public class NotesUpload extends HttpServlet {
 
@@ -63,9 +63,8 @@ public class NotesUpload extends HttpServlet {
                 Part filePart = request.getPart("file");
                 String content = request.getParameter("content");
                 content = content.replace("\n", "<br>");
-                Logger.getLogger(NotesUpload.class.getName()).log(Level.INFO, content, content);
                 int departmentId = 0;
-                if (!request.getParameter("departmentId").isEmpty() || !request.getParameter("departmentId").equals("0")) {
+                if (!request.getParameter("departmentId").isEmpty() || request.getParameter("departmentId").equals("0")) {
                     departmentId = Integer.parseInt(request.getParameter("departmentId"));
                 }
 
@@ -82,11 +81,20 @@ public class NotesUpload extends HttpServlet {
                 //Using bean to create Notes from the POST request parameters
                 Models.Notes notes = nb.createNote(content, finalDate, fileName, departmentId);
 
-                if (!request.getParameter("userId").isEmpty()) {
-                    int userId = Integer.parseInt(request.getParameter("userId"));
-                    nb.addReceiver(notes, userId);
+                if (!request.getParameter("employeeIds").isEmpty()) {
+                    if (request.getParameter("employeeIds").contains(",")) {
+                        String[] employeeIds = request.getParameter("employeeIds").split(",");
+//                        Logger.getLogger(NotesUpload.class.getName()).log(Level.INFO, employeeIds[0], employeeIds[1]);
+                        for (String id : employeeIds) {
+                            nb.addReceiver(notes, Integer.parseInt(id));
+                        }
+                    } else {
+                        nb.addReceiver(notes, Integer.parseInt(request.getParameter("employeeIds")));
+                    }
                 }
-                out.print(notes);
+//                out.print(notes);
+                out.print("Notes sent succesfully!");
+                response.sendRedirect("/management/secure/main.html");
             } catch (ParseException ex) {
                 Logger.getLogger(NotesUpload.class.getName()).log(Level.SEVERE, null, ex);
             }

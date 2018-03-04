@@ -6,6 +6,7 @@
 package service;
 
 import Beans.NotesBean;
+import Beans.UserBean;
 import Models.Notes;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -33,6 +35,9 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
 
     @EJB
     NotesBean nb;
+    
+    @EJB
+    UserBean ub;
     
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
@@ -90,7 +95,32 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
         return nb.getDateByNotesId(noteId) + " GMT+2";
     }
     
-    @GET    
+    @GET
+    @Path("getNotes")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String find(@HeaderParam("user") String username) {
+        if (check(username)) {
+            Models.Users user = ub.getByUsername(username);
+            if (user.getPermissionsId() == 1) {
+                return nb.notesData(user.getId(), ub.getDepartmentIdByJobId(user.getJobId()));
+            }
+        }
+        return null;
+    }
+    
+    //TESTING
+    @GET
+    @Path("test")
+    @Produces(MediaType.TEXT_PLAIN)
+    public int test(String username) {
+            Models.Users user = ub.getByUsername(username);
+            if (user.getPermissionsId() == 1) {
+                return ub.getDepartmentIdByJobId(user.getJobId());
+            }
+            return 0;
+    }
+    
+    @GET 
     @Override
     @Produces(MediaType.APPLICATION_JSON)
     public List<Notes> findAll() {
@@ -116,4 +146,8 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
         return em;
     }
     
+    private boolean check(String user)
+    {
+        return (ub.getByUsername(user) != null);
+    }
 }

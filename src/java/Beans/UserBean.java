@@ -29,6 +29,10 @@ public class UserBean {
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
     
+    public int getDepartmentIdByJobId(int jobId) {
+        return (int) em.createNamedQuery("Jobs.findDepartmentIdById").setParameter("id", jobId).getSingleResult();
+    }
+    
     public Users getByUsername(String name)
     {
         Query q = em.createNamedQuery("Users.findByUsername").setParameter("username", name);

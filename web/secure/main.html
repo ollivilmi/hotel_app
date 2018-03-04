@@ -29,7 +29,7 @@
             </div>
             <div class="main-view center-div">
                 <div class="add-notes-tasks">
-                    <form action="r/notes/new" enctype="multipart/form-data" method="POST">
+                    <form action="r/notes/new" enctype="multipart/form-data" method="POST" id='notes-form'>
                         <div class="add-title">
                             <img id="add-icon" src="images/main/pen-icon.svg" alt="">
                             <p>Add Notes or Tasks</p>
@@ -57,6 +57,8 @@
                                     <option value="3">Reception</option>
                                     <option value="4">Maintenance</option>
                                 </select>
+                                <br>
+                                Employee Ids (each id separated by a comma ",")<input type="text" name="employeeIds" id="employee-ids">
                             </label>
                             <input type="submit" id="add-button" value="Post">
                         </div>

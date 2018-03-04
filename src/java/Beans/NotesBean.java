@@ -8,6 +8,7 @@ package Beans;
 import Models.NoteReceivers;
 import Models.NoteReceiversPK;
 import Models.Notes;
+import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +17,12 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonBuilderFactory;
+import javax.json.JsonWriter;
+import javax.persistence.Query;
 /**
  *
  * @author Hillo
@@ -81,7 +88,8 @@ public class NotesBean {
         refreshEM();
         return new SimpleDateFormat("yyyy-MM-dd HH:mm").format((Date) em.createNamedQuery("Notes.getDateByNoteId").setParameter("noteId", id).getSingleResult());
     }
-   
+    
+    
     /*
     This method will just empty the cache,
     so if you fetch objects changed outside the entity manager, 
@@ -89,5 +97,41 @@ public class NotesBean {
     */
     public void refreshEM() {
         em.getEntityManagerFactory().getCache().evictAll();
+    }
+    
+    public String notesData(int userId, int departmentId) {
+        Query q = em.createNativeQuery("SELECT * FROM Notes "
+                + "LEFT JOIN Note_Receivers ON id = note_id "
+                + "WHERE user_id = " + userId + " OR department_id = "+ departmentId + " ORDER BY note_date;"
+        );
+        
+        return buildUserJSON(q.getResultList());
+    }
+    
+    private String buildUserJSON(List<Object[]> results)
+    {
+        JsonBuilderFactory jf = Json.createBuilderFactory(null);
+        StringWriter sWriter = new StringWriter();
+        JsonArrayBuilder jb = jf.createArrayBuilder();
+        
+        for (Object[] n : results)
+        {
+            jb
+                .add(jf.createObjectBuilder()
+                    .add("id", n[0].toString())
+                    .add("contents", n[1].toString())
+                    .add("note_date", n[2].toString())
+                    .add("department_id", n[3].toString())
+                    .add("img_url", n[4].toString())
+                    .add("user_id", n[5].toString())
+                );
+        }
+        
+        JsonArray jay = jb.build();
+
+        try (JsonWriter jWriter = Json.createWriter(sWriter)) {
+            jWriter.write(jay);
+        }
+        return sWriter.toString();
     }
 }
