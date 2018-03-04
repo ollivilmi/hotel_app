@@ -59,13 +59,13 @@ public class UserResources extends AbstractFacade<Users> {
     public void remove(@PathParam("id") Integer id) {
         super.remove(super.find(id));
     }
-    
+   
     @POST
     @Path("/manager/setUserPermissions")
     public void setUserPermission(@FormParam("username") String username, @FormParam("perm") int perm,
             @HeaderParam("user") String user)
     {
-        if (check(user))
+        if (checkManager(user))
         {
             Users u = ub.getByUsername(username);
             u.setPermissionsId(perm);
@@ -73,14 +73,41 @@ public class UserResources extends AbstractFacade<Users> {
         }
     }
     
+    //Manager can change user job - which also changes user's department for notes
     @POST
     @Path("/manager/setUserJob")
-    public void setUserJob(@FormParam("username") String username, @FormParam("job") int job)
+    public void setUserJob(@FormParam("username") String username, @FormParam("job") int job,
+            @HeaderParam("user") String user)
     {
-        Users u = ub.getByUsername(username);
-        u.setJobId(job);
-        super.edit(u);
+        if (checkManager(user))
+        {
+            Users u = ub.getByUsername(username);
+            u.setJobId(job);
+            super.edit(u);
+        }
     }
+    
+    //Manager accepts registration, puts user permission level to 1 (Employee)
+    //so that they can now log in
+    @POST
+    @Path("/manager/acceptUser")
+    public void acceptUser(@FormParam("username") String username, @FormParam("accept") String accept)
+    {
+        if (accept != null)
+        {
+            Users u = ub.getByUsername(username);
+            u.setPermissionsId(1);
+            super.edit(u);
+        }
+        else //Manager declines new registration request, deletes user from database
+        {
+            Users u = ub.getByUsername(username);
+            super.remove(u);
+        }
+    }
+    
+
+    
     
     @GET
     @Path("/manager/getNewUsers")
