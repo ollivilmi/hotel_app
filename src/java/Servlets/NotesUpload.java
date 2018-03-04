@@ -54,50 +54,37 @@ public class NotesUpload extends HttpServlet {
 
         File uploads = new File("E:\\Study\\hotel_app\\Pictures"); //define storage location
         try (PrintWriter out = response.getWriter()) {
-            try {
-                //transform HTML String date to Java Date Object
-                String date = request.getParameter("date");
-                String time = request.getParameter("time");
-                Date finalDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(date + " " + time);
-
-                Part filePart = request.getPart("file");
-                String content = request.getParameter("content");
-                content = content.replace("\n", "<br>");
-                int departmentId = 0;
-                if (!request.getParameter("departmentId").isEmpty() || request.getParameter("departmentId").equals("0")) {
-                    departmentId = Integer.parseInt(request.getParameter("departmentId"));
-                }
-
-                String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
-
-                //create the file in the storage location
-                File file = new File(uploads, fileName);
-                try (InputStream input = filePart.getInputStream()) {
-                    Files.copy(input, file.toPath());
-                } catch (Exception ex) {
-                    out.print(ex);
-                }
-
-                //Using bean to create Notes from the POST request parameters
-                Models.Notes notes = nb.createNote(content, finalDate, fileName, departmentId);
-
-                if (!request.getParameter("employeeIds").isEmpty()) {
-                    if (request.getParameter("employeeIds").contains(",")) {
-                        String[] employeeIds = request.getParameter("employeeIds").split(",");
-//                        Logger.getLogger(NotesUpload.class.getName()).log(Level.INFO, employeeIds[0], employeeIds[1]);
-                        for (String id : employeeIds) {
-                            nb.addReceiver(notes, Integer.parseInt(id));
-                        }
-                    } else {
-                        nb.addReceiver(notes, Integer.parseInt(request.getParameter("employeeIds")));
-                    }
-                }
-//                out.print(notes);
-                out.print("Notes sent succesfully!");
-                response.sendRedirect("/management/secure/main.html");
-            } catch (ParseException ex) {
-                Logger.getLogger(NotesUpload.class.getName()).log(Level.SEVERE, null, ex);
+            Part filePart = request.getPart("file");
+            String content = request.getParameter("content");
+            content = content.replace("\n", "<br>"); //new line break for textarea
+            int departmentId = 0;
+            if (!request.getParameter("departmentId").isEmpty() || request.getParameter("departmentId").equals("0")) {
+                departmentId = Integer.parseInt(request.getParameter("departmentId"));
             }
+            String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
+            //create the file in the storage location
+            File file = new File(uploads, fileName);
+            try (InputStream input = filePart.getInputStream()) {
+                Files.copy(input, file.toPath());
+            } catch (Exception ex) {
+                out.print(ex);
+            }
+            //Using bean to create Notes from the POST request parameters
+            Models.Notes notes = nb.createNote(content, fileName, departmentId);
+            if (!request.getParameter("employeeIds").isEmpty()) {
+                if (request.getParameter("employeeIds").contains(",")) {
+                    String[] employeeIds = request.getParameter("employeeIds").split(",");
+//                        Logger.getLogger(NotesUpload.class.getName()).log(Level.INFO, employeeIds[0], employeeIds[1]);
+                    for (String id : employeeIds) {
+                        nb.addReceiver(notes, Integer.parseInt(id));
+                    }
+                } else {
+                    nb.addReceiver(notes, Integer.parseInt(request.getParameter("employeeIds")));
+                }
+            }
+            //                out.print(notes);
+            out.print("Notes sent succesfully!");
+            response.sendRedirect("/management/secure/main.html");
         }
     }
 

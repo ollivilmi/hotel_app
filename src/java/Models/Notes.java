@@ -8,12 +8,17 @@ package Models;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
+import javax.persistence.EntityResult;
+import javax.persistence.FieldResult;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,6 +28,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Hillo
  */
+@SqlResultSetMapping(name="NotesDataResult", 
+        entities = {
+            @EntityResult(entityClass = Notes.class, 
+                fields = {@FieldResult(name="id", column="id"), @FieldResult(name="contents", column="contents"),
+                          @FieldResult(name="note_date", column="note_date"),  @FieldResult(name="department_id", column="department_id"), 
+                          @FieldResult(name="img_url", column="img_url"), @FieldResult(name="user_id", column="user_id")})
+        }
+)
+
+
 @Entity
 @Table(name = "Notes")
 @XmlRootElement
@@ -57,11 +72,6 @@ public class Notes implements Serializable {
 
     public Notes(Integer id) {
         this.id = id;
-    }
-
-    public Notes(Integer id, Date noteDate) {
-        this.id = id;
-        this.noteDate = noteDate;
     }
 
     public Integer getId() {

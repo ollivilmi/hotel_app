@@ -98,7 +98,7 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     @GET
     @Path("getNotes")
     @Produces(MediaType.APPLICATION_JSON)
-    public String find(@HeaderParam("user") String username) {
+    public List<Notes> find(@HeaderParam("user") String username) {
         if (check(username)) {
             Models.Users user = ub.getByUsername(username);
             if (user.getPermissionsId() == 1) {
@@ -112,8 +112,9 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     @GET
     @Path("test")
     @Produces(MediaType.TEXT_PLAIN)
-    public int test(String username) {
-            Models.Users user = ub.getByUsername(username);
+    public int test() {
+        
+            Models.Users user = ub.getByUsername("phuocn");
             if (user.getPermissionsId() == 1) {
                 return ub.getDepartmentIdByJobId(user.getJobId());
             }

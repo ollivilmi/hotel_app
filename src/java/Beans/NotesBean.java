@@ -23,6 +23,7 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonWriter;
 import javax.persistence.Query;
+import org.jboss.logging.Logger;
 /**
  *
  * @author Hillo
@@ -33,12 +34,11 @@ public class NotesBean {
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
     
-    public Notes createNote(String text, Date date, String imgUrl, int departmentId)
+    public Notes createNote(String text, String imgUrl, int departmentId)
     {
         refreshEM();
         Notes n = new Notes();
         n.setContents(text);
-        n.setNoteDate(date);
         n.setImgUrl(imgUrl);
         if (departmentId != 0) n.setDepartmentId(departmentId);  
         em.persist(n);
@@ -99,39 +99,14 @@ public class NotesBean {
         em.getEntityManagerFactory().getCache().evictAll();
     }
     
-    public String notesData(int userId, int departmentId) {
-        Query q = em.createNativeQuery("SELECT * FROM Notes "
-                + "LEFT JOIN Note_Receivers ON id = note_id "
-                + "WHERE user_id = " + userId + " OR department_id = "+ departmentId + " ORDER BY note_date;"
-        );
+    public List<Notes> notesData(int userId, int departmentId) {
+        Query q = em.createNativeQuery("SELECT n.id AS id, n.contents AS contents, n.note_date AS note_date,"
+                + " n.department_id AS department_id, n.img_url AS img_url, nr.user_id AS user_id "
+                + "FROM Notes n, Note_Receivers nr "
+                + "WHERE n.id = nr.note_id AND "
+                + "(user_id = " + userId + " OR department_id = " + departmentId + ") ORDER BY note_date;", "NotesDataResult");
         
-        return buildUserJSON(q.getResultList());
+        return (List<Notes>) q.getResultList();
     }
-    
-    private String buildUserJSON(List<Object[]> results)
-    {
-        JsonBuilderFactory jf = Json.createBuilderFactory(null);
-        StringWriter sWriter = new StringWriter();
-        JsonArrayBuilder jb = jf.createArrayBuilder();
-        
-        for (Object[] n : results)
-        {
-            jb
-                .add(jf.createObjectBuilder()
-                    .add("id", n[0].toString())
-                    .add("contents", n[1].toString())
-                    .add("note_date", n[2].toString())
-                    .add("department_id", n[3].toString())
-                    .add("img_url", n[4].toString())
-                    .add("user_id", n[5].toString())
-                );
-        }
-        
-        JsonArray jay = jb.build();
 
-        try (JsonWriter jWriter = Json.createWriter(sWriter)) {
-            jWriter.write(jay);
-        }
-        return sWriter.toString();
-    }
 }

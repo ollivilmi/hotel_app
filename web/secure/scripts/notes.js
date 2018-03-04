@@ -13,7 +13,6 @@ fileAdd.onchange = () => {
 }
 
 //Get username through cookie
-console.log(document.cookie)
 const getCookie = (cname) => {
 	const name = cname + "=";
 	const decodedCookie = decodeURIComponent(document.cookie);
@@ -34,13 +33,13 @@ const getCookie = (cname) => {
 
 let url = '/management/r/notes'
 let username = getCookie('user')
-
+console.log(username)
 fetch(url + '/getNotes', {
 	headers: {
 		'user': username
 	}
 })
-	.then(res => res.json)
+	.then(res => res.json())
 	.then(function(json) {
 		console.log(json)
 	})
