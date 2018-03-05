@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Profile page</title>
         <!-- CSS -->
-        <link rel="stylesheet" href="profilestyle.css">
+        <link rel="stylesheet" href="../assets/css/profilestyle.css">
         <!-- Link to script -->
         <script src="scripts/profilescript.js"></script>
     </head>
@@ -152,7 +152,7 @@
                                 <!-- admin user can change permissions or departments from workers here -->
                                 <div class="management-edit">
                                     <div class="edit-header">
-                                        <p>Edit user privileges</p>
+                                        <p>Edit user jobs and permissions</p>
                                     </div>
                                     <div class="edit-container">
                                         <div class="search-name-container">
@@ -160,6 +160,7 @@
                                                 <label class="search-name-element" for="name-search">
                                                     <b>Search by: 
                                                     <select id="search-type" class="search-department-dropdown" onchange="changeOptions(this.value)">
+                                                        <option value="unassigned">Unassigned</option>
                                                         <option value="firstname">First name</option>
                                                         <option value="lastname">Last name</option>
                                                         <option value="username">Username</option>

@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Users.findByJob", query = "SELECT u FROM Users u JOIN Jobs j ON u.jobId = j.id WHERE j.title LIKE :job")
     , @NamedQuery(name = "Users.findIdByName", query = "SELECT u.id FROM Users u WHERE u.username = :username")
     , @NamedQuery(name = "Users.findNew", query = "SELECT u FROM Users u WHERE u.permissionsId IS NULL")
+    , @NamedQuery(name = "Users.unassigned", query = "SELECT u FROM Users u WHERE u.jobId IS NULL")
 })
 public class Users implements Serializable {
 

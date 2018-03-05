@@ -188,6 +188,16 @@ public class UserResources extends AbstractFacade<Users> {
             return em.createNamedQuery("Users.findByJob").setParameter("job", job+"%").getResultList();
         return null;
     }
+    
+    @GET
+    @Path("/unassigned")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Users> findUnassigned(@HeaderParam("user") String user)
+    {
+        if (checkManager(user))
+            return em.createNamedQuery("Users.unassigned").getResultList();
+        return null;
+    }
 
     @Override
     protected EntityManager getEntityManager() {

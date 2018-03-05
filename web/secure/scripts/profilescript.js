@@ -20,17 +20,9 @@ window.onload = function () {
     registerContainer = document.getElementById('register-container');
     closeButton = document.getElementById('closeButton');
 
-    editButton = document.getElementById('edit-btn');
-    // editButton.addEventListener('click', editInfo);
-
-
     saveButton = document.getElementById('save-btn');
 
-    cancelButton = document.getElementById('cancel-btn');
-
     formInputFields = document.getElementsByClassName('profile-input');
-
-    console.log(profilePopup);
     
     //Current session cookie to identify we are logged in for resources
     user = getCookie("user");
@@ -109,6 +101,9 @@ const buildManagementWindow = () =>
         
         switch (searchType)
         {
+            case "unassigned":
+                apiString = "/management/r/users/unassigned";
+                break;
             case "username":
                 apiString = "/management/r/users/byUsername?username="+search;
                 break;
@@ -142,7 +137,7 @@ const buildManagementWindow = () =>
             .catch(error => console.log(error)); 
     });
     
-    changeOptions("");
+    changeOptions("unassigned");
 };
 
 // Edit user information
@@ -215,8 +210,8 @@ const newUsers = (users) => {
         +"<div class='request-person-static'>"
         +"<p class='request-container-element' id='request-name'>" + user.firstName + " " + user.lastName + "</p>"
         +"<img class='request-profile-picture' id='request-profile-picture' src='images/person-icon.png'>"
-        +"<button type='submit' id='accept-request-btn' class='request-container-element request-button' name='accept' value='accept'>Accept</button>"
-        +'<button type="submit" id="decline-request-btn" class="request-container-element request-button">Decline</button>'
+        +"<button type='submit' class='request-container-element request-button' name='accept' value='accept'>Accept</button>"
+        +'<button type="submit" class="request-container-element request-button">Decline</button>'
         +"</div>"
         +'<span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>'
         +"</div>"
@@ -247,7 +242,8 @@ const changeOptions = (searchType) => {
     switch (searchType)
     {
         case "department":
-            search.innerHTML = '<select id="search-user" class="search-department-dropdown">'
+            search.innerHTML =  'Choose department '
+                                +'<select id="search-user" class="search-department-dropdown">'
                                 + '<option value="1">Restaurant</option>'
                                 + '<option value="2">Management</option>'
                                 + '<option value="3">Reception</option>'
@@ -255,24 +251,38 @@ const changeOptions = (searchType) => {
                                 + '</select>';
             break;
         case "job":
-            fetch("/management/r/jobs/get/all")
-                    .then(response => response.json())
-                    .then(function(json) 
-            {
-                let jobSelect = '<select id="search-user" class="search-department-dropdown">';
-                for(let job of json)
-                {
-                    jobSelect += '<option value="' + job.id + '">' + job.title + '</option>';
-                }
-                jobSelect += '</select>';
-                search.innerHTML = jobSelect;
-            })
-                    .catch(error => console.log(error));
+        search.innerHTML =  'Choose department '
+                            +'<select id="search-user" class="search-department-dropdown" onchange="jobOptions(this.value)">'
+                            + '<option value="1">Restaurant</option>'
+                            + '<option value="2">Management</option>'
+                            + '<option value="3">Reception</option>'
+                            + '<option value="4">Maintenance</option>'
+                            + '</select>';
+            break;
+        case "unassigned":
+            search.innerHTML = '<input type="hidden" id="search-user"/>';
             break;
         default:
             search.innerHTML = '<input class="search-name-element" type="text" placeholder="Enter name" id="search-user">';
             break;
     }
+};
+
+const jobOptions = (department) => {
+    let search = document.querySelector("#search-option");
+    fetch("/management/r/jobs/byDepartment?dptId="+department)
+          .then(response => response.json())
+          .then(function(json) 
+    {
+        let jobSelect = 'Choose job <select id="search-user" class="search-department-dropdown">';
+        for(let job of json)
+        {
+            jobSelect += '<option value="' + job.id + '">' + job.title + '</option>';
+        }
+        jobSelect += '</select>';
+        search.innerHTML = jobSelect;
+    })
+            .catch(error => console.log(error));  
 };
 
 openModal = function() {

@@ -18,6 +18,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -35,30 +36,10 @@ public class JobResources extends AbstractFacade<Jobs> {
         super(Jobs.class);
     }
 
-    @POST
-    @Override
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void create(Jobs entity) {
-        super.create(entity);
-    }
-
-    @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void edit(@PathParam("id") Integer id, Jobs entity) {
-        super.edit(entity);
-    }
-
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
-    }
-
     @GET
-    @Path("get/{dptId}")
+    @Path("byDepartment")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Jobs> findJobsByDepartmentId(@PathParam("dptId") int dptId) {
+    public List<Jobs> findJobsByDepartmentId(@QueryParam("dptId") int dptId) {
         return (List<Jobs>) em.createNamedQuery("Jobs.findByDepartmentId").setParameter("departmentId", dptId).getResultList();
     }
 
@@ -68,20 +49,6 @@ public class JobResources extends AbstractFacade<Jobs> {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Jobs> findAll() {
         return super.findAll();
-    }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Jobs> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
     }
 
     @Override
