@@ -303,6 +303,7 @@ input[type="file"] {
     border-radius: 5px;
 }
 
+
 .filter-bar {
     width: 100%;
     height: 50px;
@@ -314,8 +315,14 @@ input[type="file"] {
     border-radius: 10px;
 }
 
-#filter-ID {
+
+.filter-input {
     margin-left: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#filter-value, .filter-input select {
     border: 2px solid #eaeaea;
     border-radius: 5px;
 }
@@ -330,6 +337,11 @@ input[type="file"] {
     color: #fff;
     margin-right: 10px;
     margin-left: auto;
+}
+
+#filter-apply-button:hover {
+    cursor: pointer;
+    background-color: #333;
 }
 
 #filter-apply-button:hover {
