@@ -1,26 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
 import Models.Users;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.mindrot.jbcrypt.BCrypt;
 import Beans.UserBean;
 import Login.Password;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
-import service.UserResources;
 
 /**
  *
@@ -41,25 +32,37 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // Get username and password from form to login
         String uname = request.getParameter("username");
         String pass = request.getParameter("password");
+        
+        // Search by username from database to check password
         Users u = bean.getByUsername(uname);
         if (u == null)
             response.sendRedirect("/management/login.html");
         
+        // Check password
         if (Password.check(pass, u.getPwHash()))
             {
+                // Create a new session for the user
                 HttpSession session = request.getSession();
 
+                // Save user object into user attribute in the session
+                // Lasts 30 minutes
                 session.setAttribute("user", u);
                 session.setMaxInactiveInterval(30*60);
                 
+                // Create user cookie for JavaScript fetch to work
+                // Lasts 30 minutes
                 Cookie cookie = new Cookie("user", uname);
                 cookie.setMaxAge(30*60);
                 response.addCookie(cookie);
 
+                // Send user to the main page
                 response.sendRedirect("/management/secure/main.html");
             }
+        // Passwords didn't match, send the user back to the login page
         else response.sendRedirect("/management/login.html");
     }
 }

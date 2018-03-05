@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -25,23 +19,23 @@ public class Logout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+            // Get session variable where we have stored our current user
             HttpSession session = request.getSession();
+            
+            // Remove the user attribute
             if (session != null)
             {
                 session.removeAttribute("user");
             }
+            // Remove the user cookie which is used for JavaScript
             for (Cookie cookie : request.getCookies())
                 if (cookie.getName().equals("user"))
                 {
                     cookie = null;
                     break;
                 }
+            // Send the user back to the login page
             response.sendRedirect("/management/login.html");
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
 }

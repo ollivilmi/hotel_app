@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
 import Beans.UserBean;
@@ -10,8 +5,6 @@ import Login.Password;
 import Models.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,12 +25,14 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Double check that the user's password match
         if (!request.getParameter("password").equals(request.getParameter("password-repeat")))
         {
             response.sendRedirect("/management/error.html");
             return;
         }
         
+        // Get user information from the profile form
         Users u = new Users();
         u.setFirstName(request.getParameter("firstname"));
         u.setLastName(request.getParameter("lastname"));
@@ -46,6 +41,7 @@ public class Register extends HttpServlet {
         u.setPhoneNumber(request.getParameter("telnumber"));
         u.setPwHash(Password.hash(request.getParameter("password")));
 
+        // Double check that the required fields are not empty
         for (String parameter : u.registrationForm())
         {
             if (check(parameter))
@@ -56,12 +52,15 @@ public class Register extends HttpServlet {
                 }
             }
         }
+        
+        // If everything is good, make changes to db
         if (bean.addUser(u))
             response.sendRedirect("/management/login.html");
         else
             response.sendRedirect("/management/error.html");
     }
     
+    // Check that a given form parameter is not null or empty
     private boolean check(String param)
     {
         return (param == null || param.isEmpty());

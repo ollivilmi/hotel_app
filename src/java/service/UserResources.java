@@ -1,40 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
 import Beans.UserBean;
 import Models.Users;
-import Login.Password;
-import java.io.StringWriter;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonBuilderFactory;
-import javax.json.JsonWriter;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -54,6 +34,21 @@ public class UserResources extends AbstractFacade<Users> {
         super(Users.class);
     }
    
+    
+    //----------------------------IMPORTANT--------------------------------
+    //
+    // Resources behind /manager/ are secured with Manager filter, and
+    // use the current session to check that the user has permissions
+    // to use them. They don't return any JSON, and are used mainly with
+    // forms.
+    //
+    // The resources that return JSON use @HeaderParam("user") cookie which
+    // contains the username of the current user that has been logged in.
+    // To use these resources you need to get the login cookie within JS
+    // and include it in the fetch header.
+    //
+    //---------------------------------------------------------------------
+    
     @POST
     @Path("/manager/setUserPermissions")
     public void setUserPermission(@FormParam("username") String username, 
@@ -64,7 +59,7 @@ public class UserResources extends AbstractFacade<Users> {
         super.edit(u);
     }
     
-    //Manager can change user job - which also changes user's department for notes
+    // Manager can change user job - which also changes user's department for notes
     @POST
     @Path("/manager/setUserJob")
     public void setUserJob(@FormParam("username") String username, @FormParam("job") int job)
@@ -74,8 +69,8 @@ public class UserResources extends AbstractFacade<Users> {
         super.edit(u);
     }
     
-    //Manager accepts registration, puts user permission level to 1 (Employee)
-    //so that they can now log in
+    // Manager accepts registration, puts user permission level to 1 (Employee)
+    // so that they can now log in
     @POST
     @Path("/manager/acceptUser")
     public void acceptUser(@FormParam("username") String username, @FormParam("accept") String accept)
@@ -93,6 +88,7 @@ public class UserResources extends AbstractFacade<Users> {
         }
     }
     
+    // Get users which haven't been given permissions to log in yet
     @GET
     @Path("/getNewUsers")
     @Produces(MediaType.APPLICATION_JSON)
@@ -103,6 +99,8 @@ public class UserResources extends AbstractFacade<Users> {
         return null;
     }
 
+    // Returns a query which contains all the information needed
+    // to construct the profile
     @GET
     @Path("/u")
     @Produces({MediaType.APPLICATION_JSON})
@@ -113,10 +111,11 @@ public class UserResources extends AbstractFacade<Users> {
     }
 
     @GET
-    @Override
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Users> findAll() {
-        return super.findAll();
+    public List<Users> findAll(@HeaderParam("user") String user) {
+        if (check(user))
+            return super.findAll();
+        return null;
     }
     
     @GET
@@ -127,20 +126,11 @@ public class UserResources extends AbstractFacade<Users> {
             return ub.allUserData();
         return null;
     }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public List<Users> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
+    
+    //-------------------SEARCH TOOLS-------------------//
+    
+    // Used to search users to edit their jobs/permissions
+    // and to search for note receivers.
     
     @GET
     @Path("/byDepartment")
@@ -204,11 +194,17 @@ public class UserResources extends AbstractFacade<Users> {
         return em;
     }
     
+    // Check that the user exists before returning resources
     private boolean check(String user)
     {
         return (ub.getByUsername(user) != null);
     }
     
+    // Check that the user exists and has permission level 2 or 3
+    // This is mainly used to hide forms that normal employees wouldnt
+    // see.
+    //
+    // Usage of the forms is secured with ManagerFilter which uses session.
     private boolean checkManager(String user)
     {
         Users u = ub.getByUsername(user);
