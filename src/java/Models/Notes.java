@@ -49,7 +49,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Notes.findByDepartmentId", query = "SELECT n FROM Notes n WHERE n.departmentId = :departmentId ORDER BY n.noteDate DESC")
     , @NamedQuery(name = "Notes.getDateByNoteId", query = "SELECT n.noteDate FROM Notes n WHERE n.id = :noteId")
     , @NamedQuery(name = "Notes.orderByDate", query = "SELECT n FROM Notes n ORDER BY n.noteDate DESC")
-    , @NamedQuery(name = "Notes.week", query = "SELECT n FROM Notes n WHERE n.noteDate ORDER BY n.noteDate DESC")
+    //, @NamedQuery(name = "Notes.week", query = "SELECT n FROM Notes n WHERE n.noteDate ORDER BY n.noteDate DESC")
 })
 public class Notes implements Serializable {
 

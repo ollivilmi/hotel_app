@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE glassfish-web-app PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Servlet 3.0//EN" "http://glassfish.org/dtds/glassfish-web-app_3_0-1.dtd">
 <glassfish-web-app error-url="">
-  <context-root>management</context-root>
+  <context-root>/management</context-root>
   <servlet>
     <servlet-name>NotesUpload</servlet-name>
   </servlet>
@@ -11,7 +11,7 @@
       <description>Keep a copy of the generated servlet class' java code.</description>
     </property>
     <welcome-file-list>
-      <welcome-file>login.html</welcome-file>
+      <welcome-file>/management/login.html</welcome-file>
     </welcome-file-list>
   </jsp-config>
 </glassfish-web-app>
