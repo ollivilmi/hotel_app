@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Hillo
  */
-@WebFilter(filterName = "SecureFilter", urlPatterns = {"/secure/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
+@WebFilter(filterName = "SecureFilter", urlPatterns = {"/secure/*", "/updateUser"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
 public class EmployeeFilter implements Filter {
     
     private static final boolean debug = true;

@@ -10,8 +10,6 @@ import Login.Password;
 import Models.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Hillo
  */
-@WebServlet(name = "register", urlPatterns = {"/register"})
-public class Register extends HttpServlet {
+@WebServlet(name = "updateUser", urlPatterns = {"/updateUser"})
+public class Update extends HttpServlet {
 
     @EJB
     private UserBean bean;
@@ -32,34 +30,32 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (!request.getParameter("password").equals(request.getParameter("password-repeat")))
-        {
-            response.sendRedirect("/management/error.html");
-            return;
-        }
         
-        Users u = new Users();
-        u.setFirstName(request.getParameter("firstname"));
-        u.setLastName(request.getParameter("lastname"));
-        u.setUsername(request.getParameter("username"));
-        u.setEmail(request.getParameter("email"));
-        u.setPhoneNumber(request.getParameter("telnumber"));
-        u.setPwHash(Password.hash(request.getParameter("password")));
-
-        for (String parameter : u.registrationForm())
+        Users u = bean.getByUsername(request.getParameter("username"));
+        
+        for (String parameter : u.updateForm())
         {
             if (check(parameter))
             {
                 response.setContentType("text/plain");
                 try (PrintWriter out = response.getWriter()) {
-                    out.println("Registration form missing a parameter");
+                    out.println("Update form missing a parameter");
                 }
             }
         }
-        if (bean.addUser(u))
-            response.sendRedirect("/management/login.html");
-        else
-            response.sendRedirect("/management/error.html");
+        
+        u.setFirstName(request.getParameter("firstname"));
+        u.setLastName(request.getParameter("lastname"));
+        u.setUsername(request.getParameter("username"));
+        u.setEmail(request.getParameter("email"));     
+        u.setPhoneNumber(request.getParameter("telnumber"));
+        
+        if (!check(request.getParameter("password")))
+            if (request.getParameter("password").equals(request.getParameter("password-repeat")))
+                u.setPwHash(Password.hash(request.getParameter("password")));
+        
+        bean.updateUser(u);
+        response.sendRedirect("/management/secure/profilepage.html");
     }
     
     private boolean check(String param)

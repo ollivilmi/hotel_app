@@ -93,9 +93,6 @@ public class UserResources extends AbstractFacade<Users> {
         }
     }
     
-
-    
-    
     @GET
     @Path("/getNewUsers")
     @Produces(MediaType.APPLICATION_JSON)
