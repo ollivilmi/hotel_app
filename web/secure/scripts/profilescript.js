@@ -9,8 +9,16 @@ var user;
 var green = '#4CAF50';
 var red = '#f44336';
 var blue = '#008CBA';
+//variables for modal container
+var modal;
+var registerContainer;
+var closeButton;
 
 window.onload = function () {
+    //Get elements for modal container
+    modal = document.getElementById('modal-edit-id');
+    registerContainer = document.getElementById('register-container');
+    closeButton = document.getElementById('closeButton');
 
     editButton = document.getElementById('edit-btn');
     // editButton.addEventListener('click', editInfo);
@@ -181,16 +189,12 @@ const getCookie = (cname) => {
 };
 
 const fillProfile = (info) => {
-  let department = document.querySelector("#department");
-  let job = document.querySelector("#job");
   let firstname = document.querySelector("#firstname");
   let lastname = document.querySelector("#lastname");
   let username = document.querySelector("#username");
   let telnumber = document.querySelector("#telnumber");
   let email = document.querySelector("#email");
   
-  department.innerHTML = info[0].department;
-  job.innerHTML = info[0].job;
   firstname.value = info[0].first_name;
   lastname.value = info[0].last_name;
   username.value = info[0].username;
@@ -226,10 +230,31 @@ const searchResults = (users) => {
         + '<div class="search-person-static">'
         + '<p class="search-container-element" id="search-name">'+user.firstName + " " + user.lastName + '</p>'      
         + '<img class="search-profile-picture" id="search-profile-picture" src="images/person-icon.png">'
-        + '<button type="submit" id="edit-user-btn" class="search-container-element" name="request-accept">Edit</button>'
+        + '<button type="submit" id="edit-user-btn" class="search-container-element" name="request-accept" onclick="openModal()>Edit</button>'
         + '</div>'
         + '<span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>'
         + '</div>';
     }
     document.querySelector("#user-search-container").innerHTML = resultString;
+};
+
+openModal = function() {
+    console.log("hello");
+    modal.style.display = 'flex';
+    registerContainer.style.display = 'none';
+};
+
+//methdod for closing the modal if user clicks anywhere else or the cross
+
+closeModal = function() {
+    modal.style.display = 'none';
+    registerContainer.style.display = 'flex';
+};
+
+
+window.onclick = function(event) {
+    if(event.target === modal) {
+        modal.style.display = 'none';
+        registerContainer.style.display = 'flex';
+    }
 };

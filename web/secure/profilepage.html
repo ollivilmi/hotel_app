@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -30,25 +25,60 @@ and open the template in the editor.
                     </div>
                     <div id="profile" class="nav-menu-items">
                         <img id="profile-img" alt="">
-                        <a href="profilepage.html" id="profile-name">Cuong</a>
+                        <a href="profilepage.html" id="profile-name">Profile</a>
                     </div>
                 </div>
             </div>
-            <div class="profile-menu">
-                <div class="profile-container">
-                    <div class="profile-nav">
-                        <div class="profile-nav-items" id="profile-general">
-                            <p>General Information</p>
-                            <p><span id="department"></span>, <span id="job"></span></p>
+            <div id="modal-edit-id" class="modal-edit">
+                <span onclick="closeModal()" class="close" id="close-button" title="Close Modal">&times;</span>
+                <form class="modal-content" action="register" method="POST">
+                    <div class="modal-container">
+                        <h1>Edit user information</h1>
+
+                        <div class="dropdown">
+                            <select name="department" class="dropdown-menu" required>
+                                <option selected disabled>Choose department</option>
+                                <option value="1">Restaurant</option>
+                                <option value="2">Management</option>
+                                <option value="3">Reception</option>
+                                <option value="4">Maintenance</option>
+                            </select>
                         </div>
-                        <div class="profile-nav-items" id="profile-management">
-                            <p>Management</p>
+
+                        <label for="firstname"><b>First Name</b></label>
+                        <input class="modal-input" type="text" placeholder="Enter name" name="firstname" required>
+
+                        <label for="lastname"><b>Last name</b></label>
+                        <input class="modal-input" type="text" placeholder="Enter name" name="lastname" required>
+
+                        <label for="tel"><b>Phone Number</b></label>
+                        <input class="modal-input" type="tel" placeholder="Enter number" name="telnumber" required>
+
+                        <label for="email"><b>Email</b></label>
+                        <input class="modal-input" type="email" placeholder="Enter Email" name="email" required>
+                        
+                        <label for="username"><b>User name</b></label>
+                        <input class="modal-input" type="text" placeholder="Enter User Name" name="username" required>
+                        
+                        <label for="password"><b>Password</b></label>
+                        <input class="modal-input" type="password" placeholder="Enter Password" name="password" required>
+
+                        <label for="psw-repeat"><b>Repeat Password</b></label>
+                        <input class="modal-input" type="password" placeholder="Repeat Password" name="password-repeat" required>
+                        
+                        <div class="clearfix">
+                            <button type="submit" class="submitbtn">Submit</button>
                         </div>
                     </div>
+                </form>
+            </div>
+            <div class="profile-menu">
+                <div class="profile-container">
                     <div class="info-container">
                         <div class="info-page" id="general-info">
+                            
                             <form id="info-form">
-
+                                <p class="info-header">General Information</p>
                                 <div class="info-block">
                                     <label class="profile-label" for="firstname"><b>First Name</b></label>
                                     <input id="firstname" class="profile-input" type="text" name="firstname" disabled>
@@ -87,12 +117,14 @@ and open the template in the editor.
                                 <div class="clearfix">
                                     <button type="submit" class="profile-btn" id="save-btn" disabled>Save</button>
                                     <button type="reset" class="profile-btn" id="cancel-btn" disabled>Cancel</button>
-                                    <button class="profile-btn" name="edit-btn" id="edit-btn" onclick="EditInfo()">Edit</button>
+                                    <button class="profile-btn" name="edit-btn" id="edit-btn">Edit</button>
+
                                 </div>
                             </form>
                         </div>
                         <div class="info-page" id="management-info">
                             <div class="management-container">
+                                <p class="info-header">Management</p>
                                 <!-- New requests for user permissions are shown here -->
                                 <div class="management-new-requests">
                                     <div class="request-header">
@@ -129,19 +161,17 @@ and open the template in the editor.
                                                 <button id="search-btn">Search</button>
                                             </div>
                                             <div class="search-result-container" id="user-search-container">
-
+                                                <div class="search-person">
+                                                </div>
                                             </div>
-                                        </div>                                       
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
-
     </body>
 </html>
