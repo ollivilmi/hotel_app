@@ -299,7 +299,8 @@ input[type="file"] {
 
 #note-title {
     margin-left: 10px;
-    background-color: #ebeeef;
+    border: 2px solid #eaeaea;
+    border-radius: 5px;
 }
 
 .filter-bar {
@@ -315,7 +316,8 @@ input[type="file"] {
 
 #filter-ID {
     margin-left: 10px;
-    background-color: #ebeeef;
+    border: 2px solid #eaeaea;
+    border-radius: 5px;
 }
 
 #filter-apply-button {
