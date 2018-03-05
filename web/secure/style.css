@@ -318,7 +318,7 @@ input[type="file"] {
     background-color: #ebeeef;
 }
 
-#apply-button {
+#filter-apply-button {
     background-color: #AB9A70;
     height: 30px;
     width: 80px;
@@ -330,7 +330,7 @@ input[type="file"] {
     margin-left: auto;
 }
 
-#apply-button:hover {
+#filter-apply-button:hover {
     cursor: pointer;
     background-color: #333;
 }

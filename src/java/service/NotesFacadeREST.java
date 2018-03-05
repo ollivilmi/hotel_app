@@ -80,14 +80,21 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     @GET
     @Path("byDepartment")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Notes> getByDepartment(@QueryParam("department") String department) {
-        return nb.getNotesByDepartment(department);
+    public List<Notes> getByDepartmentId(@QueryParam("departmentId")int departmentId) {
+        return nb.getNotesByDepartmentId(departmentId);
+    }
+    
+    @GET
+    @Path("byTime")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Notes> getByTime(@QueryParam("time")int departmentId) {
+        return nb.getNotesByDepartmentId(departmentId);
     }
     
     @GET
     @Path("getNoteDate")
     @Produces(MediaType.TEXT_PLAIN)
-    public String getByDepartment(@QueryParam("noteId") int noteId) {
+    public String getDateByNoteId(@QueryParam("noteId") int noteId) {
         return nb.getDateByNotesId(noteId) + " GMT+2";
     }
     
@@ -106,30 +113,6 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
         }
         return null;
     }
-    
-//    @GET
-//    @Path("unassignedNotes")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public List<Notes> findUnassignedNotes() {
-//        CriteriaBuilder cb = em.getCriteriaBuilder();
-//        CriteriaQuery<Notes> cq = cb.createQuery(Notes.class);
-//        Root<Notes> note = cq.from(Notes.class);
-//        cq.select(note);
-//        
-//    }
-    
-    //TESTING
-//    @GET
-//    @Path("test")
-//    @Produces(MediaType.TEXT_PLAIN)
-//    public int test() {
-//        
-//            Models.Users user = ub.getByUsername("phuocn");
-//            if (user.getPermissionsId() == 1) {
-//                return ub.getDepartmentIdByJobId(user.getJobId());
-//            }
-//            return 0;
-//    }
     
     @GET 
     @Override

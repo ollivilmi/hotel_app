@@ -78,9 +78,8 @@ public class NotesBean {
         return getNotesByUserId(id);
     }
     
-    public List<Notes> getNotesByDepartment(String departmentName) {
+    public List<Notes> getNotesByDepartmentId(int id) {
         refreshEM();
-        int id = (int) em.createNamedQuery("Departments.findIdByTitle").setParameter("title", departmentName).getSingleResult();
         return (List<Notes>) em.createNamedQuery("Notes.findByDepartmentId").setParameter("departmentId", id).getResultList();
     }
         
@@ -89,6 +88,16 @@ public class NotesBean {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format((Date) em.createNamedQuery("Notes.getDateByNoteId").setParameter("noteId", id).getSingleResult());
     }
     
+    public List<Notes> getNotesByTime(int time) {
+        switch (time) {
+            case 0:
+            case 1:
+            case 7:
+                
+            default:
+                return newestNotes();
+        }
+    }
     
     /*
     This method will just empty the cache,
