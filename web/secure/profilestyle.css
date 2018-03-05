@@ -128,19 +128,13 @@ html, body {
     background-color: #ebeeef;
 }
 
-.profile-nav {
-    height: 80px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.profile-nav-items {
+.info-header {
     padding-top: 20px;
     font-size: 26px;
-    color: #cecece;
-    height: 7%;  
+    color: #8c8c8c;
+    height: 7%;
 }
+
 
 
 #divider {
@@ -148,28 +142,6 @@ html, body {
     border-left: thick solid #cecece;
 }
 
-/* Some hover color transitions, might not need these */
-
-#profile-general p{
-    -webkit-transition: color .1s;
-    -moz-transition: color .1s;
-    -o-transition: color .1s;
-    transition: color .1s;
-}
-
-#profile-general p:hover {
-    color: #272727!important;
-}
-#profile-management p{
-    -webkit-transition: color .1s;
-    -moz-transition: color .1s;
-    -o-transition: color .1s;
-    transition: color .1s;
-}
-
-#profile-management p:hover {
-    color: #272727!important;
-}
 
 
 
@@ -182,16 +154,17 @@ html, body {
     justify-content: space-around;
 }
 
-.info-page {
-    color: grey;
-    height: 100%;
-}
 
 #info-form {
     display: flex;
     flex-direction: column;
     width: 90%;
     padding: 10px;
+}
+
+.info-header {
+    text-align: center;
+    padding-bottom: 5px;
 }
 
 /* these hold the label and input */
@@ -619,7 +592,16 @@ html, body {
     display: table;
 }
 
-/* Add padding to container elements */
+/* Add padding to modal container elements */
 .modal-container {
     padding: 25px;
+}
+
+/* Mobile media queries */
+
+@media screen and (max-width: 900px) {
+    .info-container {
+        flex-direction: column;
+        justify-content: space-between;
+    }
 }

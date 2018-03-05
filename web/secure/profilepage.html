@@ -79,19 +79,11 @@ and open the template in the editor.
             </div>
             <div class="profile-menu">
                 <div class="profile-container">
-                    <div class="profile-nav">
-                        <div class="profile-nav-items" id="profile-general">
-                            <p>General Information</p>
-                            <p><span id="department"></span>, <span id="job"></span></p>
-                        </div>
-                        <div class="profile-nav-items" id="profile-management">
-                            <p>Management</p>
-                        </div>
-                    </div>
                     <div class="info-container">
                         <div class="info-page" id="general-info">
+                            
                             <form id="info-form">
-
+                                <p class="info-header">General Information</p>
                                 <div class="info-block">
                                     <label class="profile-label" for="firstname"><b>First Name</b></label>
                                     <input id="firstname" class="profile-input" type="text" name="firstname" disabled>
@@ -137,6 +129,7 @@ and open the template in the editor.
                         </div>
                         <div class="info-page" id="management-info">
                             <div class="management-container">
+                                <p class="info-header">Management</p>
                                 <!-- New requests for user permissions are shown here -->
                                 <div class="management-new-requests">
                                     <div class="request-header">
