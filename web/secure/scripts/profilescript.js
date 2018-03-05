@@ -42,7 +42,11 @@ window.onload = function () {
     
     document.querySelector("#management-info").style.visibility = "hidden";
     
-    fetch("/management/r/users/byUsername?username="+user)
+    fetch("/management/r/users/byUsername?username="+user, {
+        headers: {
+            'user': user
+        }
+    })
             .then(response => response.json())
             .then(function(json) {
                 if (json[0].permissionsId !== 1 && json[0].permissionsId !== null)
