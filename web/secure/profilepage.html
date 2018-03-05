@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -30,7 +25,7 @@ and open the template in the editor.
                     </div>
                     <div id="profile" class="nav-menu-items">
                         <img id="profile-img" alt="">
-                        <a href="profilepage.html" id="profile-name">Cuong</a>
+                        <a href="profilepage.html" id="profile-name">Profile</a>
                     </div>
                 </div>
             </div>
@@ -151,52 +146,32 @@ and open the template in the editor.
                                     <div class="edit-container">
                                         <div class="search-name-container">
                                             <div class="search-name-input-container">
-                                                <label class="search-name-element" for="name-search"><b>Search by name: </b></label>
-                                                <input class="search-name-element" type="text" placeholder="Enter name" name="search-for-name">
-                                                <button type="submit" id="search-btn">Search</button>
+                                                <label class="search-name-element" for="name-search">
+                                                    <b>Search by: 
+                                                    <select id="searchtype" class="search-department-dropdown">
+                                                        <option value="firstname">First name</option>
+                                                        <option value="lastname">Last name</option>
+                                                        <option value="username">Username</option>
+                                                        <option value="job">Job</option>
+                                                        <option value="department">Department</option>
+                                                    </select>
+                                                    </b>
+                                                </label>
+                                                <input class="search-name-element" type="text" placeholder="Enter name" id="search-user">
+                                                <button id="search-btn">Search</button>
                                             </div>
-                                            <div class="search-result-container">
+                                            <div class="search-result-container" id="user-search-container">
                                                 <div class="search-person">
-                                                    <div class="search-person-static">
-                                                        <p class="search-container-element" id="search-name">Jane Doe </p>        
-                                                        <img class="search-profile-picture" id="search-profile-picture" src="images/person-icon.png">
-                                                        <button type="submit" id="edit-user-btn" class="search-container-element" name="request-accept">Edit</button>
-                                                    </div>
-                                                    <span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="search-department-container">
-                                            <div class="search-department-input-container">
-                                                <label for="departmnet" class="search-department-element"><b>Search by department:</b></label>
-                                                <select name="department" class="search-department-dropdown">
-                                                    <option value="kitchen">Kitchen</option>
-                                                    <option value="laundry">Laundry</option>
-                                                    <option value="roomservice">Room service</option>
-                                                </select>
-                                            </div>
-                                            <div class="search-result-container" >
-                                                <div class="search-person">
-                                                    <div class="search-person-static">
-                                                        <p class="search-container-element" id="request-name">Jane Doe </p>        
-                                                        <img class="search-profile-picture" id="search-profile-picture" src="images/person-icon.png">
-                                                        <button type="submit" id="edit-user-btn" class="search-container-element" name="request-accept" onclick="openModal()">Edit</button>
-
-                                                    </div>
-                                                    <span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>
-                                                </div>
-                                            </div>
-                                        </div>                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
-
     </body>
 </html>

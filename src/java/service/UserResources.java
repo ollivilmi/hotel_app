@@ -146,29 +146,28 @@ public class UserResources extends AbstractFacade<Users> {
     }
     
     @GET
-    @Path("byDepartment")
+    @Path("/byDepartment")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Users> findByDepartment(@QueryParam("department") int department,
             @HeaderParam("user") String user) {
-        if (check(user))
+        if(check(user))
             return em.createNamedQuery("Users.findByDepartment").setParameter("department", department).getResultList();
         return null;
     }
     
     @GET
-    @Path("byUsername")
+    @Path("/byUsername")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Users> findByDepartment(@QueryParam("username") String username,
-            @HeaderParam("user") String user) {
-        if (check(user))
+    public List<Users> findByUserName(@QueryParam("username") String username, @HeaderParam("user") String user) {
+        if(check(user))
             return em.createNamedQuery("Users.findByUsername").setParameter("username", username+"%").getResultList();
         return null;
     }
     
     @GET
-    @Path("byFirstName")
+    @Path("/byFirstName")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Users> findByFirstName(@QueryParam("firstName") String firstName,
+    public List<Users> findByFirstName(@QueryParam("firstName") String firstName, 
             @HeaderParam("user") String user) {
         if (check(user))
             return em.createNamedQuery("Users.findByFirstName").setParameter("firstName", firstName+"%").getResultList();
@@ -176,7 +175,7 @@ public class UserResources extends AbstractFacade<Users> {
     }
     
     @GET
-    @Path("byLastName")
+    @Path("/byLastName")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Users> findByLastName(@QueryParam("lastName") String lastName,
             @HeaderParam("user") String user) {
@@ -186,7 +185,7 @@ public class UserResources extends AbstractFacade<Users> {
     }
     
     @GET
-    @Path("byJobId")
+    @Path("/byJobId")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Users> findByJobId(@QueryParam("jobId") int jobId, @HeaderParam("user") String user) {
         if (check(user))
@@ -195,7 +194,7 @@ public class UserResources extends AbstractFacade<Users> {
     }
     
     @GET
-    @Path("byJob")
+    @Path("/byJob")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Users> findByJob(@QueryParam("job") String job, @HeaderParam("user") String user) {
         if (check(user))
