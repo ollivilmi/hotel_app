@@ -53,38 +53,25 @@ public class UserResources extends AbstractFacade<Users> {
     public UserResources() {
         super(Users.class);
     }
-
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
-    }
    
     @POST
     @Path("/manager/setUserPermissions")
-    public void setUserPermission(@FormParam("username") String username, @FormParam("perm") int perm,
-            @HeaderParam("user") String user)
+    public void setUserPermission(@FormParam("username") String username, 
+            @FormParam("perm") int perm)
     {
-        if (checkManager(user))
-        {
-            Users u = ub.getByUsername(username);
-            u.setPermissionsId(perm);
-            super.edit(u);
-        }
+        Users u = ub.getByUsername(username);
+        u.setPermissionsId(perm);
+        super.edit(u);
     }
     
     //Manager can change user job - which also changes user's department for notes
     @POST
     @Path("/manager/setUserJob")
-    public void setUserJob(@FormParam("username") String username, @FormParam("job") int job,
-            @HeaderParam("user") String user)
+    public void setUserJob(@FormParam("username") String username, @FormParam("job") int job)
     {
-        if (checkManager(user))
-        {
-            Users u = ub.getByUsername(username);
-            u.setJobId(job);
-            super.edit(u);
-        }
+        Users u = ub.getByUsername(username);
+        u.setJobId(job);
+        super.edit(u);
     }
     
     //Manager accepts registration, puts user permission level to 1 (Employee)
@@ -110,7 +97,7 @@ public class UserResources extends AbstractFacade<Users> {
     
     
     @GET
-    @Path("/manager/getNewUsers")
+    @Path("/getNewUsers")
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> getNewUsers(@HeaderParam("user") String user)
     {
@@ -161,61 +148,64 @@ public class UserResources extends AbstractFacade<Users> {
     @GET
     @Path("byDepartment")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Users> findByDepartment(@QueryParam("department") int department) {
-        Query q = em.createNamedQuery("Users.findByDepartment").setParameter("department", department);
-        return q.getResultList();
+    public List<Users> findByDepartment(@QueryParam("department") int department,
+            @HeaderParam("user") String user) {
+        if (check(user))
+            return em.createNamedQuery("Users.findByDepartment").setParameter("department", department).getResultList();
+        return null;
     }
     
     @GET
     @Path("byUsername")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Users> findByDepartment(@QueryParam("username") String username) {
-        Query q = em.createNamedQuery("Users.findByUsername").setParameter("username", username+"%");
-        return q.getResultList();
+    public List<Users> findByDepartment(@QueryParam("username") String username,
+            @HeaderParam("user") String user) {
+        if (check(user))
+            return em.createNamedQuery("Users.findByUsername").setParameter("username", username+"%").getResultList();
+        return null;
     }
     
     @GET
     @Path("byFirstName")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Users> findByFirstName(@QueryParam("firstName") String firstName) {
-        Query q = em.createNamedQuery("Users.findByFirstName").setParameter("firstName", firstName+"%");
-        return q.getResultList();
+    public List<Users> findByFirstName(@QueryParam("firstName") String firstName,
+            @HeaderParam("user") String user) {
+        if (check(user))
+            return em.createNamedQuery("Users.findByFirstName").setParameter("firstName", firstName+"%").getResultList();
+        return null;
     }
     
     @GET
     @Path("byLastName")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Users> findByLastName(@QueryParam("lastName") String lastName) {
-        Query q = em.createNamedQuery("Users.findByLastName").setParameter("lastName", lastName+"%");
-        return q.getResultList();
+    public List<Users> findByLastName(@QueryParam("lastName") String lastName,
+            @HeaderParam("user") String user) {
+        if (check(user))
+            return em.createNamedQuery("Users.findByLastName").setParameter("lastName", lastName+"%").getResultList();
+        return null;
     }
     
     @GET
     @Path("byJobId")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Users> findByJobId(@QueryParam("jobId") int jobId) {
-        Query q = em.createNamedQuery("Users.findByJobId").setParameter("jobId", jobId);
-        return q.getResultList();
+    public List<Users> findByJobId(@QueryParam("jobId") int jobId, @HeaderParam("user") String user) {
+        if (check(user))
+            return em.createNamedQuery("Users.findByJobId").setParameter("jobId", jobId).getResultList();
+        return null;
     }
     
     @GET
     @Path("byJob")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Users> findByJob(@QueryParam("job") String job) {
-        Query q = em.createNamedQuery("Users.findByJob").setParameter("job", job+"%");
-        return q.getResultList();
+    public List<Users> findByJob(@QueryParam("job") String job, @HeaderParam("user") String user) {
+        if (check(user))
+            return em.createNamedQuery("Users.findByJob").setParameter("job", job+"%").getResultList();
+        return null;
     }
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-    
-    private Response badRequest()
-    {
-        return Response.status(Response.Status.BAD_REQUEST)
-                .entity("{message\":\bad request\"}")
-                .build();
     }
     
     private boolean check(String user)
@@ -228,4 +218,6 @@ public class UserResources extends AbstractFacade<Users> {
         Users u = ub.getByUsername(user);
         return (u != null && u.getPermissionsId() != 1);
     }
+    
+    
 }

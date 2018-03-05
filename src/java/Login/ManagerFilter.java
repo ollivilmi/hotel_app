@@ -26,14 +26,14 @@ import javax.servlet.http.HttpSession;
  *
  * @author Hillo
  */
-@WebFilter(filterName = "SecureFilter", urlPatterns = {"/secure/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
-public class EmployeeFilter implements Filter {
+@WebFilter(filterName = "ManagerFilter", urlPatterns = {"/r/users/manager/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
+public class ManagerFilter implements Filter {
     
     private static final boolean debug = true;
 
     private FilterConfig filterConfig = null;
     
-    public EmployeeFilter() {
+    public ManagerFilter() {
     }    
     
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -41,15 +41,15 @@ public class EmployeeFilter implements Filter {
         throws IOException, ServletException {
             HttpSession session = ((HttpServletRequest) request).getSession();
             try {
-            Users u = (Users) session.getAttribute("user");
-                if (u.getPermissionsId() == null)
+                Users u = (Users) session.getAttribute("user");
+                if (u.getPermissionsId() != 1 && u.getPermissionsId() != null)
+                    chain.doFilter(request, response);
+                else
                 {
                     request.setAttribute("message", "Insufficient permissions");
                     request.getRequestDispatcher("/error").forward(request, response);
                 }
-                else
-                    chain.doFilter(request, response);
-                }
+            }
             catch (Exception e)
             {
                 request.setAttribute("message", "Insufficient permissions");

@@ -4,12 +4,21 @@ var cancelButton;
 var formInputFields;
 var requestPicture;
 var profilePopup;
+var user;
 
 var green = '#4CAF50';
 var red = '#f44336';
 var blue = '#008CBA';
+//variables for modal container
+var modal;
+var registerContainer;
+var closeButton;
 
 window.onload = function () {
+    //Get elements for modal container
+    modal = document.getElementById('modal-edit-id');
+    registerContainer = document.getElementById('register-container');
+    closeButton = document.getElementById('closeButton');
 
     editButton = document.getElementById('edit-btn');
     // editButton.addEventListener('click', editInfo);
@@ -24,7 +33,7 @@ window.onload = function () {
     console.log(profilePopup);
     
     //Current session cookie to identify we are logged in for resources
-    let user = getCookie("user");
+    user = getCookie("user");
     console.log(user);
     
     //Fetch profile information for the logged in user
@@ -38,9 +47,32 @@ window.onload = function () {
                 fillProfile(json);
             })
             .catch(error => console.log(error));
-            
+    
+    document.querySelector("#management-info").style.visibility = "hidden";
+    
+    fetch("/management/r/users/byUsername?username="+user, {
+        headers: {
+            'user': user
+        }
+    })
+            .then(response => response.json())
+            .then(function(json) {
+                if (json[0].permissionsId !== 1 && json[0].permissionsId !== null)
+            {
+                console.log(json[0].permissionsId);
+                buildManagementWindow();
+            }
+            })
+            .catch(error => console.log(error));
+    
+};
+    
+const buildManagementWindow = () => 
+{
+    document.querySelector("#management-info").style.visibility = "visible";
+        
     //Fetch users without permissions to log in for managers to accept
-    fetch("/management/r/users/manager/getNewUsers", {
+    fetch("/management/r/users/getNewUsers", {
         headers: {
             'user': user
         }
@@ -137,7 +169,6 @@ const newUsers = (info) => {
     let requestString = "";
     for (let item of info)
     {
-        console.log(item);
         requestString += "<form action='/management/r/users/manager/acceptUser' method='POST' onsubmit=\"this.style.display = 'none'\">"
         +'<input type="hidden" name="username" value="'+item.username+'"/>'
         +"<div class='request-person'>"
@@ -152,4 +183,26 @@ const newUsers = (info) => {
         +"</form>";
     }
     document.querySelector(".request-container").innerHTML = requestString;
+};
+
+//method for opening modal from management edit button
+
+openModal = function() {
+    modal.style.display = 'flex';
+    registerContainer.style.display = 'none';
+};
+
+//methdod for closing the modal if user clicks anywhere else or the cross
+
+closeModal = function() {
+    modal.style.display = 'none';
+    registerContainer.style.display = 'flex';
+};
+
+
+window.onclick = function(event) {
+    if(event.target === modal) {
+        modal.style.display = 'none';
+        registerContainer.style.display = 'flex';
+    };
 };
