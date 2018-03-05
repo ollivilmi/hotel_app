@@ -101,7 +101,6 @@ const buildManagementWindow = () =>
     let searchType = document.querySelector("#searchtype");
     let searchButton = document.querySelector("#search-btn");
  
-    //searchType.addEventListener("onchange", departmentOptions(searchType.value));
     searchButton.addEventListener("click", function() 
     {
         let apiString = "";
@@ -130,7 +129,6 @@ const buildManagementWindow = () =>
                 break;
         }
         
-        console.log(apiString);
         
         fetch(apiString, {
         headers: {
@@ -144,6 +142,7 @@ const buildManagementWindow = () =>
             .catch(error => console.log(error)); 
     });
     
+    changeOptions("");
 };
 
 // Edit user information

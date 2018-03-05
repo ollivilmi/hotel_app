@@ -191,4 +191,13 @@ public class Users implements Serializable {
         regForm.add(pwHash);
         return regForm;
     }
+    
+    public List<String> updateForm()
+    {
+        List<String> updateForm = new ArrayList<>();
+        updateForm.add(firstName);
+        updateForm.add(lastName);
+        updateForm.add(username);
+        return updateForm;
+    }
 }

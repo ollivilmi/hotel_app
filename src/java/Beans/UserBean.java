@@ -41,6 +41,18 @@ public class UserBean {
         return (Users) q.getResultList().get(0);
     }
     
+    public boolean updateUser(Users user)
+    {
+        try {
+            em.merge(user);
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+        return true;
+    }
+    
     public boolean addUser(Users user)
     {
         try { 
