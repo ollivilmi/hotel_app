@@ -148,7 +148,7 @@
                                             <div class="search-name-input-container">
                                                 <label class="search-name-element" for="name-search">
                                                     <b>Search by: 
-                                                    <select id="searchtype" class="search-department-dropdown">
+                                                    <select id="search-type" class="search-department-dropdown" onchange="changeOptions(this.value)">
                                                         <option value="firstname">First name</option>
                                                         <option value="lastname">Last name</option>
                                                         <option value="username">Username</option>
@@ -157,7 +157,8 @@
                                                     </select>
                                                     </b>
                                                 </label>
-                                                <input class="search-name-element" type="text" placeholder="Enter name" id="search-user">
+                                                <div id="search-option">
+                                                </div>
                                                 <button id="search-btn">Search</button>
                                             </div>
                                             <div class="search-result-container" id="user-search-container">

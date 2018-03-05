@@ -34,7 +34,6 @@ window.onload = function () {
     
     //Current session cookie to identify we are logged in for resources
     user = getCookie("user");
-    console.log(user);
     
     //Fetch profile information for the logged in user
     fetch("/management/r/users/u", {
@@ -98,12 +97,16 @@ const buildManagementWindow = () =>
     }; */
     
     // Search users to edit
+    
+    let searchType = document.querySelector("#searchtype");
     let searchButton = document.querySelector("#search-btn");
+ 
+    //searchType.addEventListener("onchange", departmentOptions(searchType.value));
     searchButton.addEventListener("click", function() 
     {
-        let searchType = document.querySelector("#searchtype").value;
-        let search = document.querySelector("#search-user").value;
         let apiString = "";
+        let search = document.querySelector("#search-user").value;
+        let searchType = document.querySelector("#search-type").value;    
         
         switch (searchType)
         {
@@ -117,7 +120,7 @@ const buildManagementWindow = () =>
                 apiString = "/management/r/users/byLastName?lastName="+search;
                 break;
             case "job":
-                apiString = "/management/r/users/byJob?job="+search;
+                apiString = "/management/r/users/byJobId?jobId="+search;
                 break;
             case "department":
                 apiString = "/management/r/users/byDepartment?department="+search;
@@ -127,6 +130,7 @@ const buildManagementWindow = () =>
                 break;
         }
         
+        console.log(apiString);
         
         fetch(apiString, {
         headers: {
@@ -236,6 +240,40 @@ const searchResults = (users) => {
         + '</div>';
     }
     document.querySelector("#user-search-container").innerHTML = resultString;
+};
+
+const changeOptions = (searchType) => {
+    let search = document.querySelector("#search-option");
+    document.querySelector("#user-search-container").innerHTML = "";
+    switch (searchType)
+    {
+        case "department":
+            search.innerHTML = '<select id="search-user" class="search-department-dropdown">'
+                                + '<option value="1">Restaurant</option>'
+                                + '<option value="2">Management</option>'
+                                + '<option value="3">Reception</option>'
+                                + '<option value="4">Maintenance</option>'
+                                + '</select>';
+            break;
+        case "job":
+            fetch("/management/r/jobs/get/all")
+                    .then(response => response.json())
+                    .then(function(json) 
+            {
+                let jobSelect = '<select id="search-user" class="search-department-dropdown">';
+                for(let job of json)
+                {
+                    jobSelect += '<option value="' + job.id + '">' + job.title + '</option>';
+                }
+                jobSelect += '</select>';
+                search.innerHTML = jobSelect;
+            })
+                    .catch(error => console.log(error));
+            break;
+        default:
+            search.innerHTML = '<input class="search-name-element" type="text" placeholder="Enter name" id="search-user">';
+            break;
+    }
 };
 
 openModal = function() {
