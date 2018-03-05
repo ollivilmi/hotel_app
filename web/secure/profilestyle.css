@@ -207,6 +207,66 @@ html, body {
     text-decoration: none;
     font-size: 16px;
 }
+/* styles for add photo */
+
+.add-img-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.add-img-container-element {
+    padding:5px;
+}
+
+.add-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    padding: 5px;
+}
+
+.add-file + label {
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 1.25em;
+    color: white;
+    background-color: grey;
+    display: inline-block;
+}
+
+.add-file:focus + label,
+.add-file + label:hover {
+    background-color: #8e8e8e;
+}
+
+.add-file + label {
+    cursor: pointer;
+}
+
+
+#profile-picture {
+    height: 100px;
+}
+
+#add-img-btn {
+   
+}
+
+#img-icon {
+    height: 15px;
+    margin-right: 10px;
+    opacity: 0.6;
+}
+
+#add-img-btn:hover {
+    background: grey;
+}
 
 #cancel-btn {
     background-color: grey;
