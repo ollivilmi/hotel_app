@@ -45,9 +45,9 @@ fetch(url + '/getNotes', {
 	})
 	.catch(error => console.log(error))
 
-fetch(url + '/test')
-	.then(res => res.text())
-	.then(function(txt) {
-		console.log(txt)
-	})
-	.catch(error => console.log(error))
+// fetch(url + '/test')
+// 	.then(res => res.text())
+// 	.then(function(txt) {
+// 		console.log(txt)
+// 	})
+// 	.catch(error => console.log(error))

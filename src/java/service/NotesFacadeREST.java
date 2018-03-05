@@ -14,6 +14,9 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,6 +27,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import org.jboss.logging.Logger;
 
 /**
  *
@@ -45,14 +49,6 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     public NotesFacadeREST() {
         super(Notes.class);
     }
-
-//
-//    @POST
-//    @Override
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public void create(Notes entity) {
-//        super.create(entity);
-//    }
 
     @PUT
     @Path("{id}")
@@ -101,25 +97,39 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     public List<Notes> find(@HeaderParam("user") String username) {
         if (check(username)) {
             Models.Users user = ub.getByUsername(username);
-            if (user.getPermissionsId() == 1) {
+            if (user.getPermissionsId() == 1 && user.getJobId() != null) {
                 return nb.notesData(user.getId(), ub.getDepartmentIdByJobId(user.getJobId()));
+            }
+            else {
+                return nb.newestNotes();
             }
         }
         return null;
     }
     
+//    @GET
+//    @Path("unassignedNotes")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public List<Notes> findUnassignedNotes() {
+//        CriteriaBuilder cb = em.getCriteriaBuilder();
+//        CriteriaQuery<Notes> cq = cb.createQuery(Notes.class);
+//        Root<Notes> note = cq.from(Notes.class);
+//        cq.select(note);
+//        
+//    }
+    
     //TESTING
-    @GET
-    @Path("test")
-    @Produces(MediaType.TEXT_PLAIN)
-    public int test() {
-        
-            Models.Users user = ub.getByUsername("phuocn");
-            if (user.getPermissionsId() == 1) {
-                return ub.getDepartmentIdByJobId(user.getJobId());
-            }
-            return 0;
-    }
+//    @GET
+//    @Path("test")
+//    @Produces(MediaType.TEXT_PLAIN)
+//    public int test() {
+//        
+//            Models.Users user = ub.getByUsername("phuocn");
+//            if (user.getPermissionsId() == 1) {
+//                return ub.getDepartmentIdByJobId(user.getJobId());
+//            }
+//            return 0;
+//    }
     
     @GET 
     @Override
