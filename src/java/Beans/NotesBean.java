@@ -17,13 +17,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonBuilderFactory;
-import javax.json.JsonWriter;
 import javax.persistence.Query;
-import org.jboss.logging.Logger;
 /**
  *
  * @author Hillo
@@ -89,11 +83,24 @@ public class NotesBean {
     }
     
     public List<Notes> getNotesByTime(int time) {
+        refreshEM();
+        Query q;
         switch (time) {
-            case 0:
-            case 1:
             case 7:
-                
+                q = em.createNativeQuery("SELECT * FROM Notes "
+                        + "WHERE DATE_SUB(CURDATE(),INTERVAL 7 DAY) <= note_date "
+                        + "ORDER BY note_date DESC;", "NotesTimeResult");
+                return (List<Notes>)q.getResultList();
+            case 1:
+                q = em.createNativeQuery("SELECT * FROM Notes "
+                        + "WHERE DATE_SUB(CURDATE(),INTERVAL 30 DAY) <= note_date "
+                        + "ORDER BY note_date DESC;", "NotesTimeResult");
+                return (List<Notes>)q.getResultList();
+            case 0:
+                q = em.createNativeQuery("SELECT * FROM Notes "
+                        + "WHERE note_date = CURDATE()"
+                        + "ORDER BY note_date DESC;", "NotesTimeResult");
+                return (List<Notes>)q.getResultList();
             default:
                 return newestNotes();
         }

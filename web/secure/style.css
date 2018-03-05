@@ -313,9 +313,16 @@ input[type="file"] {
     border-radius: 10px;
 }
 
-#filter-ID {
+
+.filter-input {
     margin-left: 10px;
-    background-color: #ebeeef;
+    display: flex;
+    justify-content: space-between;
+}
+
+#filter-value, .filter-input select {
+    border: 2px solid #eaeaea;
+    border-radius: 5px;
 }
 
 #filter-apply-button {
