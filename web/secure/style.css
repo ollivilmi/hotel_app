@@ -295,66 +295,6 @@ input[type="file"] {
     margin-top: 20px;
 }
 
-
-/* ADDITIONAL STYLING FOR NOTE MANAGER PAGE */
-
-#note-title {
-    margin-left: 10px;
-    background-color: #ebeeef;
-}
-
-.filter-bar {
-    width: 100%;
-    height: 50px;
-    padding-left: 20px;
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    background-color: #fff;
-    border-radius: 10px;
-}
-
-#filter-ID {
-    margin-left: 10px;
-    background-color: #ebeeef;
-}
-
-#filter-apply-button {
-    background-color: #AB9A70;
-    height: 30px;
-    width: 80px;
-    text-align: center;
-    outline: none;
-    border-radius: 3px;
-    color: #fff;
-    margin-right: 10px;
-    margin-left: auto;
-}
-
-#filter-apply-button:hover {
-    cursor: pointer;
-    background-color: #333;
-}
-
-.note-manager-buttons {
-    float: right;
-    display: flex;
-    align-items: center;
-}
-
-.note-manager-buttons button {
-    margin-right: 10px;
-    margin-top: 10px;
-    padding: 5px; 
-    border-radius: 5px;
-}
-
-#add-employee-ids {
-    border: 2px solid #eaeaea;
-    border-radius: 5px;
-}
-
-
 /* ADDITIONAL STYLING FOR MAIN */
 
 h1 {

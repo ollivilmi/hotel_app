@@ -56,15 +56,25 @@ let headers = {
 //Filter notes
 let filterButton = document.querySelector("#filter-apply-button");
 filterButton.addEventListener('click', function() {
-	let filterDepartment = document.querySelector("#filter-department").value;
-	let filterTime = document.querySelector('#filter-time').value
-	let filterId = document.querySelector('#filter-id').value
+  let filterType = document.querySelector("#filter-type").value
+  let filterValue = document.querySelector('#filter-value').value
 	let filterUrl = ""
-	//filterUrl = apiUrl + "/byDepartment?departmentId="
-	if (filterDepartment) filterUrl = apiUrl + '/byDepartment?departmentId=' + filterDepartment
-	else if (filterTime) filterUrl = apiUrl + '/byTime?time=' + filterTime
-	else if (filterId) filterUrl = apiUrl + '/byUserId?id=' +filterId
-	else if (filterDepartment && filterTime) filterUrl = apiUrl + 
+
+  switch (filterType) {
+    case 'department':
+      filterUrl = apiUrl + '/byDepartment?departmentId=' + filterValue
+      break
+    case 'time':
+      filterUrl = apiUrl + '/byTime?time=' + filterValue
+      break
+    case 'userId':
+      filterUrl = apiUrl + '/byUserId?id=' + filterValue
+      break
+    default:
+      filterUrl = apiUrl + '/getNotes'
+      break
+  }
+
 	console.log(filterUrl)
 	fetch(filterUrl, {
 		headers: headers
@@ -75,6 +85,8 @@ filterButton.addEventListener('click', function() {
 		})
 		.catch(error => console.log)
 });
+
+
 
 //Modify DOM element based on fetch notes
 const notesFetch = notes => {
@@ -117,3 +129,34 @@ const notesFetch = notes => {
   }
   document.querySelector("#notes-container").innerHTML = htmlString;
 };
+
+//Filter DOM
+
+const changeFilters = (filterType) => {
+  let filter = document.querySelector('#filter-option')
+  document.querySelector('#notes-container').innerHTML = ''
+  switch (filterType) {
+    case 'department': 
+      filter.innerHTML = '<select id="filter-value">'
+      + '<option value="1">Restaurant</option>'
+      + '<option value="2">Management</option>'
+      + '<option value="3">Reception</option>'
+      + '<option value="4">Maintenance</option>'
+      + '</select>';
+      break
+    case 'time':
+      filter.innerHTML = '<select id="filter-value" >'
+      + '<option value="99">All</option>'
+      + '<option value="0">Today</option>'
+      + '<option value="7">This week</option>'
+      + '<option value="1">This month</option>'
+      + '</select>'
+      break
+    case 'userId': 
+      filter.innerHTML = '<input type="text" id="filter-value" placeholder="Filter user id">'
+      break
+    default:
+      filter.innerHTML = ''
+      break;
+  }
+}

@@ -87,8 +87,8 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     @GET
     @Path("byTime")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Notes> getByTime(@QueryParam("time")int departmentId) {
-        return nb.getNotesByDepartmentId(departmentId);
+    public List<Notes> getByTime(@QueryParam("time")int time) {
+        return nb.getNotesByTime(time);
     }
     
     @GET
