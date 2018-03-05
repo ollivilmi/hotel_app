@@ -51,7 +51,6 @@ window.onload = function () {
             .then(function(json) {
                 if (json[0].permissionsId !== 1 && json[0].permissionsId !== null)
             {
-                console.log(json[0].permissionsId);
                 buildManagementWindow();
             }
             })
@@ -74,7 +73,7 @@ const buildManagementWindow = () =>
                 newUsers(json);
     })
             .catch(error => console.log(error));
-    
+    /*
     requestPicture = document.getElementById('request-profile-picture');
 
     requestPicture.onmouseover = function () {
@@ -88,8 +87,50 @@ const buildManagementWindow = () =>
         } else {
             profilePopup.style.display = "none";
         }
-    };
+    }; */
     
+    // Search users to edit
+    let searchButton = document.querySelector("#search-btn");
+    searchButton.addEventListener("click", function() 
+    {
+        let searchType = document.querySelector("#searchtype").value;
+        let search = document.querySelector("#search-user").value;
+        let apiString = "";
+        
+        switch (searchType)
+        {
+            case "username":
+                apiString = "/management/r/users/byUsername?username="+search;
+                break;
+            case "firstname":
+                apiString = "/management/r/users/byFirstName?firstName="+search;
+                break;
+            case "lastname":
+                apiString = "/management/r/users/byLastName?lastName="+search;
+                break;
+            case "job":
+                apiString = "/management/r/users/byJob?job="+search;
+                break;
+            case "department":
+                apiString = "/management/r/users/byDepartment?department="+search;
+                break;
+            default:
+                apiString = "/management/r/users";
+                break;
+        }
+        
+        
+        fetch(apiString, {
+        headers: {
+            'user': user
+        }
+    })
+            .then(response => response.json())
+            .then(function(json) {
+                searchResults(json);
+            })
+            .catch(error => console.log(error)); 
+    });
     
 };
 
@@ -157,15 +198,15 @@ const fillProfile = (info) => {
   email.value = info[0].email;  
 };
 
-const newUsers = (info) => {
+const newUsers = (users) => {
     let requestString = "";
-    for (let item of info)
+    for (let user of users)
     {
         requestString += "<form action='/management/r/users/manager/acceptUser' method='POST' onsubmit=\"this.style.display = 'none'\">"
-        +'<input type="hidden" name="username" value="'+item.username+'"/>'
+        +'<input type="hidden" name="username" value="'+user.username+'"/>'
         +"<div class='request-person'>"
         +"<div class='request-person-static'>"
-        +"<p class='request-container-element' id='request-name'>" + item.firstName + " " + item.lastName + "</p>"
+        +"<p class='request-container-element' id='request-name'>" + user.firstName + " " + user.lastName + "</p>"
         +"<img class='request-profile-picture' id='request-profile-picture' src='images/person-icon.png'>"
         +"<button type='submit' id='accept-request-btn' class='request-container-element request-button' name='accept' value='accept'>Accept</button>"
         +'<button type="submit" id="decline-request-btn" class="request-container-element request-button">Decline</button>'
@@ -175,4 +216,20 @@ const newUsers = (info) => {
         +"</form>";
     }
     document.querySelector(".request-container").innerHTML = requestString;
+};
+
+const searchResults = (users) => {
+    let resultString = "";
+    for (let user of users)
+    {
+        resultString += '<div class="search-person">'
+        + '<div class="search-person-static">'
+        + '<p class="search-container-element" id="search-name">'+user.firstName + " " + user.lastName + '</p>'      
+        + '<img class="search-profile-picture" id="search-profile-picture" src="images/person-icon.png">'
+        + '<button type="submit" id="edit-user-btn" class="search-container-element" name="request-accept">Edit</button>'
+        + '</div>'
+        + '<span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>'
+        + '</div>';
+    }
+    document.querySelector("#user-search-container").innerHTML = resultString;
 };
