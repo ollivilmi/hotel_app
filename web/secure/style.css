@@ -67,7 +67,9 @@ html, body {
     height: 40px;
     display: flex;
     align-items: center;
+    /*
     padding: 0 5px;
+    */
 }
 
 #profile:hover {
@@ -283,7 +285,6 @@ input[type="file"] {
 
 
 
-
 /*-- STYLES FOR PROFILE PAGE UNFINISHED --*/
 
 #profile-page-title {
@@ -351,4 +352,13 @@ input[type="file"] {
 #add-employee-ids {
     border: 2px solid #eaeaea;
     border-radius: 5px;
+}
+
+
+/* ADDITIONAL STYLING FOR MAIN */
+
+h1 {
+    font-size: 1.2em;
+    text-transform: uppercase;
+    text-align: center;
 }
