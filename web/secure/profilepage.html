@@ -79,6 +79,13 @@
                             
                             <form id="info-form" action="/management/updateUser" method="POST">
                                 <p class="info-header">General Information</p>
+                                <!-- Change profile pic -->
+                                <div class="add-img-container">
+                                    <img class="add-img-container-element" id="profile-picture" src="images/person-icon.png" alt=""/>
+                                    <input type="file" name="file" id="add-img" class="add-file">
+                                    <label class="add-img-container-element" for="file">Change</label>
+                                </div>
+                                
                                 <div class="info-block">
                                     <label class="profile-label" for="firstname"><b>First Name</b></label>
                                     <input id="firstname" class="profile-input" type="text" name="firstname">
@@ -113,6 +120,11 @@
                                     <label class="profile-label" for="psw-repeat"><b>Repeat Password</b></label>
                                     <input class="profile-input" type="password" name="password-repeat">
                                 </div>
+                                <div class="info-block">
+                                    <label class="profile-label" for="psw-old"><b>Old Password</b></label>
+                                    <input class="profile-input" type="password" name="password-old">
+                                </div>
+                                
 
                                 <div class="clearfix">
                                     <button type="submit" class="profile-btn" id="save-btn">Save</button>

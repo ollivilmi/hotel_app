@@ -56,7 +56,7 @@ public class NotesUpload extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             Part filePart = request.getPart("file");
             String content = request.getParameter("content");
-            content = content.replace("\n", "<br>"); //new line break for textarea
+            content = content.replace("\n", "<br>"); //read new line break for textarea
             int departmentId = 0;
             if (!request.getParameter("departmentId").isEmpty() || request.getParameter("departmentId").equals("0")) {
                 departmentId = Integer.parseInt(request.getParameter("departmentId"));
@@ -71,17 +71,17 @@ public class NotesUpload extends HttpServlet {
             }
             //Using bean to create Notes from the POST request parameters
             Models.Notes notes = nb.createNote(content, fileName, departmentId);
-            if (!request.getParameter("employeeIds").isEmpty()) {
-                if (request.getParameter("employeeIds").contains(",")) {
-                    String[] employeeIds = request.getParameter("employeeIds").split(",");
-//                        Logger.getLogger(NotesUpload.class.getName()).log(Level.INFO, employeeIds[0], employeeIds[1]);
-                    for (String id : employeeIds) {
-                        nb.addReceiver(notes, Integer.parseInt(id));
-                    }
-                } else {
-                    nb.addReceiver(notes, Integer.parseInt(request.getParameter("employeeIds")));
-                }
-            }
+//            if (!request.getParameter("employeeIds").isEmpty()) {
+//                if (request.getParameter("employeeIds").contains(",")) {
+//                    String[] employeeIds = request.getParameter("employeeIds").split(",");
+////                        Logger.getLogger(NotesUpload.class.getName()).log(Level.INFO, employeeIds[0], employeeIds[1]);
+//                    for (String id : employeeIds) {
+//                        nb.addReceiver(notes, Integer.parseInt(id));
+//                    }
+//                } else {
+//                    nb.addReceiver(notes, Integer.parseInt(request.getParameter("employeeIds")));
+//                }
+//            }
             //                out.print(notes);
             out.print("Notes sent succesfully!");
             response.sendRedirect("/management/secure/main.html");

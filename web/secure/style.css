@@ -150,7 +150,7 @@ html, body {
     padding-top: 10px;
     border-radius: 0 0 10px 10px;
     display: flex;
-    align-content: space-around;
+    justify-content: space-between;
 }
 
 input[type="file"] {
@@ -167,7 +167,8 @@ input[type="file"] {
 #add-photo-button {
     float: left;
     height: 30px;
-    margin: 25px 0px 5px 15px;
+    margin: 5px;
+    margin-left: 10px;
     display: flex;
     align-items: center;
     background-color: #FFF;
@@ -182,7 +183,8 @@ input[type="file"] {
 }
 
 #add-button{
-    margin: 25px 10px 5px 25px;
+    margin: 5px;
+    margin-right: 10px;
     background-color: #AB9A70;
     height: 30px;
     width: 100px;
@@ -190,19 +192,15 @@ input[type="file"] {
     outline: none;
     border-radius: 3px;
     color: #fff;
+    float: right;
 }
 
-.features {
-    height: 80%;
-    padding: 8px;
-}
-
-.features input, select {
+.features select {
     color: black;
-    margin: 5px 10px;
-    margin-left: 15px;
     border: 2px solid #eaeaea;
     border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
 }
 
 #add-button:hover {
@@ -320,7 +318,7 @@ input[type="file"] {
     background-color: #ebeeef;
 }
 
-#apply-button {
+#filter-apply-button {
     background-color: #AB9A70;
     height: 30px;
     width: 80px;
@@ -332,7 +330,7 @@ input[type="file"] {
     margin-left: auto;
 }
 
-#apply-button:hover {
+#filter-apply-button:hover {
     cursor: pointer;
     background-color: #333;
 }

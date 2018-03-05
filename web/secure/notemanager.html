@@ -32,7 +32,8 @@
                         <div class="add-title">
                             <img id="add-icon" src="images/main/pen-icon.svg" alt="">
                             <p>Add Notes or Tasks. Title:</p>
-                            <textarea name="title" id="note-title" cols="50" rows="1"></textarea>
+                            <input type="text" name="title" id="note-title">
+                            </textarea>
                         </div>
 
                         <div class="add-content-container">
@@ -55,8 +56,6 @@
                                     <option value="3">Reception</option>
                                     <option value="4">Maintenance</option>
                                 </select>
-                                <br> Employee Ids (each id separated by a comma ",")
-                                <input type="text" name="employeeIds" id="employee-ids">
                             </label>
                             <input type="submit" id="add-button" value="Post">
                         </div>
@@ -67,7 +66,7 @@
 
                     <div class="filter-bar">
                         <p>Filter notes by:</p>
-                        <select name="filterByDepartment" class="dropdown-menu">
+                        <select id='filter-department'name="filterByDepartment" class="dropdown-menu" >
                             <option selected disabled>By department</option>
                             <option value="">None</option>
                             <option value="1">Restaurant</option>
@@ -75,45 +74,47 @@
                             <option value="3">Reception</option>
                             <option value="4">Maintenance</option>
                         </select>
-                        <select name="filterByTime" class="dropdown-menu">
+                        <select id='filter-time' name="filterByTime" class="dropdown-menu" >
                             <option selected disabled>By time</option>
                             <option value="">All</option>
-                            <option value="1">Today</option>
-                            <option value="2">This week</option>
-                            <option value="3">This month</option>
+                            <option value="0">Today</option>
+                            <option value="7">This week</option>
+                            <option value="1">This month</option>
                         </select>
-                        <textarea name="filerByID" id="filter-ID" cols="20" rows="1" placeholder="by user ID"></textarea>
-                        <input type="submit" id="apply-button" value="Apply">
+                        <input type="text" name="filterByID" id="filter-id" placeholder="by user ID">
+                        <input type="submit" id="filter-apply-button" value="Apply">
                     </div>
 
-                    <div id="note-1" class="notes">
-                        <div class="notes-header">
-                            <div class="notes-sender">
-                                <div class="sender-avatar">
-                                    <img src="images/main/person1.png" alt="">
+                    <div id="notes-container">
+                        <div id="note-1" class="notes">
+                            <div class="notes-header">
+                                <div class="notes-sender">
+                                    <div class="sender-avatar">
+                                        <img src="images/main/person1.png" alt="">
+                                    </div>
+                                    <div class="sender-name">
+                                        <h5>An Nguyen</h5>
+                                        <span>3 hours ago</span>
+                                    </div>
                                 </div>
-                                <div class="sender-name">
-                                    <h5>An Nguyen</h5>
-                                    <span>3 hours ago</span>
+
+                                <div class="note-manager-buttons">
+                                    <button id="note-edit">Edit</button>
+                                    <button id="note-delete">Delete</button>
                                 </div>
                             </div>
 
-                            <div class="note-manager-buttons">
-                                <button id="note-edit">Edit</button>
-                                <button id="note-delete">Delete</button>
+                            <div class="notes-content">
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat deserunt officia ut enim
+                                    voluptatum! Autem, beatae voluptatibus quo, adipisci dolor porro aspernatur a maxime
+                                    cum, fuga numquam dolore repellat ad.</p>
+                                <img src="images/main/notes-example-1.jpg" alt="">
                             </div>
-                        </div>
 
-                        <div class="notes-content">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat deserunt officia ut enim voluptatum!
-                                Autem, beatae voluptatibus quo, adipisci dolor porro aspernatur a maxime cum, fuga numquam
-                                dolore repellat ad.</p>
-                            <img src="images/main/notes-example-1.jpg" alt="">
-                        </div>
-
-                        <div class="notes-footer">
-                            Add more receivers:
-                            <input type="text" name="employeeIds" id="add-employee-ids">
+                            <div class="notes-footer">
+                                Add more receivers:
+                                <input type="text" name="employeeIds" id="add-employee-ids">
+                            </div>
                         </div>
                     </div>
                 </div>

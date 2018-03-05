@@ -14,6 +14,9 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,6 +27,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import org.jboss.logging.Logger;
 
 /**
  *
@@ -45,14 +49,6 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     public NotesFacadeREST() {
         super(Notes.class);
     }
-
-//
-//    @POST
-//    @Override
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public void create(Notes entity) {
-//        super.create(entity);
-//    }
 
     @PUT
     @Path("{id}")
@@ -84,14 +80,21 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     @GET
     @Path("byDepartment")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Notes> getByDepartment(@QueryParam("department") String department) {
-        return nb.getNotesByDepartment(department);
+    public List<Notes> getByDepartmentId(@QueryParam("departmentId")int departmentId) {
+        return nb.getNotesByDepartmentId(departmentId);
+    }
+    
+    @GET
+    @Path("byTime")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Notes> getByTime(@QueryParam("time")int departmentId) {
+        return nb.getNotesByDepartmentId(departmentId);
     }
     
     @GET
     @Path("getNoteDate")
     @Produces(MediaType.TEXT_PLAIN)
-    public String getByDepartment(@QueryParam("noteId") int noteId) {
+    public String getDateByNoteId(@QueryParam("noteId") int noteId) {
         return nb.getDateByNotesId(noteId) + " GMT+2";
     }
     
@@ -101,24 +104,14 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     public List<Notes> find(@HeaderParam("user") String username) {
         if (check(username)) {
             Models.Users user = ub.getByUsername(username);
-            if (user.getPermissionsId() == 1) {
+            if (user.getPermissionsId() == 1 && user.getJobId() != null) {
                 return nb.notesData(user.getId(), ub.getDepartmentIdByJobId(user.getJobId()));
+            }
+            else {
+                return nb.newestNotes();
             }
         }
         return null;
-    }
-    
-    //TESTING
-    @GET
-    @Path("test")
-    @Produces(MediaType.TEXT_PLAIN)
-    public int test() {
-        
-            Models.Users user = ub.getByUsername("phuocn");
-            if (user.getPermissionsId() == 1) {
-                return ub.getDepartmentIdByJobId(user.getJobId());
-            }
-            return 0;
     }
     
     @GET 

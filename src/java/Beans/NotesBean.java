@@ -78,17 +78,26 @@ public class NotesBean {
         return getNotesByUserId(id);
     }
     
-    public List<Notes> getNotesByDepartment(String departmentName) {
+    public List<Notes> getNotesByDepartmentId(int id) {
         refreshEM();
-        int id = (int) em.createNamedQuery("Departments.findIdByTitle").setParameter("title", departmentName).getSingleResult();
         return (List<Notes>) em.createNamedQuery("Notes.findByDepartmentId").setParameter("departmentId", id).getResultList();
     }
-    
+        
     public String getDateByNotesId(int id) {
         refreshEM();
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm").format((Date) em.createNamedQuery("Notes.getDateByNoteId").setParameter("noteId", id).getSingleResult());
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format((Date) em.createNamedQuery("Notes.getDateByNoteId").setParameter("noteId", id).getSingleResult());
     }
     
+    public List<Notes> getNotesByTime(int time) {
+        switch (time) {
+            case 0:
+            case 1:
+            case 7:
+                
+            default:
+                return newestNotes();
+        }
+    }
     
     /*
     This method will just empty the cache,
@@ -100,13 +109,30 @@ public class NotesBean {
     }
     
     public List<Notes> notesData(int userId, int departmentId) {
+        refreshEM();
         Query q = em.createNativeQuery("SELECT n.id AS id, n.contents AS contents, n.note_date AS note_date,"
                 + " n.department_id AS department_id, n.img_url AS img_url, nr.user_id AS user_id "
-                + "FROM Notes n, Note_Receivers nr "
-                + "WHERE n.id = nr.note_id AND "
-                + "(user_id = " + userId + " OR department_id = " + departmentId + ") ORDER BY note_date;", "NotesDataResult");
-        
+                + "FROM Notes n LEFT JOIN Note_Receivers nr /'"
+                + ""
+                + "ON n.id = nr.note_id "
+                + "WHERE user_id = " + userId + " OR department_id = " + departmentId + " ORDER BY n.note_date DESC;", "NotesDataResult");
         return (List<Notes>) q.getResultList();
     }
-
-}
+    
+    public List<Notes> newestNotes() {
+        refreshEM();
+        return (List<Notes>) em.createNamedQuery("Notes.orderByDate").getResultList();
+    }
+    
+    
+//    public List<Notes> assignedNotesData() {
+//        Query q = em.createNativeQuery("SELECT n.id AS id, n.contents AS contents, n.note_date AS note_date,"
+//                + " n.department_id AS department_id, n.img_url AS img_url, nr.user_id AS user_id "
+//                + "FROM Notes n, Note_Receivers nr "
+//                + "WHERE n.id = nr.note_id "
+//                + "ORDER BY note_date;", "NotesDataResult");
+//        
+//        return (List<Notes>) q.getResultList();
+//    }
+    
+}   
