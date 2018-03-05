@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Main</title>
     <link rel="stylesheet" href="style.css">
+
     <body>
         <div class="container">
             <div class="nav-menu">
@@ -15,52 +16,21 @@
                         <img id="logo-img" src="images/Hotel-Logo.svg" alt="">
                     </div>
 
-                    <div class="nav-menu-items">
-                        <a href="/management/logout">Logout</a>
-                    </div>
-                    <div id="search-bar" class="nav-menu-items">
-                        <input type="text" name="search" placeholder="Search">
-                    </div>
                     <div id="profile" class="nav-menu-items">
                         <img id="profile-img" alt="">
                         <a href="profilepage.html" id="profile-name">Profile</a>
                     </div>
+
+                    <div id="note-button-container" class="nav-menu-items">
+                        <a href="notemanager.html" id="note-button">Note</a>
+                    </div>
+
+                    <div class="nav-menu-items">
+                        <a href="/management/logout">Logout</a>
+                    </div>
                 </div>
             </div>
             <div class="main-view center-div">
-                <div class="add-notes-tasks">
-                    <form action="r/notes/new" enctype="multipart/form-data" method="POST" id='notes-form'>
-                        <div class="add-title">
-                            <img id="add-icon" src="images/main/pen-icon.svg" alt="">
-                            <p>Add Notes or Tasks</p>
-                        </div>
-
-                        <div class="add-content-container">
-                            <textarea name="content" id="add-content" cols="50" rows="5" required></textarea>
-                        </div>
-
-                        <div class="add-buttons-container">
-                            <label for="file-add" id="add-photo-button">
-                                <img id="photo-icon" src="images/main/photo-icon.png" alt="">
-                                <p id='file-selected'>Add photo</p>
-                            </label>
-                            <input type="file" name="file" id="file-add">
-                            
-                            <label class="features">
-                                <select name="departmentId" class="dropdown-menu" required>
-                                    <option selected disabled>Choose department</option>
-                                    <option value="">None</option>
-                                    <option value="1">Restaurant</option>
-                                    <option value="2">Management</option>
-                                    <option value="3">Reception</option>
-                                    <option value="4">Maintenance</option>
-                                </select> 
-                           </label>
-                            <input type="submit" id="add-button" value="Post">
-                        </div>
-                    </form>
-                </div>
-
                 <div class="main-board">
 
                     <div id="note-1" class="notes">
@@ -74,12 +44,10 @@
                                     <span>3 hours ago</span>
                                 </div>
                             </div>
-
-                            <div class="notes-color red-notes">
-                            </div>
                         </div>
 
                         <div class="notes-content">
+                            <h1>This is the title</h1>
                             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat deserunt officia ut enim voluptatum!
                                 Autem, beatae voluptatibus quo, adipisci dolor porro aspernatur a maxime cum, fuga numquam
                                 dolore repellat ad.</p>
@@ -103,12 +71,10 @@
                                     <span>5 February 2018 at 15:00</span>
                                 </div>
                             </div>
-
-                            <div class="notes-color blue-notes">
-                            </div>
                         </div>
 
                         <div class="notes-content">
+                            <h1>This is the title</h1>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, laborum ipsam. Cupiditate asperiores
                                 adipisci a eveniet numquam ipsa libero unde cumque corrupti, eaque quibusdam fuga deleniti
                                 impedit ipsum debitis iusto nobis eum alias? Tempora optio dolores corporis neque atque delectus,
@@ -125,7 +91,7 @@
             </div>
         </div>
 
-    <script src='../secure/scripts/notes.js'> </script>
+        <script src='../secure/scripts/notes.js'> </script>
     </body>
 
 </html>
