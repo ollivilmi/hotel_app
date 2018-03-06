@@ -1,164 +1,197 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Profile page</title>
-        <!-- CSS -->
-        <link rel="stylesheet" href="../assets/css/profilestyle.css">
-        <!-- Link to script -->
-        <script src="scripts/profilescript.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <div class="nav-menu">
-                <div class="container-nav-menu center-div">
-                    <div id="logo" class="nav-menu-items">
-                        <a href="main.html"><img id="logo-img" src="images/Hotel-Logo.svg" alt=""></a>
-                    </div>
-                    <div class="nav-menu-items">
-                        <a href="/management/logout">Logout</a>
-                    </div>
-                    <div id="search-bar" class="nav-menu-items">
-                        <input type="text" name="search" placeholder="Search">
-                    </div>
-                    <div id="profile" class="nav-menu-items">
-                        <img id="profile-img" alt="">
-                        <a href="profilepage.html" id="profile-name">Profile</a>
-                    </div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile page</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/profilestyle.css">
+    <!-- Link to script -->
+    <script src="scripts/profilescript.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-menu">
+            <div class="container-nav-menu center-div">
+                <div id="logo" class="nav-menu-items">
+                    <a href="main.html">
+                        <img id="logo-img" src="images/Hotel-Logo.svg" alt="">
+                    </a>
+                </div>
+                <div id="profile" class="nav-menu-items">
+                    <img id="profile-img" alt="">
+                    <a href="profilepage.html" id="profile-name">Profile</a>
+                </div>
+                <div class="nav-menu-items">
+                    <a href="/management/logout">Logout</a>
                 </div>
             </div>
-            <div id="modal-edit-id" class="modal-edit">
-                <span onclick="closeModal()" class="close" id="close-button" title="Close Modal">&times;</span>
-                <form class="modal-content" action="register" method="POST">
-                    <div class="modal-container">
-                        <h1>Edit user information</h1>
+        </div>
+        <div id="modal-edit-id" class="modal-edit">
+            <span onclick="closeModal()" class="close" id="close-button" title="Close Modal">&times;</span>
+            <form class="modal-content" action="register" method="POST">
+                <div class="modal-container">
+                    <h1>Edit user information</h1>
 
-                        <div class="dropdown">
-                            <select name="department" class="dropdown-menu" required>
-                                <option selected disabled>Choose department</option>
-                                <option value="1">Restaurant</option>
-                                <option value="2">Management</option>
-                                <option value="3">Reception</option>
-                                <option value="4">Maintenance</option>
-                            </select>
-                        </div>
-
-                        <label for="firstname"><b>First Name</b></label>
-                        <input class="modal-input" type="text" placeholder="Enter name" name="firstname" required>
-
-                        <label for="lastname"><b>Last name</b></label>
-                        <input class="modal-input" type="text" placeholder="Enter name" name="lastname" required>
-
-                        <label for="tel"><b>Phone Number</b></label>
-                        <input class="modal-input" type="tel" placeholder="Enter number" name="telnumber" required>
-
-                        <label for="email"><b>Email</b></label>
-                        <input class="modal-input" type="email" placeholder="Enter Email" name="email" required>
-                        
-                        <label for="username"><b>User name</b></label>
-                        <input class="modal-input" type="text" placeholder="Enter User Name" name="username" required>
-                        
-                        <label for="password"><b>Password</b></label>
-                        <input class="modal-input" type="password" placeholder="Enter Password" name="password" required>
-
-                        <label for="psw-repeat"><b>Repeat Password</b></label>
-                        <input class="modal-input" type="password" placeholder="Repeat Password" name="password-repeat" required>
-                        
-                        <div class="clearfix">
-                            <button type="submit" class="submitbtn">Submit</button>
-                        </div>
+                    <div class="dropdown">
+                        <select name="department" class="dropdown-menu" required>
+                            <option selected disabled>Choose department</option>
+                            <option value="1">Restaurant</option>
+                            <option value="2">Management</option>
+                            <option value="3">Reception</option>
+                            <option value="4">Maintenance</option>
+                        </select>
                     </div>
-                </form>
-            </div>
-            <div class="profile-menu">
-                <div class="profile-container">
-                    <div class="info-container">
-                        <div class="info-page" id="general-info">
-                            
-                            <form id="info-form" action="/management/updateUser" method="POST">
-                                <p class="info-header">General Information</p>
-                                <!-- Change profile pic -->
-                                <div class="add-img-container">
-                                    <img class="add-img-container-element" id="profile-picture" src="images/person-icon.png" alt=""/>
-                                    <input type="file" name="file" id="add-img" class="add-file">
-                                    <label class="add-img-container-element" for="file">Change</label>
-                                </div>
-                                
-                                <div class="info-block">
-                                    <label class="profile-label" for="firstname"><b>First Name</b></label>
-                                    <input id="firstname" class="profile-input" type="text" name="firstname" required>
-                                </div>
 
-                                <div class="info-block">
-                                    <label class="profile-label" for="lastname"><b>Last Name</b></label>
-                                    <input id="lastname" class="profile-input" type="text" name="lastname" required>
-                                </div>
+                    <label for="firstname">
+                        <b>First Name</b>
+                    </label>
+                    <input class="modal-input" type="text" placeholder="Enter name" name="firstname" required>
 
-                                <div class="info-block">
-                                    <label class="profile-label" for="tel"><b>Phone Number</b></label>
-                                    <input id="telnumber" class="profile-input" type="tel" name="telnumber">
-                                </div>
+                    <label for="lastname">
+                        <b>Last name</b>
+                    </label>
+                    <input class="modal-input" type="text" placeholder="Enter name" name="lastname" required>
 
-                                <div class="info-block">
-                                    <label class="profile-label" for="email"><b>Email</b></label>
-                                    <input id="email" class="profile-input" type="email" name="email">
-                                </div>
+                    <label for="tel">
+                        <b>Phone Number</b>
+                    </label>
+                    <input class="modal-input" type="tel" placeholder="Enter number" name="telnumber" required>
 
-                                <div class="info-block">
-                                    <label class="profile-label" for="username"><b>User name</b></label>
-                                    <input id="username" class="profile-input" type="text" name="username" required>
-                                </div>
+                    <label for="email">
+                        <b>Email</b>
+                    </label>
+                    <input class="modal-input" type="email" placeholder="Enter Email" name="email" required>
 
-                                <div class="info-block">
-                                    <label class="profile-label" for="password"><b>New Password</b></label>
-                                    <input class="profile-input" type="password" name="password">
-                                </div>
+                    <label for="username">
+                        <b>User name</b>
+                    </label>
+                    <input class="modal-input" type="text" placeholder="Enter User Name" name="username" required>
 
-                                <div class="info-block">
-                                    <label class="profile-label" for="psw-repeat"><b>Repeat Password</b></label>
-                                    <input class="profile-input" type="password" name="password-repeat">
-                                </div>
-                                <div class="info-block">
-                                    <label class="profile-label" for="psw-old"><b>Current Password</b></label>
-                                    <input class="profile-input" type="password" name="password-current" required>
-                                </div>
-                                
+                    <label for="password">
+                        <b>Password</b>
+                    </label>
+                    <input class="modal-input" type="password" placeholder="Enter Password" name="password" required>
 
-                                <div class="clearfix">
-                                    <button type="submit" class="profile-btn" id="save-btn">Save</button>
-                                    <!--<button type="reset" class="profile-btn" id="cancel-btn" disabled>Cancel</button>-->
-                                    <!--<button class="profile-btn" name="edit-btn" id="edit-btn">Edit</button>-->
+                    <label for="psw-repeat">
+                        <b>Repeat Password</b>
+                    </label>
+                    <input class="modal-input" type="password" placeholder="Repeat Password" name="password-repeat" required>
+
+                    <div class="clearfix">
+                        <button type="submit" class="submitbtn">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="profile-menu">
+            <div class="profile-container">
+                <div class="info-container">
+                    <div class="info-page" id="general-info">
+
+                        <form id="info-form" action="/management/updateUser" method="POST">
+                            <p class="info-header">General Information</p>
+                            <!-- Change profile pic -->
+                            <div class="add-img-container">
+                                <img class="add-img-container-element" id="profile-picture" src="images/person-icon.png" alt="" />
+                                <input type="file" name="file" id="add-img" class="add-file">
+                                <label class="add-img-container-element" for="file">Change</label>
+                            </div>
+
+                            <div class="info-block">
+                                <label class="profile-label" for="firstname">
+                                    <b>First Name</b>
+                                </label>
+                                <input id="firstname" class="profile-input" type="text" name="firstname" required>
+                            </div>
+
+                            <div class="info-block">
+                                <label class="profile-label" for="lastname">
+                                    <b>Last Name</b>
+                                </label>
+                                <input id="lastname" class="profile-input" type="text" name="lastname" required>
+                            </div>
+
+                            <div class="info-block">
+                                <label class="profile-label" for="tel">
+                                    <b>Phone Number</b>
+                                </label>
+                                <input id="telnumber" class="profile-input" type="tel" name="telnumber">
+                            </div>
+
+                            <div class="info-block">
+                                <label class="profile-label" for="email">
+                                    <b>Email</b>
+                                </label>
+                                <input id="email" class="profile-input" type="email" name="email">
+                            </div>
+
+                            <div class="info-block">
+                                <label class="profile-label" for="username">
+                                    <b>User name</b>
+                                </label>
+                                <input id="username" class="profile-input" type="text" name="username" required>
+                            </div>
+
+                            <div class="info-block">
+                                <label class="profile-label" for="password">
+                                    <b>New Password</b>
+                                </label>
+                                <input class="profile-input" type="password" name="password">
+                            </div>
+
+                            <div class="info-block">
+                                <label class="profile-label" for="psw-repeat">
+                                    <b>Repeat Password</b>
+                                </label>
+                                <input class="profile-input" type="password" name="password-repeat">
+                            </div>
+                            <div class="info-block">
+                                <label class="profile-label" for="psw-old">
+                                    <b>Current Password</b>
+                                </label>
+                                <input class="profile-input" type="password" name="password-current" required>
+                            </div>
+
+
+                            <div class="clearfix">
+                                <button type="submit" class="profile-btn" id="save-btn">Save</button>
+                                <!--<button type="reset" class="profile-btn" id="cancel-btn" disabled>Cancel</button>-->
+                                <!--<button class="profile-btn" name="edit-btn" id="edit-btn">Edit</button>-->
+                            </div>
+                        </form>
+                    </div>
+                    <div class="info-page" id="management-info">
+                        <div class="management-container">
+                            <p class="info-header">Management</p>
+                            <!-- New requests for user permissions are shown here -->
+                            <div class="management-new-requests">
+                                <div class="request-header">
+                                    <p>New users waiting for approval:
+                                        <em>(hover for more information)</em>
+                                    </p>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="info-page" id="management-info">
-                            <div class="management-container">
-                                <p class="info-header">Management</p>
-                                <!-- New requests for user permissions are shown here -->
-                                <div class="management-new-requests">
-                                    <div class="request-header">
-                                        <p>New users waiting for approval: <em>(hover for more information)</em> </p>
-                                    </div>
-                                    <div class="request-container">
-                                        <!-- new user cards -->
-               
-                                    </div>
-                                </div>
-                                <div class="divider-horizontal">
+                                <div class="request-container">
+                                    <!-- new user cards -->
 
                                 </div>
-                                <!-- admin user can change permissions or departments from workers here -->
-                                <div class="management-edit">
-                                    <div class="edit-header">
-                                        <p>Edit user jobs and permissions</p>
-                                    </div>
-                                    <div class="edit-container">
-                                        <div class="search-name-container">
-                                            <div class="search-name-input-container">
-                                                <label class="search-name-element" for="name-search">
-                                                    <b>Search by: 
+                            </div>
+                            <div class="divider-horizontal">
+
+                            </div>
+                            <!-- admin user can change permissions or departments from workers here -->
+                            <div class="management-edit">
+                                <div class="edit-header">
+                                    <p>Edit user jobs and permissions</p>
+                                </div>
+                                <div class="edit-container">
+                                    <div class="search-name-container">
+                                        <div class="search-name-input-container">
+                                            <label class="search-name-element" for="name-search">
+                                                <b>Search by:
                                                     <select id="search-type" class="search-department-dropdown" onchange="changeOptions(this.value)">
                                                         <option value="unassigned">Unassigned</option>
                                                         <option value="firstname">First name</option>
@@ -167,15 +200,14 @@
                                                         <option value="job">Job</option>
                                                         <option value="department">Department</option>
                                                     </select>
-                                                    </b>
-                                                </label>
-                                                <div id="search-option">
-                                                </div>
-                                                <button id="search-btn">Search</button>
+                                                </b>
+                                            </label>
+                                            <div id="search-option">
                                             </div>
-                                            <div class="search-result-container" id="user-search-container">
-                                                <div class="search-person">
-                                                </div>
+                                            <button id="search-btn">Search</button>
+                                        </div>
+                                        <div class="search-result-container" id="user-search-container">
+                                            <div class="search-person">
                                             </div>
                                         </div>
                                     </div>
@@ -186,5 +218,7 @@
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
