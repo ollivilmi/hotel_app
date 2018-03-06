@@ -117,13 +117,7 @@ public class NotesBean {
     
     public List<Notes> notesData(int userId, int departmentId) {
         refreshEM();
-        Query q = em.createNativeQuery("SELECT n.id AS id, n.contents AS contents, n.note_date AS note_date,"
-                + " n.department_id AS department_id, n.img_url AS img_url, nr.user_id AS user_id "
-                + "FROM Notes n LEFT JOIN Note_Receivers nr /'"
-                + ""
-                + "ON n.id = nr.note_id "
-                + "WHERE user_id = " + userId + " OR department_id = " + departmentId + " ORDER BY n.note_date DESC;", "NotesDataResult");
-        return (List<Notes>) q.getResultList();
+        return em.createNamedQuery("notes.forUser").setParameter("userid", userId).setParameter("departmentid", departmentId).getResultList();
     }
     
     public List<Notes> newestNotes() {
