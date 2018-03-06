@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="assets/css/login_new_style.css">
+	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 	<script src="assets/scripts/loginscript.js"></script>
 
 
@@ -16,13 +17,14 @@
                 <span onclick="closeModal()" class="close" id="close-button" title="Close Modal">&times;</span>
                 <form class="modal-content" action="register" method="POST">
                     <div class="modal-container">
-                        <h1>Register</h1>
+						<h1>Register</h1>
+                       
 
                         <label for="firstname"><b>First Name</b></label>
                         <input class="modal-input" type="text" placeholder="Enter name" name="firstname" required>
 
-                        <label for="lastname"><b>Last Name</b></label>
-                        <input class="modal-input" type="text" placeholder="Enter name" name="lastname" required>
+                        <label for="secondname"><b>Last Name</b></label>
+                        <input class="modal-input" type="text" placeholder="Enter name" name="secondname" required>
 
                         <label for="tel"><b>Phone Number</b></label>
                         <input class="modal-input" type="tel" placeholder="Enter number" name="telnumber" required>
@@ -40,7 +42,7 @@
                         <input class="modal-input" type="password" placeholder="Repeat Password" name="password-repeat" required>
 
                         <div class="clearfix">
-                            <button type="submit" class="submitbtn">Submit</button>
+                            <button type="submit">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -55,14 +57,14 @@
 				</div>
 
 				<form class="login-form validate-form" action="login" method="POST">
-					<div class="wrap-input validate-input m-b-26" data-validate="Username is required">
-						<span class="label-input">Username</span>
+					<div class="wrap-input" data-validate="Username is required">
+						<span class="label-input"><i class="fas fa-id-card fa-2x"></i></span> 
 						<input class="input" type="text" name="username" placeholder="Enter username" required>
 						<span class="focus-input"></span>
 					</div>
 
-					<div class="wrap-input validate-input" data-validate = "Password is required">
-						<span class="label-input">Password</span>
+					<div class="wrap-input" data-validate = "Password is required">
+						<span class="label-input"><i class="fas fa-lock fa-2x"></i></span>
 						<input class="input" type="password" name="password" placeholder="Enter password" required>
 						<span class="focus-input"></span>
 					</div>

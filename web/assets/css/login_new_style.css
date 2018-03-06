@@ -1,59 +1,20 @@
 /* Styles for the login page */
 * {
-	margin: 0px; 
-	padding: 0px; 
-	box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
+
 
 body, html {
-	height: 100%;
-	font-family: Poppins-Regular, sans-serif;
-
+  height: 100%;
+  font-family: Poppins-Regular, sans-serif;
 }
 
-
-a {
-	font-family: Poppins-Regular;
-	font-size: 14px;
-	line-height: 1.7;
-	color: #666666;
-	margin: 0px;
-	transition: all 0.4s;
-	-webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-}
-
-a:focus {
-	outline: none !important;
-}
-
-a:hover {
-	text-decoration: none;
-  color: #57b846;
-}
-
-
-h1,h2,h3,h4,h5,h6 {
-	margin: 0px;
-}
-
-p {
-	font-family: Poppins-Regular;
-	font-size: 14px;
-	line-height: 1.7;
-	color: #666666;
-	margin: 0px;
-}
-
-ul, li {
-	margin: 0px;
-	list-style-type: none;
-}
 
 input {
-	outline: none;
-	border: none;
+  outline: none;
+  border: none;
 }
 
 input[type="number"] {
@@ -67,15 +28,6 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-textarea {
-  outline: none;
-  border: none;
-}
-
-textarea:focus, input:focus {
-  border-color: transparent !important;
-}
-
 
 label {
   display: block;
@@ -83,17 +35,17 @@ label {
 }
 
 button {
-	outline: none !important;
-	border: none;
-	background: transparent;
+  outline: none !important;
+  border: none;
+  background: transparent;
 }
 
 button:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 iframe {
-	border: none !important;
+  border: none !important;
 }
 
 .limiter {
@@ -102,7 +54,7 @@ iframe {
 }
 
 .container-login {
-  width: 100%;  
+  width: 100%;
   min-height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
@@ -181,12 +133,10 @@ iframe {
 }
 
 .label-input {
-  font-family: Poppins-Regular;
   font-size: 15px;
   color: #808080;
   line-height: 1.2;
   text-align: right;
-
   position: absolute;
   top: 14px;
   left: -105px;
@@ -305,10 +255,6 @@ input.input {
   }
 }
 
-.validate-input {
-  position: relative;
-}
-
 
 @media (max-width: 992px) {
   .alert-validate::before {
@@ -318,14 +264,7 @@ input.input {
 }
 
 /* Styles for the register page */
-.dropdown-menu {
-    display: flex;
-    align-content: center;
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0 5px 0;
-    background: #e5e5e5;
-}
+
 
 /* Background for the modal */
 .modal-signup {
@@ -341,13 +280,15 @@ input.input {
     height: 100%;
     overflow: auto;
     background-color: #474e5d;
-    padding-top: 50px;
+    padding-top: 120px;
+    overflow: hidden; /* new */
+
 }
 
 
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto 15% auto; 
+    margin: 5% auto 15% auto;
     border: 1px solid #888;
     width: 60%;
     font-family: Poppins-Regular, sans-serif;
@@ -358,7 +299,8 @@ input.input {
     text-align: center;
     font-family: Poppins-Regular, sans-serif;
     font-size: 45px;
-    padding: 5px;
+    padding-bottom: 10px;
+
 }
 
 
@@ -403,21 +345,25 @@ input.input {
 
 /*--BUTTON STYLES --*/
 
-
+/* new */
 /* Style for submit button */
 .modal-container button {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #B19B74;
+    border-radius: 25px;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
     width: 100%;
     opacity: 0.9;
+    font-family: Poppins-Regular;
+  color: #fff;
+  text-align: center;
 }
 
 .modal-container button:hover {
     opacity:1;
+    background-color: #333333;
 }
 
 /*--STYLES FOR CLOSE BUTTON--*/

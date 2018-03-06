@@ -68,6 +68,19 @@ body {
     text-decoration: none;
 }
 
+.nav-menu-items-style {
+    text-decoration: none;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: inset 0 -3px 0 #B19B74;
+    border-radius: 5px;
+}
+.nav-menu-items-style:hover {
+    box-shadow: inset 0 -50px 0  #B19B74;
+}
+
 #logo:hover {
     background-color: #666;
 }

@@ -1,10 +1,10 @@
 * {
     margin: 0;
-	padding: 0;
+    padding: 0;
     border: 0;
     box-sizing: border-box;
-	font-size: 14px;
-	font: inherit;
+    font-size: 14px;
+    font: inherit;
     vertical-align: baseline;
     font-family: Poppins-Regular, sans-serif;
     color: #666;
@@ -52,6 +52,17 @@ html, body {
 
 .nav-menu-items a {
     text-decoration: none;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: inset 0 -3px 0 #B19B74;
+    border-radius: 5px;
+    /*background-color: #B19B74;
+    font-family: Poppins-Regular;
+    border-radius: 25px;
+    color: #fff;
+    */
 }
 
 #logo:hover {
@@ -59,7 +70,7 @@ html, body {
 }
 
 #logo-img {
-    height: 70px;
+    height: 68px;
     margin: 5px 10px;
 }
 
@@ -72,8 +83,14 @@ html, body {
     */
 }
 
-#profile:hover {
+/*#profile:hover {
     background-color: #ebeeef;
+}
+*/
+
+a:hover {
+  /*background-color: #333333;  */
+  box-shadow: inset 0 -50px 0  #B19B74;
 }
 
 #profile-img {
