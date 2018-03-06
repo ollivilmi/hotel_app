@@ -233,7 +233,7 @@ const searchResults = (users) => {
         + '<span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>'
         + '</div>';
     }
-    document.querySelector("#user-search-container").innerHTML = resultString;
+    document.querySelector(".search-result-container").innerHTML = resultString;
 };
 
 const changeOptions = (searchType) => {
@@ -285,8 +285,10 @@ const jobOptions = (department) => {
             .catch(error => console.log(error));  
 };
 
+
+// method for openin edit modal for admin
+
 openModal = function() {
-    console.log("hello");
     modal.style.display = 'flex';
     registerContainer.style.display = 'none';
 };

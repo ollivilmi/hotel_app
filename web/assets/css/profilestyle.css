@@ -25,7 +25,11 @@ and open the template in the editor.
 
 html, body {
     height: 100%;
-    min-width: 600px;
+    min-width: 700px;
+}
+
+body {
+    background-color: #ebeeef;
 }
 
 .container {
@@ -125,6 +129,8 @@ html, body {
 /* STYLES FOR INFORMATION NAV */
 
 .profile-container {
+    height: auto;
+    min-height: 100%;
     background-color: #ebeeef;
 }
 
@@ -148,7 +154,8 @@ html, body {
 /* STYLES FOR THE INFORMATION PAGES */
 
 .info-container {
-    height: 80px;
+    height: auto;
+    min-height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -665,3 +672,11 @@ html, body {
         justify-content: space-between;
     }
 }
+
+/* Adding styling for profile-menu*/
+
+.profile-menu {
+    height: auto;
+    min-height: 100%;
+}
+
