@@ -28,12 +28,13 @@ public class NotesBean {
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
     
-    public Notes createNote(String text, String imgUrl, int departmentId)
+    public Notes createNote(String text, String imgUrl, int departmentId, String title)
     {
         refreshEM();
         Notes n = new Notes();
         n.setContents(text);
         n.setImgUrl(imgUrl);
+        n.setTitle(title);
         if (departmentId != 0) n.setDepartmentId(departmentId);  
         em.persist(n);
         return n; 

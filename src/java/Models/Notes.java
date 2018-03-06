@@ -71,6 +71,8 @@ public class Notes implements Serializable {
     private Date noteDate;
     @Column(name = "img_url")
     private String imgUrl;
+    @Column(name = "title")
+    private String title;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -91,6 +93,14 @@ public class Notes implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
 

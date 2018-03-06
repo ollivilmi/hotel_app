@@ -56,6 +56,7 @@ public class NotesUpload extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             Part filePart = request.getPart("file");
             String content = request.getParameter("content");
+            String title = request.getParameter("title");
             content = content.replace("\n", "<br>"); //read new line break for textarea
             int departmentId = 0;
             if (!request.getParameter("departmentId").isEmpty() || request.getParameter("departmentId").equals("0")) {
@@ -70,7 +71,7 @@ public class NotesUpload extends HttpServlet {
                 out.print(ex);
             }
             //Using bean to create Notes from the POST request parameters
-            Models.Notes notes = nb.createNote(content, fileName, departmentId);
+            Models.Notes notes = nb.createNote(content, fileName, departmentId, title);
 //            if (!request.getParameter("employeeIds").isEmpty()) {
 //                if (request.getParameter("employeeIds").contains(",")) {
 //                    String[] employeeIds = request.getParameter("employeeIds").split(",");
