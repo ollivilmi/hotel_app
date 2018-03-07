@@ -42,16 +42,6 @@ let username = getCookie("user");
 let headers = {
   user: username
 };
-// console.log(username);
-// fetch(apiUrl + "/getNotes", {
-//   headers: headers
-// })
-//   .then(res => res.json())
-//   .then(function(json) {
-//     console.log(json);
-//     notesFetch(json);
-//   })
-//   .catch(error => console.log(error));
 
 //Filter notes
 let filterButton = document.querySelector("#filter-apply-button");
@@ -119,7 +109,7 @@ const notesFetch = notes => {
           "<p>" + note.imgUrl + "</p>" +
         "</div>" +
         '<div class="notes-footer">' +
-          '<p>Find employees to add note:</p>'+
+          '<p>Find employees to send note:</p>'+
           '<select id="search-type-' + note.id + '" class="dropdown-menu" onchange="changeOptions(this.value, ' + note.id + ')">'+
               '<option value="firstname">First name</option>'+
               '<option value="lastname">Last name</option>'+
@@ -128,11 +118,12 @@ const notesFetch = notes => {
               '<option value="department">Department</option>'+
           '</select>'+
           '<div id="search-option-' + note.id + '" class="sidemargins">'+
+          '<input class="profile-input name-search" type="text" placeholder="Enter name" id="search-user-' + note.id + '">'+
           '</div>'+
           '<button id="search-btn-' + note.id + '" class="sidemargins search-btn" onclick="searchButton('+ note.id + ')">Search</button>'+
-          '<select id="user-search-container-' + note.id + '">'+
+          '<select id="user-search-container-' + note.id + '" class="dropdown-menu">'+
           '</select>'+
-          '<button id="add-note-btn-' + note.id + '" class="sidemargins add-note-btn">Add note</button>'+
+          '<button id="add-note-btn-' + note.id + '" class="sidemargins add-note-btn" onclick="sendNote('+ note.id + ')">Send note</button>'+
         "</div>" +
       "</div>";
   }
@@ -212,7 +203,7 @@ const searchButton = (id) => {
 const searchResults = (users, id) => {
   let resultString = ""
   for (let user of users) {
-    resultString += "<option>" + user.firstName + " " + user.lastName + "</option>"
+    resultString += '<option value="' + user.username+ '">' + user.firstName + ' ' + user.lastName + '</option>'
   }
 
   document.querySelector("#user-search-container-" + id).innerHTML = resultString;
@@ -287,3 +278,13 @@ const jobOptions = (element, value) =>
 {
 element.innerHTML = jobs[value];  
 };
+
+
+//Send note to more receivers
+
+const sendNote = (id) => {
+  receiverUsername = document.getElementById('user-search-container-' + id).value
+  fetch(apiUrl + '/newReceiver?noteId='+ id + '&username=' + receiverUsername, {
+    method: 'POST'
+  })
+} 

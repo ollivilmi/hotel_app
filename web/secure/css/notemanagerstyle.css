@@ -350,6 +350,7 @@ input[type="file"] {
 #filter-value, .filter-input select {
     border: 2px solid #eaeaea;
     border-radius: 5px;
+    margin: 5px;
 }
 
 #filter-apply-button {
@@ -420,4 +421,11 @@ h1 {
     font-size: 1.2em;
     text-transform: uppercase;
     text-align: center;
+}
+
+.profile-input {
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
 }
