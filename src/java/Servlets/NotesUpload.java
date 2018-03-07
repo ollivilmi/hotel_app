@@ -6,6 +6,7 @@
 package Servlets;
 
 import Beans.NotesBean;
+import Beans.UserBean;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,7 +37,9 @@ public class NotesUpload extends HttpServlet {
 
     @EJB
     NotesBean nb;
-
+    
+    @EJB
+    UserBean ub;
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -54,7 +57,6 @@ public class NotesUpload extends HttpServlet {
 
         File uploads = new File("E:\\Study\\hotel_app\\Pictures"); //define storage location
         try (PrintWriter out = response.getWriter()) {
-            Part filePart = request.getPart("file");
             String content = request.getParameter("content");
             String title = request.getParameter("title");
             content = content.replace("\n", "<br>"); //read new line break for textarea
@@ -62,6 +64,10 @@ public class NotesUpload extends HttpServlet {
             if (!request.getParameter("departmentId").isEmpty() || request.getParameter("departmentId").equals("0")) {
                 departmentId = Integer.parseInt(request.getParameter("departmentId"));
             }
+            
+            
+            //Get the picture/file
+            Part filePart = request.getPart("file");
             String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
             //create the file in the storage location
             File file = new File(uploads, fileName);
@@ -72,17 +78,10 @@ public class NotesUpload extends HttpServlet {
             }
             //Using bean to create Notes from the POST request parameters
             Models.Notes notes = nb.createNote(content, fileName, departmentId, title);
-//            if (!request.getParameter("employeeIds").isEmpty()) {
-//                if (request.getParameter("employeeIds").contains(",")) {
-//                    String[] employeeIds = request.getParameter("employeeIds").split(",");
-////                        Logger.getLogger(NotesUpload.class.getName()).log(Level.INFO, employeeIds[0], employeeIds[1]);
-//                    for (String id : employeeIds) {
-//                        nb.addReceiver(notes, Integer.parseInt(id));
-//                    }
-//                } else {
-//                    nb.addReceiver(notes, Integer.parseInt(request.getParameter("employeeIds")));
-//                }
-//            }
+            
+            //Add receiver
+            String username = request.getParameter("username");
+            nb.addReceiver(notes.getId(), ub.getByUsername(username).getId());
             //                out.print(notes);
             out.print("Notes sent succesfully!");
             response.sendRedirect("/management/secure/main.html");
