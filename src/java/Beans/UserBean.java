@@ -53,6 +53,13 @@ public class UserBean {
         return true;
     }
     
+    public String getJob(Users user)
+    {
+        return (String) em.createNativeQuery("SELECT job.title FROM Jobs JOIN Users "
+                + "ON Jobs.id = Users.job_id WHERE Users.id = " + user.getId())
+                .getResultList().get(0);
+    }
+    
     public boolean addUser(Users user)
     {
         try { 

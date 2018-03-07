@@ -60,7 +60,10 @@ public class EmployeeFilter implements Filter {
                         request.getRequestDispatcher("/error").forward(request, response);
                     }
                     else
+                    {
+                        user.setMaxAge(60*60);
                         chain.doFilter(request, response);
+                    }
                 }
             }
             catch (Exception e)

@@ -37,32 +37,32 @@ public class Login extends HttpServlet {
         String uname = request.getParameter("username");
         String pass = request.getParameter("password");
         
-        // Search by username from database to check password
-        Users u = bean.getByUsername(uname);
-        if (u == null)
+        try 
+        {
+            // Search by username from database to check password
+            Users u = bean.getByUsername(uname);
+            if (u == null)
+                throw new NullPointerException();
+
+            // Check password
+            if (Password.check(pass, u.getPwHash()))
+                {
+
+                    // Create user cookie for JavaScript fetch to work
+                    // Lasts 60 minutes
+                    Cookie cookie = new Cookie("user", uname);
+                    cookie.setMaxAge(60*60);
+                    response.addCookie(cookie);
+
+                    // Send user to the main page
+                    response.sendRedirect("/management/secure/main.html");
+                }
+            // Passwords didn't match, send the user back to the login page
+            else response.sendRedirect("/management/login.html");
+        }
+        catch (Exception e)
+        {
             response.sendRedirect("/management/login.html");
-        
-        // Check password
-        if (Password.check(pass, u.getPwHash()))
-            {
-                // Create a new session for the user
-                //HttpSession session = request.getSession(true);
-
-                // Save user object into user attribute in the session
-                // Lasts 30 minutes
-                //session.setAttribute("user", u);
-                //session.setMaxInactiveInterval(60*60);
-                
-                // Create user cookie for JavaScript fetch to work
-                // Lasts 60 minutes
-                Cookie cookie = new Cookie("user", uname);
-                cookie.setMaxAge(60*60);
-                response.addCookie(cookie);
-
-                // Send user to the main page
-                response.sendRedirect("/management/secure/main.html");
-            }
-        // Passwords didn't match, send the user back to the login page
-        else response.sendRedirect("/management/login.html");
+        }
     }
 }
