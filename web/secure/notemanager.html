@@ -13,12 +13,13 @@
             <div class="nav-menu">
                 <div class="container-nav-menu center-div">
                     <div id="logo" class="nav-menu-items">
-                        <a href='main.html'><img id="logo-img" src="images/Hotel-Logo.svg" alt=""></a>
+                        <a href='main.html'>
+                            <img id="logo-img" src="images/Hotel-Logo.svg" alt="">
+                        </a>
                     </div>
 
                     <div id="profile" class="nav-menu-items nav-menu-items-style">
-                        <img id="profile-img" alt="">
-                        <a href="profilepage.html" id="profile-name">Cuong</a>
+                        <a href="profilepage.html" id="profile-name">Profile</a>
                     </div>
 
                     <div class="nav-menu-items nav-menu-items-style">
@@ -40,23 +41,53 @@
                         </div>
 
                         <div class="add-buttons-container">
-                            <label for="file-add" id="add-photo-button">
-                                <img id="photo-icon" src="images/main/photo-icon.png" alt="">
-                                <p id='file-selected'>Add photo</p>
-                            </label>
-                            <input type="file" name="file" id="file-add">
+                            <div class="add-button-option">
+                                <div class="option-1">
+                                    <label for="file-add" id="add-photo-button">
+                                        <img id="photo-icon" src="images/main/photo-icon.png" alt="">
+                                        <p id='file-selected'>Add photo</p>
+                                    </label>
+                                    <input type="file" name="file" id="file-add">
 
-                            <label class="features">
-                                <select name="departmentId" class="dropdown-menu" required>
-                                    <option selected disabled>Choose department</option>
-                                    <option value="">None</option>
-                                    <option value="1">Restaurant</option>
-                                    <option value="2">Management</option>
-                                    <option value="3">Reception</option>
-                                    <option value="4">Maintenance</option>
-                                </select>
-                            </label>
-                            <input type="submit" id="add-button" value="Post">
+                                    <label class="features">
+                                        <select name="departmentId" class="dropdown-menu" required>
+                                            <option selected disabled>Choose department</option>
+                                            <option value="">None</option>
+                                            <option value="1">Restaurant</option>
+                                            <option value="2">Management</option>
+                                            <option value="3">Reception</option>
+                                            <option value="4">Maintenance</option>
+                                        </select>
+                                    </label>
+                                </div>
+
+                                <div class="option-2">
+                                    <p>Find employees: </p>
+                                    <select id="search-type" class="dropdown-menu" onchange="changeOptions(this.value)">
+                                        <option value="firstname">First name</option>
+                                        <option value="lastname">Last name</option>
+                                        <option value="username">Username</option>
+                                        <option value="job">Job</option>
+                                        <option value="department">Department</option>
+                                    </select>
+                                    <div id="search-option" class="sidemargins">
+                                        <select id="" class="dropdown-menu" onchange="changeOptions(this.value)">
+                                            <option value="firstname">First name</option>
+                                            <option value="lastname">Last name</option>
+                                            <option value="username">Username</option>
+                                            <option value="job">Job</option>
+                                            <option value="department">Department</option>
+                                        </select>
+                                    </div>
+                                    <button id="search-btn" class="sidemargins">Search</button>
+                                    <select id="user-search-container">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="post-button">
+                                <input type="submit" id="add-button" value="Post">
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -73,12 +104,12 @@
                                 <option value="userId">User Id</option>
                             </select>
                             <div id="filter-option">
-                                
+
                             </div>
                         </div>
                         <input type="submit" id="filter-apply-button" value="Apply">
                     </div>
-                    
+
                     <div id="notes-container">
                         <!-- <div id="note-1" class="notes">
                             <div class="notes-header">
