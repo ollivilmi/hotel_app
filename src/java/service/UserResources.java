@@ -55,7 +55,9 @@ public class UserResources extends AbstractFacade<Users> {
             @FormParam("perm") int perm)
     {
         Users u = ub.getByUsername(username);
-        u.setPermissionsId(perm);
+        if (perm == 0)
+            u.setPermissionsId(null);
+        else u.setPermissionsId(perm);
         super.edit(u);
     }
     

@@ -88,25 +88,19 @@ const notesFetch = notes => {
       '<div id="note-' + note.id + '" class="notes">' +
         '<input type="hidden" name="noteId" value="'+note.id+'"/>'+
         '<div class="notes-header">' +
-          '<div class="notes-sender">' +
-            '<div class="sender-avatar">' +
-              '<img src="images/main/person1.png" alt="">' +
-            "</div>" +
-            '<div class="sender-name">' +
-              "<h5>An Nguyen</h5>" +
-              "<span>" + note.noteDate + "</span>" +
-            "</div>" +
-          "</div>" +
+          '<h1>' + note.title + '</h1>' +
           '<div class="note-manager-buttons">' +
             '<button id="note-edit">Edit</button>' +
             '<button id="note-delete">Delete</button>' +
           "</div>" +
         "</div>" + 
         '<div class="notes-content">' +
-          "<h1>"+ note.title + "</h1>" +
           "<p>" + note.contents + "</p>" +
       // +		'<img src="'+ note.imgUrl + '" alt="">'
           "<p>" + note.imgUrl + "</p>" +
+        "</div>" +
+        '<div class="notes-date">' +
+            "<span>" + note.noteDate + "</span>" +
         "</div>" +
         '<div class="notes-footer">' +
           '<p>Find employees to send note:</p>'+

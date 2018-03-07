@@ -63,24 +63,18 @@
 
                                 <div class="option-2">
                                     <p>Find employees: </p>
-                                    <select id="search-type" class="dropdown-menu" onchange="changeOptions(this.value)">
+                                    <select id="search-type-m" class="dropdown-menu" onchange="changeOptions(this.value, 'm')">
                                         <option value="firstname">First name</option>
                                         <option value="lastname">Last name</option>
                                         <option value="username">Username</option>
                                         <option value="job">Job</option>
                                         <option value="department">Department</option>
                                     </select>
-                                    <div id="search-option" class="sidemargins">
-                                        <select id="" class="dropdown-menu" onchange="changeOptions(this.value)">
-                                            <option value="firstname">First name</option>
-                                            <option value="lastname">Last name</option>
-                                            <option value="username">Username</option>
-                                            <option value="job">Job</option>
-                                            <option value="department">Department</option>
-                                        </select>
+                                    <div id="search-option-m" class="sidemargins">
+                                            <input class="profile-input name-search" type="text" placeholder="Enter name" id="search-user-m">
                                     </div>
-                                    <button id="search-btn" class="sidemargins"  onclick="searchButton">Search</button>
-                                    <select id="user-search-container">
+                                    <button id="search-btn-m" class="sidemargins search-btn"  onclick="searchButton('m')">Search</button>
+                                    <select id="user-search-container-m">
                                     </select>
                                 </div>
                             </div>

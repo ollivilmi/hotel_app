@@ -339,6 +339,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 5px;
+    margin-bottom: 0.2em;
 }
 
 .request-person-static {
@@ -431,7 +432,8 @@ select {
 
 .accept-request-btn {
     background: #4CAF50;
-    margin: 0.5em;
+    margin: 1em;
+    height: 4em;
 }
 
 .accept-request-btn:hover {
@@ -440,7 +442,8 @@ select {
 
 .decline-request-btn {
     background: #f44336;
-    margin: 0.5em;
+    margin: 1em;
+    height: 4em;
 }
 
 .decline-request-btn:hover {
@@ -496,7 +499,8 @@ select {
     flex-direction: row;
     justify-content: space-between;
     padding: 5px;
-    
+    border: 5px solid #ccc;
+    margin-bottom: 2em;
 }
 
 #search-btn {
@@ -559,12 +563,13 @@ select {
 
 .edit-user-btn {
     background: #008CBA;
-    width: 100px;
+    width: 80%;
     border-radius: 4px;
     color: white;
     text-align: center;
     text-decoration: none;
     font-size: 12px; 
+    margin: 0 2em;
 }
 
 /* MODAL POPUP STYLES*/

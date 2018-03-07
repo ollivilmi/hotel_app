@@ -198,14 +198,17 @@ const searchResults = (users) => {
         + '</div>'
         + '</form>'
         + '<form class="sidemargins" action="/management/r/users/manager/setUserPermissions" method="POST">'
+        +' <input type="hidden" name="username" value="'+user.username+'"/>'
         + '<select name="perm" class="dropdown-menu sidemargins">'
+        + '<option value="0">None</option>'
         + '<option value="1">Employee</option>'
         + '<option value="2">Manager</option>'
         + '</select>'
         + '<button type="submit" class="request-container-element request-button edit-user-btn">Change permissions</button>'
+        + '</form>'
         + '</div>'
-        + '</div>'
-        + '</form>';
+        + '</div>';
+        
     }
     document.querySelector("#user-search-container").innerHTML = resultString;
 };
