@@ -280,8 +280,8 @@ input.input {
     height: 100%;
     overflow: auto;
     background-color: #474e5d;
-    padding-top: 120px;
-    overflow: hidden; /* new */
+    padding-top: 200px;
+
 
 }
 
@@ -299,7 +299,7 @@ input.input {
     text-align: center;
     font-family: Poppins-Regular, sans-serif;
     font-size: 45px;
-    padding-bottom: 10px;
+    padding-top: 25px;
 
 }
 
@@ -395,4 +395,3 @@ input.input {
 .modal-container {
     padding: 25px;
 }
-
