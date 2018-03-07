@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
             @EntityResult(entityClass = Notes.class, 
                 fields = {@FieldResult(name="id", column="id"), @FieldResult(name="contents", column="contents"),
                           @FieldResult(name="note_date", column="note_date"),  @FieldResult(name="department_id", column="department_id"), 
-                          @FieldResult(name="img_url", column="img_url")})
+                          @FieldResult(name="img_url", column="img_url"), @FieldResult(name="title", column="title")})
         }
 )
 

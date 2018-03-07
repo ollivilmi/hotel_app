@@ -90,41 +90,37 @@ filterButton.addEventListener('click', function() {
 
 //Modify DOM element based on fetch notes
 const notesFetch = notes => {
+  
+  console.log(notes)
   let htmlString = "";
   for (let note of notes) {
     htmlString +=
-      '<div id="note-' +
-      note.id +
-      '" class="notes">' +
-      '<div class="notes-header">' +
-      '<div class="notes-sender">' +
-      '<div class="sender-avatar">' +
-      '<img src="images/main/person1.png" alt="">' +
-      "</div>" +
-      '<div class="sender-name">' +
-      "<h5>An Nguyen</h5>" +
-      "<span>" +
-      note.noteDate +
-      "</span>" +
-      "</div>" +
-      "</div>" +
-      '<div class="note-manager-buttons">' +
-      '<button id="note-edit">Edit</button>' +
-      '<button id="note-delete">Delete</button>' +
-      "</div>" +
-      "</div>" +
-      "<p>" +
-      note.contents +
-      "</p>" +
+      '<div id="note-' + note.id + '" class="notes">' +
+        '<div class="notes-header">' +
+          '<div class="notes-sender">' +
+            '<div class="sender-avatar">' +
+              '<img src="images/main/person1.png" alt="">' +
+            "</div>" +
+            '<div class="sender-name">' +
+              "<h5>An Nguyen</h5>" +
+              "<span>" + note.noteDate + "</span>" +
+            "</div>" +
+          "</div>" +
+          '<div class="note-manager-buttons">' +
+            '<button id="note-edit">Edit</button>' +
+            '<button id="note-delete">Delete</button>' +
+          "</div>" +
+        "</div>" + 
+        '<div class="notes-content">' +
+          "<h1>"+ note.title + "</h1>" +
+          "<p>" + note.contents + "</p>" +
       // +		'<img src="'+ note.imgUrl + '" alt="">'
-      "<p>" +
-      note.imgUrl +
-      "</p>" +
-      '<div class="notes-footer">' +
-      "Add more receivers:" +
-      '<input type="text" name="employeeIds" id="add-employee-ids">' +
-      "</div>" +
-      "</div>" +
+          "<p>" + note.imgUrl + "</p>" +
+        "</div>" +
+        '<div class="notes-footer">' +
+          "Add more receivers:" +
+          '<input type="text" name="employeeIds" id="add-employee-ids">' +
+        "</div>" +
       "</div>";
   }
   document.querySelector("#notes-container").innerHTML = htmlString;

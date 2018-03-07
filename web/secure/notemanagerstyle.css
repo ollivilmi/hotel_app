@@ -1,10 +1,10 @@
 * {
     margin: 0;
-	padding: 0;
+    padding: 0;
     border: 0;
     box-sizing: border-box;
-	font-size: 14px;
-	font: inherit;
+    font-size: 14px;
+    font: inherit;
     vertical-align: baseline;
     font-family: Poppins-Regular, sans-serif;
     color: #666;
@@ -50,8 +50,20 @@ html, body {
     margin: auto 0;
 }
 
+.nav-menu-items-style {
+    text-decoration: none;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: inset 0 -3px 0 #B19B74;
+    border-radius: 5px;
+}
+
+
 .nav-menu-items a {
     text-decoration: none;
+
 }
 
 #logo:hover {
@@ -59,7 +71,7 @@ html, body {
 }
 
 #logo-img {
-    height: 70px;
+    height: 68px;
     margin: 5px 10px;
 }
 
@@ -70,8 +82,12 @@ html, body {
     padding: 0 5px;
 }
 
-#profile:hover {
-    background-color: #ebeeef;
+/*#profile:hover {
+    box-shadow: inset 0 -50px 0  #B19B74;
+}
+*/
+.nav-menu-items-style:hover {
+    box-shadow: inset 0 -50px 0  #B19B74;
 }
 
 #profile-img {
@@ -268,6 +284,7 @@ input[type="file"] {
 .notes-content {
     padding: 10px;
     border-bottom: 1px solid #999999;
+    text-align: center;
 }
 
 .notes-content img {
