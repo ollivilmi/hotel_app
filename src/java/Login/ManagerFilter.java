@@ -1,7 +1,9 @@
 package Login;
 
+import Beans.UserBean;
 import Models.Users;
 import java.io.IOException;
+import javax.ejb.EJB;
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -10,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,19 +30,29 @@ public class ManagerFilter implements Filter {
     public ManagerFilter() {
     }    
     
+    @EJB
+    private UserBean bean;
+    
     public void doFilter(ServletRequest request, ServletResponse response,
         FilterChain chain)
         throws IOException, ServletException {
-            HttpSession session = ((HttpServletRequest) request).getSession();
+            //HttpSession session = ((HttpServletRequest) request).getSession();
+            Cookie user;
             try {
-                Users u = (Users) session.getAttribute("user");
-                if (u.getPermissionsId() != 1 && u.getPermissionsId() != null)
-                    chain.doFilter(request, response);
-                else
-                {
-                    request.setAttribute("message", "Insufficient permissions");
-                    request.getRequestDispatcher("/error").forward(request, response);
-                }
+                for (Cookie cookie : ((HttpServletRequest) request).getCookies())
+                    if (cookie.getName().equals("user"))
+                    {
+                        user = cookie;
+                        Users u = bean.getByUsername(user.getValue());
+                        
+                        if (u.getPermissionsId() != 1 && u.getPermissionsId() != null)
+                            chain.doFilter(request, response);
+                        else
+                        {
+                            request.setAttribute("message", "Insufficient permissions");
+                            request.getRequestDispatcher("/error").forward(request, response);
+                        }
+                    }
             }
             catch (Exception e)
             {
