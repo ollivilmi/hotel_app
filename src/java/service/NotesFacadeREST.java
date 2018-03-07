@@ -50,13 +50,6 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
         super(Notes.class);
     }
 
-    @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void edit(@PathParam("id") Integer id, Notes entity) {
-        super.edit(entity);
-    }
-
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
