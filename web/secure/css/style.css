@@ -300,6 +300,8 @@ input[type="file"] {
 }
 
 .notes-footer {
+    display: flex;
+    flex-direction: row-reverse;
     height: 35px;
     font-size: 12px;
     padding: 9px;
@@ -322,5 +324,8 @@ input[type="file"] {
 h1 {
     font-size: 1.2em;
     text-transform: uppercase;
+    font-weight:bold;
     text-align: center;
+    line-height: 50px;
+    vertical-align: middle;
 }
