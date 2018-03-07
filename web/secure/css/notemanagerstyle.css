@@ -411,3 +411,9 @@ input[type="file"] {
     height: 3em;
     padding:2px;
 }
+
+h1 {
+    font-size: 1.2em;
+    text-transform: uppercase;
+    text-align: center;
+}
