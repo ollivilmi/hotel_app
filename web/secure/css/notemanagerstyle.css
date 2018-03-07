@@ -13,7 +13,7 @@
 html, body {
     height: 100%;
     min-width: 700px;
-}
+} 
 
 .container {
     height: auto;
@@ -163,7 +163,7 @@ html, body {
 }
 
 .add-buttons-container {
-    padding-top: 10px;
+    padding-top: 5px;
     border-radius: 0 0 10px 10px;
     display: flex;
     justify-content: space-between;
@@ -293,9 +293,13 @@ input[type="file"] {
 }
 
 .notes-footer {
-    height: 35px;
+    height: 70px;
     font-size: 12px;
     padding: 9px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 
@@ -382,4 +386,28 @@ input[type="file"] {
 #add-employee-ids {
     border: 2px solid #eaeaea;
     border-radius: 5px;
+}
+
+
+.dropdown-menu {
+    padding: 5px;
+    background: #e5e5e5;
+} 
+/* Notes-footer */
+
+.sidemargins {
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+}
+
+.search-btn, .add-note-btn {
+    color: white;
+    display: block;
+    width: 60px;
+    box-sizing: border-box;
+    border: 2px solid #eaeaea;
+    border-radius: 5px;
+    background: #808080;
+    height: 3em;
+    padding:2px;
 }
