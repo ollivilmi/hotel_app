@@ -287,4 +287,6 @@ const sendNote = (id) => {
   fetch(apiUrl + '/newReceiver?noteId='+ id + '&username=' + receiverUsername, {
     method: 'POST'
   })
+  .catch(error => console.log(error))
+  console.log("note sent")
 } 
