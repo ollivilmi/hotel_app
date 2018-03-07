@@ -41,21 +41,15 @@ const notesFetch = notes => {
     htmlString +=
       '<div id="note-' + note.id + '" class="notes">' +
         '<div class="notes-header">' +
-          '<div class="notes-sender">' +
-            '<div class="sender-avatar">' +
-              '<img src="images/main/person1.png" alt="">' +
-            "</div>" +
-            '<div class="sender-name">' +
-              "<h5>An Nguyen</h5>" +
-              "<span>" + note.noteDate + "</span>" +
-            "</div>" +
-          "</div>" +
+          "<h1>"+ note.title + "</h1>" +
         "</div>" +
         '<div class="notes-content">' +
-          "<h1>"+ note.title + "</h1>" +
           "<p>" + note.contents + "</p>" +
       // +		'<img src="'+ note.imgUrl + '" alt="">'
           "<p>" + note.imgUrl + "</p>" +
+        "</div>" +
+        '<div class="notes-footer">' +
+            "<span>" + note.noteDate + "</span>" +
         "</div>" +
       "</div>";
   }
