@@ -466,7 +466,8 @@ h1 {
     height: 30px;
 }
 
-#user-search-container-m {
+#user-search-container-0 {
+    max-width: 120px;
     min-width: 80px;
     background: #e5e5e5;
     height: 30px;
@@ -477,6 +478,7 @@ h1 {
     background: #f1f1f1;
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 10px;
+    padding: 5px;
+    width: 125px;
 }
 

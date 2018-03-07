@@ -212,6 +212,7 @@ const changeOptions = (searchType, id) => {
 let jobs = []
 
 const getOptions = (searchType, id) => {
+  console.log(id)
   switch (searchType)
   {
       case "department":
