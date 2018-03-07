@@ -44,7 +44,7 @@ public class EmployeeFilter implements Filter {
             Users u = (Users) session.getAttribute("user");
                 if (u.getPermissionsId() == null)
                 {
-                    request.setAttribute("message", "Insufficient permissions");
+                    request.setAttribute("message", "No permission to log in. Contact manager to approve user.");
                     request.getRequestDispatcher("/error").forward(request, response);
                 }
                 else
@@ -52,7 +52,7 @@ public class EmployeeFilter implements Filter {
                 }
             catch (Exception e)
             {
-                request.setAttribute("message", "Insufficient permissions");
+                request.setAttribute("message", "No user session found.");
                 request.getRequestDispatcher("/error").forward(request, response);
             }
 

@@ -10,9 +10,9 @@ var green = '#4CAF50';
 var red = '#f44336';
 var blue = '#008CBA';
 //variables for modal container
-var modal;
 var registerContainer;
 var closeButton;
+var jobs = [];
 
 window.onload = function () {
     //Get elements for modal container
@@ -23,6 +23,11 @@ window.onload = function () {
     saveButton = document.getElementById('save-btn');
 
     formInputFields = document.getElementsByClassName('profile-input');
+    
+    for(let i = 1; i<5; i++)
+        getJobOptions(i).then(function(result) {
+           jobs[i] = result;
+        });
     
     //Current session cookie to identify we are logged in for resources
     user = getCookie("user");
@@ -72,23 +77,6 @@ const buildManagementWindow = () =>
                 newUsers(json);
     })
             .catch(error => console.log(error));
-    /*
-    requestPicture = document.getElementById('request-profile-picture');
-
-    requestPicture.onmouseover = function () {
-        console.log('mouse enter called');
-        ShowInfoCard();
-    };
-    
-    requestPicture.onclick = function () {
-        if (profilePopup.style.display === "none") {
-            profilePopup.style.display = "block";
-        } else {
-            profilePopup.style.display = "none";
-        }
-    }; */
-    
-    // Search users to edit
     
     let searchType = document.querySelector("#searchtype");
     let searchButton = document.querySelector("#search-btn");
@@ -140,36 +128,6 @@ const buildManagementWindow = () =>
     changeOptions("unassigned");
 };
 
-// Edit user information
-EditInfo = function () {
-    console.log('edit called');
-    //enableButtons();
-    //enableInputs();
-};
-
-//Enable button
-
-EnableButtons = function () {
-    saveButton.disabled = false;
-    saveButton.style.backgroundColor = green;
-    cancelButton.disabled = false;
-    cancelButton.style.backgroundColor = red;
-};
-
-EnableInputs = function () {
-    for (var i = 0; i < formInputFields.length; i++) {
-        formInputFields[i].disabled = false;
-    }
-};
-
-//show info card on hover
-
-ShowInfoCard = function () {
-    console.log('show infocard called');
-    profilePopup = document.getElementById("info-card-popup");
-    profilePopup.classList.toggle('show');
-};
-
 const getCookie = (cname) => {
     const name = cname + "=";
     const decodedCookie = decodeURIComponent(document.cookie);
@@ -208,12 +166,11 @@ const newUsers = (users) => {
         +'<input type="hidden" name="username" value="'+user.username+'"/>'
         +"<div class='request-person'>"
         +"<div class='request-person-static'>"
-        +"<p class='request-container-element' id='request-name'>" + user.firstName + " " + user.lastName + "</p>"
-        +"<img class='request-profile-picture' id='request-profile-picture' src='images/person-icon.png'>"
-        +"<button type='submit' class='request-container-element request-button' name='accept' value='accept'>Accept</button>"
-        +'<button type="submit" class="request-container-element request-button">Decline</button>'
+        +"<p class='request-container-element'>" + user.firstName + " " + user.lastName + "</p>"
+        +"<img class='request-profile-picture' src='images/person-icon.png'>"
+        +"<button type='submit' class='request-container-element request-button accept-request-btn' name='accept' value='accept'>Accept</button>"
+        +'<button type="submit" class="request-container-element request-button decline-request-btn">Decline</button>'
         +"</div>"
-        +'<span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>'
         +"</div>"
         +"</form>";
     }
@@ -224,86 +181,101 @@ const searchResults = (users) => {
     let resultString = "";
     for (let user of users)
     {
-        resultString += '<div class="search-person">'
-        + '<div class="search-person-static">'
-        + '<p class="search-container-element" id="search-name">'+user.firstName + " " + user.lastName + '</p>'      
-        + '<img class="search-profile-picture" id="search-profile-picture" src="images/person-icon.png">'
-        + '<button type="submit" id="edit-user-btn" class="search-container-element" name="request-accept" onclick="openModal()>Edit</button>'
+        resultString += "<form action='/management/r/users/manager/setUserJob' method='POST'>"
+        + '<input type="hidden" name="username" value="'+user.username+'"/>'
+        + "<div class='request-person'>"
+        + "<div class='request-person-static'>"
+        + '<p class="w20">'+user.firstName + " " + user.lastName + '</p>'      
+        + '<img class="request-profile-picture" src="images/person-icon.png"/>'
+        + '<div class="select-wrapper sidemargins">'
+        + '<select class="dropdown-menu sidemargins" onchange="jobOptions(this.parentNode.lastChild, this.value)">'
+        + getManagementOptions()
+        + '</select>'
+        + '<select name="job" class="dropdown-menu sidemargins">'
+        + jobs[1]
+        + '</select>'
+        + '<button type="submit" class="request-container-element request-button edit-user-btn">Change job</button>'
         + '</div>'
-        + '<span class="popup-text" id="info-card-popup">This will be a popup for more info on the user</span>'
-        + '</div>';
+        + '</form>'
+        + '<form class="sidemargins" action="/management/r/users/manager/setUserPermissions" method="POST">'
+        + '<select name="perm" class="dropdown-menu sidemargins">'
+        + '<option value="1">Employee</option>'
+        + '<option value="2">Manager</option>'
+        + '</select>'
+        + '<button type="submit" class="request-container-element request-button edit-user-btn">Change permissions</button>'
+        + '</div>'
+        + '</div>'
+        + '</form>';
     }
-    document.querySelector(".search-result-container").innerHTML = resultString;
+    document.querySelector("#user-search-container").innerHTML = resultString;
 };
 
 const changeOptions = (searchType) => {
     let search = document.querySelector("#search-option");
+    search.innerHTML = getOptions(searchType);
     document.querySelector("#user-search-container").innerHTML = "";
+};
+    
+const getOptions = (searchType) => {
     switch (searchType)
     {
         case "department":
-            search.innerHTML =  'Choose department '
-                                +'<select id="search-user" class="search-department-dropdown">'
-                                + '<option value="1">Restaurant</option>'
-                                + '<option value="2">Management</option>'
-                                + '<option value="3">Reception</option>'
-                                + '<option value="4">Maintenance</option>'
-                                + '</select>';
+            return 'Choose department '
+                    +'<select id="search-user" class="dropdown-menu">'
+                    + getManagementOptions()
+                    + '</select>';
             break;
         case "job":
-        search.innerHTML =  'Choose department '
-                            +'<select id="search-user" class="search-department-dropdown" onchange="jobOptions(this.value)">'
-                            + '<option value="1">Restaurant</option>'
-                            + '<option value="2">Management</option>'
-                            + '<option value="3">Reception</option>'
-                            + '<option value="4">Maintenance</option>'
-                            + '</select>';
+            return  'Choose department '
+                    +'<select class="dropdown-menu sidemargins" onchange="changeJobOptions(this.value)">'
+                    + getManagementOptions()
+                    + '</select>'
+                    + '<br>'
+                    + 'Choose job '
+                    + '<select id="search-user" class="dropdown-menu sidemargins">'
+                    + jobs[1]
+                    + '</select>';
             break;
         case "unassigned":
-            search.innerHTML = '<input type="hidden" id="search-user"/>';
+            return '<input type="hidden" id="search-user"/>';
             break;
         default:
-            search.innerHTML = '<input class="search-name-element" type="text" placeholder="Enter name" id="search-user">';
+            return '<input class="profile-input name-search" type="text" placeholder="Enter name" id="search-user">';
             break;
     }
 };
 
-const jobOptions = (department) => {
-    let search = document.querySelector("#search-option");
-    fetch("/management/r/jobs/byDepartment?dptId="+department)
+const getManagementOptions = () => {
+    return  '<option value="1">Restaurant</option>'
+            + '<option value="2">Management</option>'
+            + '<option value="3">Reception</option>'
+            + '<option value="4">Maintenance</option>';
+};
+
+const changeJobOptions = (department) => {
+    let search = document.querySelector("#search-user");
+    getJobOptions(department).then(function(result) {
+       search.innerHTML = result; 
+    });
+};
+
+const getJobOptions = (department) => {
+    
+    return fetch("/management/r/jobs/byDepartment?dptId="+department)
           .then(response => response.json())
           .then(function(json) 
     {
-        let jobSelect = 'Choose job <select id="search-user" class="search-department-dropdown">';
+        let jobSelect = "";
+        
         for(let job of json)
-        {
             jobSelect += '<option value="' + job.id + '">' + job.title + '</option>';
-        }
-        jobSelect += '</select>';
-        search.innerHTML = jobSelect;
+        
+        return jobSelect;
     })
             .catch(error => console.log(error));  
 };
 
-
-// method for openin edit modal for admin
-
-openModal = function() {
-    modal.style.display = 'flex';
-    registerContainer.style.display = 'none';
-};
-
-//methdod for closing the modal if user clicks anywhere else or the cross
-
-closeModal = function() {
-    modal.style.display = 'none';
-    registerContainer.style.display = 'flex';
-};
-
-
-window.onclick = function(event) {
-    if(event.target === modal) {
-        modal.style.display = 'none';
-        registerContainer.style.display = 'flex';
-    }
+const jobOptions = (element, value) =>
+{
+  element.innerHTML = jobs[value];  
 };

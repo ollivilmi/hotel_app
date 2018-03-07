@@ -46,7 +46,7 @@ public class Login extends HttpServlet {
         if (Password.check(pass, u.getPwHash()))
             {
                 // Create a new session for the user
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(true);
 
                 // Save user object into user attribute in the session
                 // Lasts 30 minutes

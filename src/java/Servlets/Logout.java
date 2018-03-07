@@ -21,12 +21,13 @@ public class Logout extends HttpServlet {
             throws ServletException, IOException {
         
             // Get session variable where we have stored our current user
-            HttpSession session = request.getSession();
+            HttpSession session = request.getSession(false);
             
             // Remove the user attribute
             if (session != null)
             {
                 session.removeAttribute("user");
+                session.invalidate();
             }
             // Remove the user cookie which is used for JavaScript
             for (Cookie cookie : request.getCookies())

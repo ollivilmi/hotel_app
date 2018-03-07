@@ -291,7 +291,7 @@ body {
     background: #4CAF50;
 }
 
-#edit-btn {
+.edit-btn {
     background-color: #008CBA;;
 }
 
@@ -308,6 +308,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     padding: 5px;
+    width: 45em;
 }
 
 .divider-horizontal {
@@ -393,8 +394,11 @@ body {
 
 .request-container-element {
     width: 80%;
-    height: 80%;
     padding: 5px;
+}
+
+select {
+    margin: 0.3em;
 }
 
 .management-new-requests {
@@ -416,12 +420,26 @@ body {
     font-size: 12px; 
 }
 
-#accept-request-btn {
+.accept-request-btn {
     background: #4CAF50;
+    margin: 0.5em;
 }
 
-#decline-request-btn {
-    background: #f44336
+.accept-request-btn:hover {
+    background: rgba(76, 175, 79, 0.705);
+}
+
+.decline-request-btn {
+    background: #f44336;
+    margin: 0.5em;
+}
+
+.decline-request-btn:hover {
+    background: #f44336d3
+}
+
+.w20 {
+    width: 20%;
 }
 
 /* EDIT PARTION STYLES */
@@ -453,6 +471,17 @@ body {
     padding: 5px;
 }
 
+.name-search {
+    margin-top: 23px;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.sidemargins {
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+}
+
 .search-name-input-container {
     display: flex;
     flex-direction: row;
@@ -468,8 +497,10 @@ body {
     box-sizing: border-box;
     border: 2px solid #eaeaea;
     border-radius: 5px;
-    background: #4CAF50;
+    background: #808080;
     padding:2px;
+    height: 3em;
+    margin-top: auto;
 }
 
 /* styles for search result container */
@@ -517,7 +548,7 @@ body {
     height: 80px;
 }
 
-#edit-user-btn {
+.edit-user-btn {
     background: #008CBA;
     width: 100px;
     border-radius: 4px;
@@ -530,11 +561,8 @@ body {
 /* MODAL POPUP STYLES*/
 
 .dropdown-menu {
-    display: flex;
-    align-content: center;
     width: 100%;
     padding: 10px;
-    margin: 5px 0 5px 0;
     background: #e5e5e5;
   }
   

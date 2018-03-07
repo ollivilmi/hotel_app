@@ -42,7 +42,7 @@ public class JobResources extends AbstractFacade<Jobs> {
     public List<Jobs> findJobsByDepartmentId(@QueryParam("dptId") int dptId) {
         return (List<Jobs>) em.createNamedQuery("Jobs.findByDepartmentId").setParameter("departmentId", dptId).getResultList();
     }
-
+    
     @GET
     @Path("get/all")
     @Override
