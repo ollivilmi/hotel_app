@@ -188,7 +188,7 @@ const searchResults = (users) => {
         + '<p class="w20">'+user.firstName + " " + user.lastName + '</p>'      
         + '<img class="request-profile-picture" src="images/person-icon.png"/>'
         + '<div class="select-wrapper sidemargins">'
-        + '<select class="dropdown-menu sidemargins" onchange="jobOptions(this.parentNode.lastChild, this.value)">'
+        + '<select class="dropdown-menu sidemargins" onchange="jobOptions(this.nextSibling, this.value)">'
         + getManagementOptions()
         + '</select>'
         + '<select name="job" class="dropdown-menu sidemargins">'
