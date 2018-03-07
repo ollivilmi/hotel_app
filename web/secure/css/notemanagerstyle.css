@@ -254,6 +254,7 @@ input[type="file"] {
     border-radius: 10px 10px 0 0;
     align-items: center;
     border-bottom: 1px solid #999999;
+    text-align: center;
 }
 
 .notes-sender {
@@ -308,6 +309,16 @@ input[type="file"] {
     justify-content: space-between;
     align-items: center;
 }
+
+.notes-date {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 35px;
+    font-size: 12px;
+    padding: 9px;
+    border-bottom: 1px solid black;
+}
+
 
 
 
@@ -423,7 +434,12 @@ input[type="file"] {
 h1 {
     font-size: 1.2em;
     text-transform: uppercase;
+    font-weight: bold;
     text-align: center;
+    line-height: 50px;
+    vertical-align: middle;
+    display: inline-block; 
+    margin-left: 120px;
 }
 
 .post-button {
