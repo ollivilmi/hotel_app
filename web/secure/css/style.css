@@ -65,6 +65,10 @@ html, body {
     */
 }
 
+#logo {
+    height: 80px;
+}
+
 #logo:hover {
     background-color: #666;
 }
