@@ -5,11 +5,13 @@
  */
 package Login;
 
+import Beans.UserBean;
 import Models.Users;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import javax.ejb.EJB;
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -18,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,20 +39,30 @@ public class EmployeeFilter implements Filter {
     public EmployeeFilter() {
     }    
     
+    @EJB
+    private UserBean bean;
+    
     public void doFilter(ServletRequest request, ServletResponse response,
         FilterChain chain)
         throws IOException, ServletException {
-            HttpSession session = ((HttpServletRequest) request).getSession();
+            //HttpSession session = ((HttpServletRequest) request).getSession();
+            Cookie user;
             try {
-            Users u = (Users) session.getAttribute("user");
-                if (u.getPermissionsId() == null)
+            for (Cookie cookie : ((HttpServletRequest) request).getCookies())
+                if (cookie.getName().equals("user"))
                 {
-                    request.setAttribute("message", "No permission to log in. Contact manager to approve user.");
-                    request.getRequestDispatcher("/error").forward(request, response);
+                    user = cookie;
+            
+                    Users u = bean.getByUsername(user.getValue());
+                    if (u.getPermissionsId() == null)
+                    {
+                        request.setAttribute("message", "No permission to log in. Contact manager to approve user.");
+                        request.getRequestDispatcher("/error").forward(request, response);
+                    }
+                    else
+                        chain.doFilter(request, response);
                 }
-                else
-                    chain.doFilter(request, response);
-                }
+            }
             catch (Exception e)
             {
                 request.setAttribute("message", "No user session found.");

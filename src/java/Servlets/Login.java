@@ -46,17 +46,17 @@ public class Login extends HttpServlet {
         if (Password.check(pass, u.getPwHash()))
             {
                 // Create a new session for the user
-                HttpSession session = request.getSession(true);
+                //HttpSession session = request.getSession(true);
 
                 // Save user object into user attribute in the session
                 // Lasts 30 minutes
-                session.setAttribute("user", u);
-                session.setMaxInactiveInterval(30*60);
+                //session.setAttribute("user", u);
+                //session.setMaxInactiveInterval(60*60);
                 
                 // Create user cookie for JavaScript fetch to work
-                // Lasts 30 minutes
+                // Lasts 60 minutes
                 Cookie cookie = new Cookie("user", uname);
-                cookie.setMaxAge(30*60);
+                cookie.setMaxAge(60*60);
                 response.addCookie(cookie);
 
                 // Send user to the main page
