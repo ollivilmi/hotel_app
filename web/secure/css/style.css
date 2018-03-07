@@ -67,12 +67,13 @@ html, body {
 
 #logo {
     height: 80px;
-}
-
-#logo:hover {
     background-color: #666;
 }
 
+/*#logo:hover {
+    background-color: #666;
+}
+*/
 #logo-img {
     height: 68px;
     margin: 5px 10px;
