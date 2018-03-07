@@ -353,6 +353,7 @@ input[type="file"] {
 #filter-value, .filter-input select {
     border: 2px solid #eaeaea;
     border-radius: 5px;
+    margin: 5px;
 }
 
 #filter-apply-button {
@@ -406,15 +407,16 @@ input[type="file"] {
     margin-left: 5px;
 }
 
-#search-btn {
+.search-btn, .add-note-btn {
+    color: white;
     display: block;
     width: 60px;
     box-sizing: border-box;
     border: 2px solid #eaeaea;
-    height: 30px;
     border-radius: 5px;
-    background: #e5e5e5;
-    margin-right: 5px; 
+    background: #808080;
+    height: 3em;
+    padding:2px;
 }
 
 h1 {
@@ -454,3 +456,10 @@ h1 {
     border: 2px solid #eaeaea;
     border-radius: 5px;
 }
+.profile-input {
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+

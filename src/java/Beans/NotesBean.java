@@ -40,10 +40,10 @@ public class NotesBean {
         return n; 
    }
     
-    public void addReceiver(Notes note, int receiver)
+    public void addReceiver(int noteId, int receiver)
     {
         refreshEM();
-        NoteReceiversPK pk = new NoteReceiversPK(note.getId(), receiver);
+        NoteReceiversPK pk = new NoteReceiversPK(noteId, receiver);
         NoteReceivers rec = new NoteReceivers(pk);
         em.persist(rec);
     }
