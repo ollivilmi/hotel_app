@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Note Manager</title>
-    <link rel="stylesheet" href="css/notemanagerstyle.css">
+    <link rel="stylesheet" href="../css/notemanagerstyle.css">
 
     <body>
         <div class="container">
             <div class="nav-menu">
                 <div class="container-nav-menu center-div">
                     <div id="logo" class="nav-menu-items">
-                        <a href='main.html'>
-                            <img id="logo-img" src="images/Hotel-Logo.svg" alt="">
+                        <a href='../main.html'>
+                            <img id="logo-img" src="../images/Hotel-Logo.svg" alt="">
                         </a>
                     </div>
 
                     <div id="profile" class="nav-menu-items nav-menu-items-style">
-                        <a href="profilepage.html" id="profile-name">Profile</a>
+                        <a href="../profilepage.html" id="profile-name">Profile</a>
                     </div>
 
                     <div class="nav-menu-items nav-menu-items-style">
@@ -29,9 +29,9 @@
             </div>
             <div class="main-view center-div">
                 <div class="add-notes-tasks">
-                    <form action="r/notes/new" enctype="multipart/form-data" method="POST" id='notes-form'>
+                    <form action="/management/secure/r/notes/manager/new" enctype="multipart/form-data" method="POST" id='notes-form'>
                         <div class="add-title">
-                            <img id="add-icon" src="images/main/pen-icon.svg" alt="">
+                            <img id="add-icon" src="../images/main/pen-icon.svg" alt="">
                             <p>Add Notes or Tasks. Title:</p>
                             <input type="text" name="title" id="note-title">
                         </div>
@@ -44,10 +44,10 @@
                             <div class="add-button-option">
                                 <div class="option-1">
                                     <label for="file-add" id="add-photo-button">
-                                        <img id="photo-icon" src="images/main/photo-icon.png" alt="">
+                                        <img id="photo-icon" src="../images/main/photo-icon.png" alt="">
                                         <p id='file-selected'>Add photo</p>
                                     </label>
-                                    <input type="file" name="file" id="file-add" required>
+                                    <input type="file" name="file" id="file-add">
 
                                     <label class="features">
                                         <select name="departmentId" class="dropdown-menu" required>
@@ -105,53 +105,12 @@
                     </div>
 
                     <div id="notes-container">
-                        <!-- <div id="note-1" class="notes">
-                            <div class="notes-header">
-                                <div class="notes-sender">
-                                    <div class="sender-avatar">
-                                        <img src="images/main/person1.png" alt="">
-                                    </div>
-                                    <div class="sender-name">
-                                        <h5>An Nguyen</h5>
-                                        <span>3 hours ago</span>
-                                    </div>
-                                </div>
-
-                                <div class="note-manager-buttons">
-                                    <button id="note-edit">Edit</button>
-                                    <button id="note-delete">Delete</button>
-                                </div>
-                            </div>
-                            <div class="notes-content">
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat deserunt officia ut enim
-                                    voluptatum! Autem, beatae voluptatibus quo, adipisci dolor porro aspernatur a maxime
-                                    cum, fuga numquam dolore repellat ad.</p>
-                                <img src="images/main/notes-example-1.jpg" alt="">
-                            </div>
-
-                            <div class="notes-footer">
-                                <p>Find employees to add note:</p>
-                                <select id="search-type" class="dropdown-menu" onchange="changeOptions(this.value)">
-                                    <option value="firstname">First name</option>
-                                    <option value="lastname">Last name</option>
-                                    <option value="username">Username</option>
-                                    <option value="job">Job</option>
-                                    <option value="department">Department</option>
-                                </select>
-                                <div id="search-option" class="sidemargins">
-                                </div>
-                                <button id="search-btn" class="sidemargins">Search</button>
-                                <select id="user-search-container">
-                                </select>
-                                <button id="add-note-btn" class="sidemargins">Add note</button>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
 
-        <script src='../secure/scripts/notes.js'> </script>
+        <script src='../scripts/notes.js'> </script>
     </body>
 
 </html>

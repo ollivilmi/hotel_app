@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Hillo
  */
-@WebFilter(filterName = "ManagerFilter", urlPatterns = {"/r/users/manager/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
+@WebFilter(filterName = "ManagerFilter", urlPatterns = {"/r/users/manager/*", "/secure/manager/*", "/r/notes/manager/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
 public class ManagerFilter implements Filter {
     
     private static final boolean debug = true;

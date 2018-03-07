@@ -97,7 +97,8 @@ const notesFetch = notes => {
         '<div class="notes-content">' +
           "<p>" + note.contents + "</p>" +
       // +		'<img src="'+ note.imgUrl + '" alt="">'
-          "<p>" + note.imgUrl + "</p>" +
+          //"<p>" + note.imgUrl + "</p>" +
+          // Add if condition for img url - if note.imgUrl is not null then add it.
         "</div>" +
         '<div class="notes-date">' +
             "<span>" + note.noteDate + "</span>" +

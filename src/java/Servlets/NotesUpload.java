@@ -31,7 +31,7 @@ import javax.servlet.http.Part;
  *
  * @author rangigo
  */
-@WebServlet(urlPatterns = "/secure/r/notes/new")
+@WebServlet(urlPatterns = "/secure/r/notes/manager/new")
 @MultipartConfig
 public class NotesUpload extends HttpServlet {
 
@@ -55,7 +55,7 @@ public class NotesUpload extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
 
-        File uploads = new File("E:\\Study\\hotel_app\\Pictures"); //define storage location
+        //File uploads = new File("E:\\Study\\hotel_app\\Pictures"); //define storage location
         try (PrintWriter out = response.getWriter()) {
             String content = request.getParameter("content");
             String title = request.getParameter("title");
@@ -70,12 +70,12 @@ public class NotesUpload extends HttpServlet {
             Part filePart = request.getPart("file");
             String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
             //create the file in the storage location
-            File file = new File(uploads, fileName);
+            /*File file = new File(uploads, fileName);
             try (InputStream input = filePart.getInputStream()) {
                 Files.copy(input, file.toPath());
             } catch (Exception ex) {
                 out.print(ex);
-            }
+            }*/
             //Using bean to create Notes from the POST request parameters
             Models.Notes notes = nb.createNote(content, fileName, departmentId, title);
             
