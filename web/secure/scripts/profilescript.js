@@ -119,8 +119,8 @@ const buildManagementWindow = () =>
         }
     })
             .then(response => response.json())
-            .then(function(json) {
-                searchResults(json);
+            .then(function(users) {
+                searchResults(users);
             })
             .catch(error => console.log(error)); 
     });

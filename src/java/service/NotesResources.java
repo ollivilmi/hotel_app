@@ -8,6 +8,7 @@ package service;
 import Beans.NotesBean;
 import Beans.UserBean;
 import Models.Notes;
+import Models.Users;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -36,7 +37,7 @@ import org.jboss.logging.Logger;
  */
 @Stateless
 @Path("notes")
-public class NotesFacadeREST extends AbstractFacade<Notes> {
+public class NotesResources extends AbstractFacade<Notes> {
 
     @EJB
     NotesBean nb;
@@ -47,7 +48,7 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
 
-    public NotesFacadeREST() {
+    public NotesResources() {
         super(Notes.class);
     }
     
@@ -55,12 +56,6 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     @Path("newReceiver")
     public void addReceiver(@QueryParam("noteId")int noteId, @QueryParam("username")String username) {
         nb.addReceiver(noteId, ub.getByUsername(username).getId());
-    }
-    
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
     }
     
     @GET
@@ -103,7 +98,7 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Notes> find(@HeaderParam("user") String username) {
         if (check(username)) {
-            Models.Users user = ub.getByUsername(username);
+            Users user = ub.getByUsername(username);
             if (user.getPermissionsId() == 1 && user.getJobId() != null) {
                 return nb.notesData(user.getId(), ub.getDepartmentIdByJobId(user.getJobId()));
             }
@@ -112,27 +107,6 @@ public class NotesFacadeREST extends AbstractFacade<Notes> {
             }
         }
         return null;
-    }
-    
-    @GET 
-    @Override
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Notes> findAll() {
-        return super.findAll();
-    }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Notes> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
     }
 
     @Override

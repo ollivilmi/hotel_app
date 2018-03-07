@@ -2,6 +2,7 @@ package service;
 
 import Beans.UserBean;
 import Models.Users;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

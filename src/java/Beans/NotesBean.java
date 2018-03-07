@@ -118,7 +118,7 @@ public class NotesBean {
     
     public List<Notes> notesData(int userId, int departmentId) {
         refreshEM();
-        return em.createNamedQuery("notes.forUser").setParameter("userid", userId).setParameter("departmentid", departmentId).getResultList();
+        return em.createNamedQuery("Notes.forUser").setParameter("userid", userId).setParameter("departmentid", departmentId).getResultList();
     }
     
     public List<Notes> newestNotes() {
