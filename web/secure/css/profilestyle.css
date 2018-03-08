@@ -283,6 +283,10 @@ body {
     background-color: grey;
 }
 
+#save-btn:hover {
+    background-color: rgb(139, 139, 139);
+}
+
 .save-enabled {
     background: #4CAF50;
 }
