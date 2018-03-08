@@ -191,6 +191,10 @@ body {
     padding: 10px;
 }
 
+.profile-input:hover {
+    background: #f8f8f8;
+}
+
 /*Styles for buttons*/
 
 .clearfix {
@@ -499,6 +503,10 @@ select {
     margin-top: auto;
 }
 
+#search-btn:hover {
+    background: #949494;
+}
+
 /* styles for search result container */
 
 .search-result-container {
@@ -545,7 +553,7 @@ select {
 }
 
 .edit-user-btn {
-    background: #008CBA;
+    background: grey;
     width: 80%;
     border-radius: 4px;
     color: white;
@@ -555,6 +563,10 @@ select {
     margin: 0 2em;
 }
 
+.edit-user-btn:hover {
+    background: rgb(155, 154, 154);
+}
+
 /* MODAL POPUP STYLES*/
 
 .dropdown-menu {
@@ -562,6 +574,10 @@ select {
     padding: 10px;
     background: #e5e5e5;
   }
+
+.dropdown-menu:hover {
+    background: #d3d2d2;
+}
 
   /* Background for the modal */
   .modal-edit {
