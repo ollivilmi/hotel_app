@@ -185,7 +185,7 @@ const searchResults = (users) => {
         + '<input type="hidden" name="username" value="'+user.username+'"/>'
         + "<div class='request-person'>"
         + "<div class='request-person-static'>"
-        + '<p class="w20">'+user.firstName + " " + user.lastName + '</p>'      
+        + '<p class="w20">'+user.firstName + " " + user.lastName + " (" + user.username + ")" + '</p>'      
         + '<img class="request-profile-picture" src="images/person-icon.png"/>'
         + '<div class="select-wrapper sidemargins">'
         + '<select class="dropdown-menu sidemargins" onchange="jobOptions(this.nextSibling, this.value)">'

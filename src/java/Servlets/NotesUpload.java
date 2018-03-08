@@ -80,11 +80,16 @@ public class NotesUpload extends HttpServlet {
             Models.Notes notes = nb.createNote(content, fileName, departmentId, title);
             
             //Add receiver
+            try {
             String username = request.getParameter("username");
             nb.addReceiver(notes.getId(), ub.getByUsername(username).getId());
             //                out.print(notes);
-            out.print("Notes sent succesfully!");
             response.sendRedirect("/management/secure/main.html");
+            }
+            catch (Exception e)
+            {
+            response.sendRedirect("/management/secure/main.html");
+            }
         }
     }
 
