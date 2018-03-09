@@ -395,3 +395,7 @@ input.input {
 .modal-container {
     padding: 25px;
 }
+
+#register-alert {
+    margin-bottom: 1em;
+}

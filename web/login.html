@@ -33,8 +33,9 @@
                         <input class="modal-input" type="text" placeholder="Enter Email" name="email" required>
 
                         <label for="username"><b>User name</b></label>
-                        <input class="modal-input" type="text" placeholder="Enter User Name" name="username" required>
-
+                        <input class="modal-input" id="register-username" type="text" placeholder="Enter User Name" name="username" required>
+                        <p class="input" id="register-alert"></p>
+                        
                         <label for="password"><b>Password</b></label>
                         <input class="modal-input" type="password" placeholder="Enter Password" name="password" required>
 
@@ -57,9 +58,10 @@
 				</div>
 
 				<form class="login-form validate-form" action="login" method="POST">
+                                        <p class="input" id="login-alert"></p>
 					<div class="wrap-input" data-validate="Username is required">
 						<span class="label-input"><i class="fas fa-id-card fa-2x"></i></span> 
-						<input class="input" type="text" name="username" placeholder="Enter username" required>
+						<input class="input" id="login-username" type="text" name="username" placeholder="Enter username" required>
 						<span class="focus-input"></span>
 					</div>
 

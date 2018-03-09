@@ -38,10 +38,9 @@ public class UserResources extends AbstractFacade<Users> {
     
     //----------------------------IMPORTANT--------------------------------
     //
-    // Resources behind /manager/ are secured with Manager filter, and
-    // use the current session to check that the user has permissions
-    // to use them. They don't return any JSON, and are used mainly with
-    // forms.
+    // Resources behind /manager/ are secured with Manager filter, to check 
+    // that the user has permissions to use them. They don't return any JSON, 
+    // and are used mainly with forms.
     //
     // The resources that return JSON use @HeaderParam("user") cookie which
     // contains the username of the current user that has been logged in.
@@ -200,6 +199,18 @@ public class UserResources extends AbstractFacade<Users> {
         if (checkManager(user))
             return em.createNamedQuery("Users.unassigned").getResultList();
         return null;
+    }
+    
+    // For login, check if username exists. This is freely accessible without
+    // logging in.
+    @GET
+    @Path("/userExists")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String checkUserExists(@QueryParam("user") String user)
+    {
+        if (check(user))
+            return "[{\"status\": \"true\"}]";
+        return "[{\"status\": \"false\"}]";
     }
 
     @Override
