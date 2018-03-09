@@ -60,21 +60,24 @@ const notesFetch = notes => {
     }
     else
     {
-        for (let note of notes) {
-          htmlString += '<div id="note-' + note.id + '" class="notes">' +
-              '<div class="notes-header">' +
-                "<h1>"+ note.title + "</h1>" +
-              "</div>" +
-              '<div class="notes-content">' +
-                "<p>" + note.contents + "</p>" +
-            // +		'<img src="'+ note.imgUrl + '" alt="">'
-                //"<p>" + note.imgUrl + "</p>" +
-                // Add if condition here - if note.imUrl is not null then add it.
-              "</div>" +
-              '<div class="notes-footer">' +
-                  "<span>" + note.noteDate + "</span>" +
-              "</div>" +
-            "</div>";
+        for (let note of notes) 
+        {
+            htmlString += '<div id="note-' + note.id + '" class="notes">' +
+                          '<div class="notes-header">' +
+                          "<h1>"+ note.title + "</h1>" +
+                          "</div>" +
+                          '<div class="notes-content">' +
+                          "<p>" + note.contents + "</p>";
+            if (note.imgUrl !== null)
+            {
+                let url = '/management/images/'+ note.imgUrl + '';
+                htmlString += '<a class="noteImgLink" href="'+ url +'"><img src="'+ url +'" alt="" style="max-height:5em; width:auto;"/></a>';
+            }
+            htmlString += "</div>" +
+                          '<div class="notes-footer">' +
+                          "<span>" + note.noteDate + "</span>" +
+                          "</div>" +
+                          "</div>";
         }
         document.querySelector(".main-board").innerHTML += htmlString;
     }

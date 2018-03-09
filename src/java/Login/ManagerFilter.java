@@ -36,7 +36,6 @@ public class ManagerFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
         FilterChain chain)
         throws IOException, ServletException {
-            //HttpSession session = ((HttpServletRequest) request).getSession();
             Cookie user;
             try {
                 for (Cookie cookie : ((HttpServletRequest) request).getCookies())

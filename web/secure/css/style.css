@@ -330,3 +330,8 @@ h1 {
     line-height: 50px;
     vertical-align: middle;
 }
+
+.noteImgLink:hover {
+    box-shadow: none;
+}
+

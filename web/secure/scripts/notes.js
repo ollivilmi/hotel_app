@@ -84,43 +84,46 @@ const notesFetch = notes => {
   console.log(notes)
   let htmlString = "";
   for (let note of notes) {
-    htmlString +=
-      '<div id="note-' + note.id + '" class="notes">' +
-        '<input type="hidden" name="noteId" value="'+note.id+'"/>'+
+        htmlString +=
+        '<div id="note-' + note.id + '" class="notes">' +
+            '<input type="hidden" name="noteId" value="'+note.id+'"/>'+
         '<div class="notes-header">' +
-          '<h1>' + note.title + '</h1>' +
-          '<div class="note-manager-buttons">' +
+            '<h1>' + note.title + '</h1>' +
+        '<div class="note-manager-buttons">' +
             '<button id="note-edit">Edit</button>' +
             '<button id="note-delete">Delete</button>' +
-          "</div>" +
+        "</div>" +
         "</div>" + 
         '<div class="notes-content">' +
-          "<p>" + note.contents + "</p>" +
-      // +		'<img src="'+ note.imgUrl + '" alt="">'
-          //"<p>" + note.imgUrl + "</p>" +
-          // Add if condition for img url - if note.imgUrl is not null then add it.
+            "<p>" + note.contents + "</p>";
+        if (note.imgUrl !== null)
+        {
+            let url = '/management/images/'+ note.imgUrl + '';
+            htmlString += '<a class="noteImgLink" href="'+ url +'"><img src="'+ url +'" alt="" style="max-height:5em; width:auto;"/></a>';
+        }
+        htmlString +=
         "</div>" +
         '<div class="notes-date">' +
             "<span>" + note.noteDate + "</span>" +
         "</div>" +
         '<div class="notes-footer">' +
-          '<p>Find employees to send note:</p>'+
-          '<select id="search-type-' + note.id + '" class="dropdown-menu" onchange="changeOptions(this.value, ' + note.id + ')">'+
-              '<option value="firstname">First name</option>'+
-              '<option value="lastname">Last name</option>'+
-              '<option value="username">Username</option>'+
-              '<option value="job">Job</option>'+
-              '<option value="department">Department</option>'+
-          '</select>'+
-          '<div id="search-option-' + note.id + '" class="sidemargins">'+
-          '<input class="profile-input name-search" type="text" placeholder="Enter name" id="search-user-' + note.id + '">'+
-          '</div>'+
-          '<button id="search-btn-' + note.id + '" class="sidemargins search-btn" onclick="searchButton('+ note.id + ')">Search</button>'+
-          '<select id="user-search-container-' + note.id + '" class="dropdown-menu">'+
-          '</select>'+
-          '<button id="add-note-btn-' + note.id + '" class="sidemargins add-note-btn" onclick="sendNote('+ note.id + ')">Send note</button>'+
+            '<p>Find employees to send note:</p>'+
+        '<select id="search-type-' + note.id + '" class="dropdown-menu" onchange="changeOptions(this.value, ' + note.id + ')">'+
+            '<option value="firstname">First name</option>'+
+            '<option value="lastname">Last name</option>'+
+            '<option value="username">Username</option>'+
+            '<option value="job">Job</option>'+
+            '<option value="department">Department</option>'+
+        '</select>'+
+        '<div id="search-option-' + note.id + '" class="sidemargins">'+
+            '<input class="profile-input name-search" type="text" placeholder="Enter name" id="search-user-' + note.id + '">'+
+        '</div>'+
+            '<button id="search-btn-' + note.id + '" class="sidemargins search-btn" onclick="searchButton('+ note.id + ')">Search</button>'+
+            '<select id="user-search-container-' + note.id + '" class="dropdown-menu">'+
+            '</select>'+
+            '<button id="add-note-btn-' + note.id + '" class="sidemargins add-note-btn" onclick="sendNote('+ note.id + ')">Send note</button>'+
         "</div>" +
-      "</div>";
+        "</div>";
   }
   document.querySelector("#notes-container").innerHTML = htmlString;
 };

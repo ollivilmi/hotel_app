@@ -40,6 +40,18 @@ public class NotesBean {
         return n; 
    }
     
+    public Notes createNote(String text, int departmentId, String title)
+    {
+        refreshEM();
+        Notes n = new Notes();
+        n.setContents(text);
+        n.setTitle(title);
+        n.setImgUrl(null);
+        if (departmentId != 0) n.setDepartmentId(departmentId);  
+        em.persist(n);
+        return n; 
+   }
+    
     public void addReceiver(int noteId, int receiver)
     {
         refreshEM();
@@ -125,16 +137,5 @@ public class NotesBean {
         refreshEM();
         return (List<Notes>) em.createNamedQuery("Notes.orderByDate").getResultList();
     }
-    
-    
-//    public List<Notes> assignedNotesData() {
-//        Query q = em.createNativeQuery("SELECT n.id AS id, n.contents AS contents, n.note_date AS note_date,"
-//                + " n.department_id AS department_id, n.img_url AS img_url, nr.user_id AS user_id "
-//                + "FROM Notes n, Note_Receivers nr "
-//                + "WHERE n.id = nr.note_id "
-//                + "ORDER BY note_date;", "NotesDataResult");
-//        
-//        return (List<Notes>) q.getResultList();
-//    }
     
 }   
