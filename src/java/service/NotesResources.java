@@ -20,6 +20,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
@@ -63,6 +64,14 @@ public class NotesResources extends AbstractFacade<Notes> {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Notes> getByUserId(@QueryParam("id") Integer id) {
         return nb.getNotesByUserId(id);
+    }
+    
+    @POST
+    @Path("/manager/updateNoteStatus")
+    public void updateNoteStatus(@FormParam("status") int status, @FormParam("id") int id) {
+        Notes n = nb.findById(id);
+        n.setStatus(status);
+        em.persist(n);
     }
     
     @GET

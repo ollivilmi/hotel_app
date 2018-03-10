@@ -71,6 +71,8 @@ public class Notes implements Serializable {
     private String imgUrl;
     @Column(name = "title")
     private String title;
+    @Column(name = "status")
+    private Integer status;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -166,4 +168,11 @@ public class Notes implements Serializable {
         this.departmentId = departmentId;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }

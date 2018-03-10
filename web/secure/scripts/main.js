@@ -75,6 +75,7 @@ const notesFetch = notes => {
             }
             htmlString += "</div>" +
                           '<div class="notes-footer">' +
+                          noteStatus(note.status, note.id) +
                           "<span>" + note.noteDate + "</span>" +
                           "</div>" +
                           "</div>";
@@ -84,3 +85,25 @@ const notesFetch = notes => {
 
 };
 
+const noteStatus = (status, id) => {
+    let returnForm = '<form onsubmit="setTimeout(function(){window.location.reload();},10)" action="/management/r/notes/manager/updateNoteStatus" method="POST">' +
+                     '<input type="hidden" name="id" value=' + id + ' />';
+  switch (status)
+  {
+    case 0:
+        returnForm += '<input type="hidden" name="status" value=1 />' +
+                      '<label>New task!</label>' +
+                      '<input class="accept-task" type="submit" value="Accept task">';
+        break;
+    case 1:
+        returnForm += '<input type="hidden" name="status" value=2 />' +
+                      '<label>Task in progress</label>' +
+                      '<input class="progress-task" type="submit" value="Complete task">';
+        break;
+    case 2:
+        returnForm += '<input class="complete-task" type="submit" name="status" value="Done" disabled>';
+        break;
+  }
+  returnForm += '</form>';
+  return returnForm;
+};

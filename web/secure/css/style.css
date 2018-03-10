@@ -335,3 +335,42 @@ h1 {
     box-shadow: none;
 }
 
+input {
+    height: 2em;
+    width: 8em;
+    padding: 0.4em;
+    margin: 0 0.5em;
+    border-radius: 25px;
+}
+
+.accept-task {
+    background: #66b559;
+    color: white;
+}
+
+.accept-task:hover {
+    background: #66b559c9;
+    color: white;
+}
+
+.progress-task {
+    background: #d6d600;
+    color: white;
+}
+
+.progress-task:hover {
+    background: #e2e21e;
+}
+
+.complete-task {
+    background: #880202;
+    color: white;
+}
+
+span {
+    margin: 0.5em;
+}
+
+label {
+    font-weight: bold;
+}

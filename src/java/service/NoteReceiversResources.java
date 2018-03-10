@@ -28,7 +28,7 @@ import javax.ws.rs.core.PathSegment;
  */
 @Stateless
 @Path("models.notereceivers")
-public class NoteReceiversFacadeREST extends AbstractFacade<NoteReceivers> {
+public class NoteReceiversResources extends AbstractFacade<NoteReceivers> {
 
     @PersistenceContext(unitName = "ManagementPU")
     private EntityManager em;
@@ -54,7 +54,7 @@ public class NoteReceiversFacadeREST extends AbstractFacade<NoteReceivers> {
         return key;
     }
 
-    public NoteReceiversFacadeREST() {
+    public NoteReceiversResources() {
         super(NoteReceivers.class);
     }
 

@@ -30,7 +30,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(service.JobResources.class);
-        resources.add(service.NoteReceiversFacadeREST.class);
+        resources.add(service.NoteReceiversResources.class);
         resources.add(service.NotesResources.class);
         resources.add(service.UserResources.class);
     }

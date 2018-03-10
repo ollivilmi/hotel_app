@@ -8,6 +8,7 @@ CREATE TABLE Notes (
     contents TEXT,
     note_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     department_id INT REFERENCES Departments(id),
+    status INT DEFAULT 0,
     title TEXT,
     img_url TEXT
 );

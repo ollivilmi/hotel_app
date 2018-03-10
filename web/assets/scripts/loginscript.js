@@ -50,7 +50,6 @@ const checkUsernameRegister = (username, alert) => {
 };
 
 const clearAlert = (username, alert) => {
-    console.log("clear");
     alert.innerHTML = "";
     username.style.border = "none";
 };

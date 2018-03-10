@@ -133,6 +133,11 @@ public class NotesBean {
         return em.createNamedQuery("Notes.forUser").setParameter("userid", userId).setParameter("departmentid", departmentId).getResultList();
     }
     
+    public Notes findById(int noteId) {
+        refreshEM();
+        return (Notes) em.createNamedQuery("Notes.findById").setParameter("id", noteId).getResultList().get(0);
+    }
+    
     public List<Notes> newestNotes() {
         refreshEM();
         return (List<Notes>) em.createNamedQuery("Notes.orderByDate").getResultList();
