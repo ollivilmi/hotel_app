@@ -53,15 +53,15 @@ fetch("/management/r/users/byUsername?username="+username, {
 
 //Modify DOM element based on fetch notes
 const notesFetch = notes => {
+    let mainBoard = document.querySelector(".main-board");
     let htmlString = "";
-    if (notes.length === 0)
+    let count = 0;
+    
+    for (let note of notes) 
     {
-        document.querySelector(".main-board").innerHTML += '<h1>No notes found</h1>';
-    }
-    else
-    {
-        for (let note of notes) 
+        if (note.status !== 2)
         {
+            count += 1;
             htmlString += '<div id="note-' + note.id + '" class="notes">' +
                           '<div class="notes-header">' +
                           "<h1>"+ note.title + "</h1>" +
@@ -80,9 +80,9 @@ const notesFetch = notes => {
                           "</div>" +
                           "</div>";
         }
-        document.querySelector(".main-board").innerHTML += htmlString;
     }
-
+    mainBoard.innerHTML += htmlString;
+    document.querySelector("#note-count").innerHTML = "You have " + count + " tasks";
 };
 
 const noteStatus = (status, id) => {

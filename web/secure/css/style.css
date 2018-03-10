@@ -331,6 +331,12 @@ h1 {
     vertical-align: middle;
 }
 
+.mainHeader {
+    background: white;
+    border: darkgrey;
+    border-radius: 25px;
+}
+
 .noteImgLink:hover {
     box-shadow: none;
 }
@@ -374,3 +380,4 @@ span {
 label {
     font-weight: bold;
 }
+
