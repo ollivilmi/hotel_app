@@ -67,7 +67,7 @@ public class NotesResources extends AbstractFacade<Notes> {
     }
     
     @POST
-    @Path("/manager/updateNoteStatus")
+    @Path("/updateNoteStatus")
     public void updateNoteStatus(@FormParam("status") int status, @FormParam("id") int id) {
         Notes n = nb.findById(id);
         n.setStatus(status);

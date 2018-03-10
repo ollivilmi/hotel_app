@@ -86,7 +86,7 @@ const notesFetch = notes => {
 };
 
 const noteStatus = (status, id) => {
-    let returnForm = '<form onsubmit="setTimeout(function(){window.location.reload();},10)" action="/management/r/notes/manager/updateNoteStatus" method="POST">' +
+    let returnForm = '<form onsubmit="setTimeout(function(){window.location.reload();},10)" action="/management/r/notes/updateNoteStatus" method="POST">' +
                      '<input type="hidden" name="id" value=' + id + ' />';
   switch (status)
   {

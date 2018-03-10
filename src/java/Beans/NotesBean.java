@@ -35,6 +35,7 @@ public class NotesBean {
         n.setContents(text);
         n.setImgUrl(imgUrl);
         n.setTitle(title);
+        n.setStatus(0);
         if (departmentId != 0) n.setDepartmentId(departmentId);  
         em.persist(n);
         return n; 
@@ -47,6 +48,7 @@ public class NotesBean {
         n.setContents(text);
         n.setTitle(title);
         n.setImgUrl(null);
+        n.setStatus(0);
         if (departmentId != 0) n.setDepartmentId(departmentId);  
         em.persist(n);
         return n; 
