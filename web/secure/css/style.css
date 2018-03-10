@@ -346,12 +346,12 @@ h1 {
     font-weight:bold;
     width: auto;
     height: auto;
-    background: #8080802b;
+    background: #80808012;
     color: #00000091;
 }
 
 .note-title:hover {
-    background: #80808088;
+    background: #8080801c;
 }
 
 .mainHeader {
