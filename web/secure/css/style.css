@@ -251,9 +251,9 @@ input[type="file"] {
 }
 
 .notes-header {
-    height: 50px;
     border-radius: 10px 10px 0 0;
-    align-items: center;
+    display: flex;
+    justify-content: center;
     border-bottom: 1px solid #999999;
 }
 
@@ -291,8 +291,7 @@ input[type="file"] {
 
 .notes-content {
     padding: 10px;
-    border-bottom: 1px solid #999999;
-    text-align: center;
+    display: flex;
 }
 
 .notes-content img {
@@ -300,9 +299,16 @@ input[type="file"] {
     width: 100%;
 }
 
+.note-text {
+    width: 90%;
+    margin: 0.5em;
+    margin-left: 2em;
+}
+
 .notes-footer {
     display: flex;
     flex-direction: row-reverse;
+    border-top: 1px solid #999999;
     justify-content: space-between;
     height: 35px;
     font-size: 12px;
@@ -330,6 +336,22 @@ h1 {
     text-align: center;
     line-height: 50px;
     vertical-align: middle;
+}
+
+.note-title {
+    font-size: 1.5em;
+    min-width: 10em;
+    padding: 0 0.5em;
+    text-transform: uppercase;
+    font-weight:bold;
+    width: auto;
+    height: auto;
+    background: #8080802b;
+    color: #00000091;
+}
+
+.note-title:hover {
+    background: #80808088;
 }
 
 .mainHeader {
@@ -382,3 +404,15 @@ label {
     font-weight: bold;
 }
 
+button {
+    margin: 0.5em;
+    border-radius: 12px;
+    width: 4em;
+    background: #9E9E9E;
+    color: white;
+    height: 1.5em;
+}
+
+button:focus {
+    outline: 0
+}

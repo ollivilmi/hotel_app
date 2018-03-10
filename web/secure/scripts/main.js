@@ -59,16 +59,15 @@ const notesFetch = notes => {
     
     for (let note of notes) 
     {
-        console.log(note.departmentId);
         if (note.status !== 2)
         {
             count += 1;
             htmlString += '<div id="note-' + note.id + '" class="notes">' +
                           '<div class="notes-header">' +
-                          "<h1>"+ note.title + "</h1>" +
+                          '<button class="note-title" onclick="showContent(this.parentNode.nextSibling)">'+ note.title +'</button>' +
                           '</div>' +
                           '<div class="notes-content">' +
-                          "<p>" + note.contents + "</p>" +
+                          "<p class='note-text'>" + note.contents + "</p>" +
                           noteImage(note.imgUrl) +
                           "</div>" +
                           '<div class="notes-footer">' +
@@ -81,6 +80,12 @@ const notesFetch = notes => {
     }
     mainBoard.innerHTML += htmlString;
     document.querySelector("#note-count").innerHTML = "You have " + count + " tasks";
+};
+
+const showContent = content => {
+    if (content.style.display === "none")
+        content.style.display = "flex";
+    else content.style.display = "none";
 };
 
 const noteImage = imgUrl => {
