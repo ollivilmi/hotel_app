@@ -303,6 +303,7 @@ input[type="file"] {
 .notes-footer {
     display: flex;
     flex-direction: row-reverse;
+    justify-content: space-between;
     height: 35px;
     font-size: 12px;
     padding: 9px;

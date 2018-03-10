@@ -59,30 +59,43 @@ const notesFetch = notes => {
     
     for (let note of notes) 
     {
+        console.log(note.departmentId);
         if (note.status !== 2)
         {
             count += 1;
             htmlString += '<div id="note-' + note.id + '" class="notes">' +
                           '<div class="notes-header">' +
                           "<h1>"+ note.title + "</h1>" +
-                          "</div>" +
+                          '</div>' +
                           '<div class="notes-content">' +
-                          "<p>" + note.contents + "</p>";
-            if (note.imgUrl !== null)
-            {
-                let url = '/management/images/'+ note.imgUrl + '';
-                htmlString += '<a class="noteImgLink" href="'+ url +'"><img src="'+ url +'" alt="" style="max-height:5em; width:auto;"/></a>';
-            }
-            htmlString += "</div>" +
+                          "<p>" + note.contents + "</p>" +
+                          noteImage(note.imgUrl) +
+                          "</div>" +
                           '<div class="notes-footer">' +
                           noteStatus(note.status, note.id) +
                           "<span>" + note.noteDate + "</span>" +
+                          noteType(note.departmentId) +
                           "</div>" +
                           "</div>";
         }
     }
     mainBoard.innerHTML += htmlString;
     document.querySelector("#note-count").innerHTML = "You have " + count + " tasks";
+};
+
+const noteImage = imgUrl => {
+    if (imgUrl !== null)
+    {
+      let url = '/management/images/'+ imgUrl + '';
+      return '<a class="noteImgLink" href="'+ url +'"><img src="'+ url +'" alt="" style="max-height:5em; width:auto;"/></a>';
+    }
+    return "";
+};
+
+const noteType = departmentId => {
+    if (departmentId == null)
+        return '<span>Personal task</span>';      
+    else return '<span>Task for your department</span>';  
 };
 
 const noteStatus = (status, id) => {
