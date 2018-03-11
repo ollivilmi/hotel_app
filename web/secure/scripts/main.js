@@ -20,6 +20,7 @@ const getCookie = cname => {
 
 let apiUrl = "/management/r/notes";
 let username = getCookie("user");
+let noteId;
 
 let headers = {
   user: username
@@ -33,6 +34,20 @@ fetch(apiUrl + '/getNotes', {
     notesFetch(json)
   })
   .catch(error => console.log)
+  
+// Polling server to every minute to check for new notes
+// and to refresh page if there are
+setInterval(function()
+{
+    fetch(apiUrl + '/getNotes', {
+    headers: headers
+    })
+    .then(res => res.json())
+    .then(function(json) {
+        if (json[0].id > noteId)
+            location.reload();
+    });
+}, 60*1000);
   
 fetch("/management/r/users/byUsername?username="+username, {
       headers: {
@@ -56,6 +71,7 @@ const notesFetch = notes => {
     let mainBoard = document.querySelector(".main-board");
     let htmlString = "";
     let count = 0;
+    noteId = notes[0].id;
     
     for (let note of notes) 
     {

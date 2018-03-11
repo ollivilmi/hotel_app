@@ -724,3 +724,36 @@ select {
     height: auto;
     min-height: 100%;
 }
+
+#add-photo-button {
+    float: left;
+    height: 30px;
+    margin: 5px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #FFF;
+    padding: 0 10px;
+    outline: none;
+}
+
+#add-photo-button:hover {
+    background-color: rgba(255, 255, 255, 0.63);
+}
+
+#photo-icon {
+    height: 15px;
+    margin-right: 10px;
+    opacity: 0.6;
+}
+
+input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}

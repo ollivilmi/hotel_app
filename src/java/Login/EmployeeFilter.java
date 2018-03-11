@@ -45,7 +45,7 @@ public class EmployeeFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
         FilterChain chain)
         throws IOException, ServletException {
-            Cookie user;
+            Cookie user = null;
             try {
             for (Cookie cookie : ((HttpServletRequest) request).getCookies())
                 if (cookie.getName().equals("user"))
@@ -64,13 +64,13 @@ public class EmployeeFilter implements Filter {
                         chain.doFilter(request, response);
                     }
                 }
+            if (user == null) throw new NullPointerException();
             }
             catch (Exception e)
             {
                 request.setAttribute("message", "No user session found.");
                 request.getRequestDispatcher("/error").forward(request, response);
             }
-
     }
 
         
