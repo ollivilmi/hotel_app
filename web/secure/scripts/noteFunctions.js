@@ -15,7 +15,7 @@ const notesFetch = notes => {
                           '<button class="note-title" onclick="showContent(this.parentNode.nextSibling)">'+ note.title +'</button>' +
                           '</div>' +
                           '<div class="notes-content">' +
-                          "<p class='note-text'>" + note.contents.replace("\n", "<br>") + "</p>" +
+                          "<p class='note-text'>" + note.contents + "</p>" +
                           noteImage(note.imgUrl) +
                           "</div>" +
                           '<div class="notes-footer">' +
