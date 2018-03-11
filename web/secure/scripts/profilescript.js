@@ -64,8 +64,12 @@ window.onload = function () {
     
 const buildManagementWindow = () => 
 {
+    // Make manager options visible
     document.querySelector("#management-info").style.visibility = "visible";
-        
+    document.querySelector("#note-button-container")
+                .innerHTML = '<a href="/management/secure/manager/notemanager.html" id="note-button">Manager</a>';
+    document.querySelector("#note-button-container").classList.add("nav-menu-items-style");
+    
     //Fetch users without permissions to log in for managers to accept
     fetch("/management/r/users/getNewUsers", {
         headers: {

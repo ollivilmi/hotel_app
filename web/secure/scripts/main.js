@@ -59,7 +59,7 @@ fetch("/management/r/users/byUsername?username="+username, {
             if (json[0].permissionsId !== 1 && json[0].permissionsId !== null)
             {
                 document.querySelector("#note-button-container")
-                .innerHTML = '<a href="/management/secure/manager/notemanager.html" id="note-button">Note</a>';
+                .innerHTML = '<a href="/management/secure/manager/notemanager.html" id="note-button">Manager</a>';
             }
           })
           .catch(error => console.log(error));
@@ -95,7 +95,9 @@ const notesFetch = notes => {
         }
     }
     mainBoard.innerHTML += htmlString;
-    document.querySelector("#note-count").innerHTML = "" + count + " tasks";
+    if (count === 1)
+        document.querySelector("#note-count").innerHTML = "" + count + " task";
+    else document.querySelector("#note-count").innerHTML = "" + count + " tasks";
 };
 
 const showContent = content => {
