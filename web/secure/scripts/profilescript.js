@@ -145,18 +145,14 @@ const getCookie = (cname) => {
 };
 
 const fillProfile = (info) => {
-  let firstname = document.querySelector("#firstname");
-  let lastname = document.querySelector("#lastname");
-  let username = document.querySelector("#username");
-  let telnumber = document.querySelector("#telnumber");
-  let email = document.querySelector("#email");
-  
-  firstname.value = info[0].first_name;
-  lastname.value = info[0].last_name;
-  username.value = info[0].username;
-  telnumber.value = info[0].phone;
-  email.value = info[0].email;  
+  document.querySelector("#firstname").value = info[0].first_name;
+  document.querySelector("#lastname").value = info[0].last_name;
+  document.querySelector("#username").value = info[0].username;
+  document.querySelector("#telnumber").value = info[0].phone;
+  document.querySelector("#email").value = info[0].email;
+  document.querySelector("#profile-picture").src = info[0].picture;
 };
+
 
 const newUsers = (users) => {
     let requestString = "";
@@ -167,7 +163,7 @@ const newUsers = (users) => {
         +"<div class='request-person'>"
         +"<div class='request-person-static'>"
         +"<p class='request-container-element'>" + user.firstName + " " + user.lastName + "</p>"
-        +"<img class='request-profile-picture' src='images/person-icon.png'>"
+        +"<img class='request-profile-picture' src='"+ user.picture +"'>"
         +"<button type='submit' class='request-container-element request-button accept-request-btn' name='accept' value='accept'>Accept</button>"
         +'<button type="submit" class="request-container-element request-button decline-request-btn">Decline</button>'
         +"</div>"
@@ -186,7 +182,7 @@ const searchResults = (users) => {
         + "<div class='request-person'>"
         + "<div class='request-person-static'>"
         + '<p class="w20">'+user.firstName + " " + user.lastName + " (" + user.username + ")" + '</p>'      
-        + '<img class="request-profile-picture" src="images/person-icon.png"/>'
+        + '<img class="request-profile-picture" src="' + user.picture + '"/>'
         + '<div class="select-wrapper sidemargins">'
         + '<select class="dropdown-menu sidemargins" onchange="jobOptions(this.nextSibling, this.value)">'
         + getManagementOptions()

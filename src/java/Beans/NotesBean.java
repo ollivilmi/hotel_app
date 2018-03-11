@@ -33,7 +33,7 @@ public class NotesBean {
         refreshEM();
         Notes n = new Notes();
         n.setContents(text);
-        n.setImgUrl(imgUrl);
+        n.setImgUrl("/management/images/"+imgUrl);
         n.setTitle(title);
         n.setStatus(0);
         if (departmentId != 0) n.setDepartmentId(departmentId);  

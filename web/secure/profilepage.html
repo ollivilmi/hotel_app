@@ -94,13 +94,15 @@
                 <div class="info-container">
                     <div class="info-page" id="general-info">
 
-                        <form id="info-form" action="/management/updateUser" method="POST">
+                        <form id="info-form" action="/management/updateUser" enctype="multipart/form-data" method="POST">
                             <p class="info-header">General Information</p>
                             <!-- Change profile pic -->
                             <div class="add-img-container">
-                                <img class="add-img-container-element" id="profile-picture" src="images/person-icon.png" alt="" />
-                                <input type="file" name="file" id="add-img" class="add-file">
-                                <label class="add-img-container-element" for="file">Change</label>
+                                <img class="add-img-container-element" id="profile-picture" alt="" />
+                                <label for="file-add" id="add-photo-button">
+                                        <p id='file-selected'>Change picture</p>
+                                </label>
+                                <input type="file" name="file" id="file-add">
                             </div>
 
                             <div class="info-block">

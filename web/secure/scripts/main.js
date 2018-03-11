@@ -91,7 +91,7 @@ const showContent = content => {
 const noteImage = imgUrl => {
     if (imgUrl !== null)
     {
-      let url = '/management/images/'+ imgUrl + '';
+      let url = imgUrl;
       return '<a class="noteImgLink" href="'+ url +'"><img src="'+ url +'" alt="" style="max-height:5em; width:auto;"/></a>';
     }
     return "";

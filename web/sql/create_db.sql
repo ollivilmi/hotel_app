@@ -34,7 +34,7 @@ CREATE TABLE Users (
     phone_number VARCHAR(20),
     permissions_id INT REFERENCES Permissions(id),
     job_id INT REFERENCES Jobs(id),
-    img_url TEXT
+    picture TEXT
 );
 
 CREATE TABLE Note_Receivers (

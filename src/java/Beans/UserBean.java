@@ -53,6 +53,12 @@ public class UserBean {
         return true;
     }
     
+    public void updateUserPicture(Users user, String url)
+    {
+        user.setPicture("/management/images/"+url);
+        em.merge(user);
+    }
+    
     public String getJob(Users user)
     {
         return (String) em.createNativeQuery("SELECT job.title FROM Jobs JOIN Users "
@@ -74,7 +80,7 @@ public class UserBean {
     
     public String allUserData() {
         Query q = em.createNativeQuery("SELECT Users.id, Users.first_name, Users.last_name,"
-            + "Users.username, Users.email, Users.phone_number, Jobs.title, Departments.title "
+            + "Users.username, Users.email, Users.phone_number, Jobs.title, Departments.title, Users.picture "
             + "FROM Users "
             + "JOIN Jobs ON Users.job_id = Jobs.id "
             + "JOIN Departments ON Jobs.department_id = Departments.id");
@@ -83,7 +89,7 @@ public class UserBean {
     
     public String allUserDataById(int id) {
         Query q = em.createNativeQuery("SELECT Users.id, Users.first_name, Users.last_name,"
-            + "Users.username, Users.email, Users.phone_number, Jobs.title, Departments.title "
+            + "Users.username, Users.email, Users.phone_number, Jobs.title, Departments.title, Users.picture "
             + "FROM Users "
             + "JOIN Jobs ON Users.job_id = Jobs.id "
             + "JOIN Departments ON Jobs.department_id = Departments.id "
@@ -109,6 +115,7 @@ public class UserBean {
                     .add("phone", u[5].toString())
                     .add("job", u[6].toString())
                     .add("department", u[7].toString())
+                    .add("picture", u[8].toString())
                 );
         }
         

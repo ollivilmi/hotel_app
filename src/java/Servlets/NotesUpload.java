@@ -68,9 +68,9 @@ public class NotesUpload extends HttpServlet {
             String fileName = null;
             
             //Get the picture/file
-            if (request.getPart("file") != null)
+            Part filePart = request.getPart("file");
+            if (!filePart.getSubmittedFileName().isEmpty())
             {
-                Part filePart = request.getPart("file");
                 fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
                 //create the file in the storage location
                 File file = new File(uploads, fileName);
@@ -80,6 +80,7 @@ public class NotesUpload extends HttpServlet {
                     out.print(ex);
                 }
             }
+            
             //Using bean to create Notes from the POST request parameters
             Models.Notes notes;
             if (fileName == null)

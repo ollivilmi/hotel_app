@@ -40,7 +40,7 @@ public class Register extends HttpServlet {
         u.setEmail(request.getParameter("email"));
         u.setPhoneNumber(request.getParameter("telnumber"));
         u.setPwHash(Password.hash(request.getParameter("password")));
-
+        u.setPicture("/management/secure/images/person-icon.png");
         // Double check that the required fields are not empty
         for (String parameter : u.registrationForm())
         {
