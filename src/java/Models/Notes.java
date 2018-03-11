@@ -52,10 +52,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Notes.findById", query = "SELECT n FROM Notes n WHERE n.id = :id ORDER BY n.noteDate DESC")
     , @NamedQuery(name = "Notes.findByNoteDate", query = "SELECT n FROM Notes n WHERE n.noteDate = :noteDate ORDER BY n.noteDate DESC")
     , @NamedQuery(name = "Notes.findByImgUrl", query = "SELECT n FROM Notes n WHERE n.imgUrl = :imgUrl ORDER BY n.noteDate DESC")
-    , @NamedQuery(name = "Notes.findByDepartmentId", query = "SELECT n FROM Notes n WHERE n.departmentId = :departmentId ORDER BY n.noteDate DESC")
+    , @NamedQuery(name = "Notes.findByDepartmentId", query = "SELECT n FROM Notes n WHERE n.departmentId = :departmentId AND n.status = :status ORDER BY n.noteDate DESC")
     , @NamedQuery(name = "Notes.getDateByNoteId", query = "SELECT n.noteDate FROM Notes n WHERE n.id = :noteId ORDER BY n.noteDate DESC")
     , @NamedQuery(name = "Notes.orderByDate", query = "SELECT n FROM Notes n ORDER BY n.noteDate DESC")
     , @NamedQuery(name = "Notes.forUser", query = "SELECT n FROM Notes n LEFT JOIN NoteReceivers nr ON n.id = nr.noteReceiversPK.noteId WHERE nr.noteReceiversPK.userId = :userid OR n.departmentId = :departmentid ORDER BY n.noteDate DESC")
+    , @NamedQuery(name = "Notes.byTime", query = "SELECT n FROM Notes n WHERE n.noteDate > :date AND n.status = :status ORDER BY n.noteDate DESC")
 })
 public class Notes implements Serializable {
 

@@ -84,15 +84,16 @@ public class NotesResources extends AbstractFacade<Notes> {
     @GET
     @Path("byDepartment")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Notes> getByDepartmentId(@QueryParam("departmentId")int departmentId) {
-        return nb.getNotesByDepartmentId(departmentId);
+    public List<Notes> getByDepartmentId(@QueryParam("departmentId")int departmentId,
+            @QueryParam("status") int status) {
+        return nb.getNotesByDepartmentId(departmentId, status);
     }
     
     @GET
     @Path("byTime")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Notes> getByTime(@QueryParam("time")int time) {
-        return nb.getNotesByTime(time);
+    public List<Notes> getByTime(@QueryParam("time")int time, @QueryParam("status") int status) {
+        return nb.getNotesByTime(time, status);
     }
     
     @GET

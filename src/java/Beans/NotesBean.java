@@ -12,6 +12,7 @@ import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -87,9 +88,9 @@ public class NotesBean {
         return getNotesByUserId(id);
     }
     
-    public List<Notes> getNotesByDepartmentId(int id) {
+    public List<Notes> getNotesByDepartmentId(int id, int status) {
         refreshEM();
-        return (List<Notes>) em.createNamedQuery("Notes.findByDepartmentId").setParameter("departmentId", id).getResultList();
+        return (List<Notes>) em.createNamedQuery("Notes.findByDepartmentId").setParameter("departmentId", id).setParameter("status", status).getResultList();
     }
         
     public String getDateByNotesId(int id) {
@@ -97,28 +98,31 @@ public class NotesBean {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format((Date) em.createNamedQuery("Notes.getDateByNoteId").setParameter("noteId", id).getSingleResult());
     }
     
-    public List<Notes> getNotesByTime(int time) {
+    public List<Notes> getNotesByTime(int time, int status) {
         refreshEM();
-        Query q;
-        switch (time) {
-            case 7:
-                q = em.createNativeQuery("SELECT * FROM Notes "
-                        + "WHERE DATE_SUB(CURDATE(),INTERVAL 7 DAY) <= note_date "
-                        + "ORDER BY note_date DESC;", "NotesTimeResult");
-                return (List<Notes>)q.getResultList();
-            case 1:
-                q = em.createNativeQuery("SELECT * FROM Notes "
-                        + "WHERE DATE_SUB(CURDATE(),INTERVAL 30 DAY) <= note_date "
-                        + "ORDER BY note_date DESC;", "NotesTimeResult");
-                return (List<Notes>)q.getResultList();
-            case 0:
-                q = em.createNativeQuery("SELECT * FROM Notes "
-                        + "WHERE note_date = CURDATE()"
-                        + "ORDER BY note_date DESC;", "NotesTimeResult");
-                return (List<Notes>)q.getResultList();
+        Date date;
+        Calendar cal = Calendar.getInstance();
+        switch (time)
+        {
+            case 0: //All
+                date = new Date(0,0,0);
+                break;
+            case 1: //Today
+                cal.add(Calendar.DAY_OF_MONTH, -1);
+                date = cal.getTime();
+                break;
+            case 2: //This week
+                cal.add(Calendar.DAY_OF_MONTH, -7);
+                date = cal.getTime();
+                break;
+            case 3: //This month
+                cal.add(Calendar.DAY_OF_MONTH, -30);
+                date = cal.getTime();
+                break;
             default:
-                return newestNotes();
+                date = new Date(0,0,0);
         }
+        return (List<Notes>) em.createNamedQuery("Notes.byTime").setParameter("date", date).setParameter("status", status).getResultList();
     }
     
     /*

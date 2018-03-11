@@ -19,14 +19,15 @@ let filterButton = document.querySelector("#filter-apply-button");
 filterButton.addEventListener('click', function() {
   let filterType = document.querySelector("#filter-type").value;
   let filterValue = document.querySelector('#filter-value').value;
+  let statusValue = document.querySelector('#status-value').value;
 	let filterUrl = "";
 
   switch (filterType) {
     case 'department':
-      filterUrl = apiUrl + '/byDepartment?departmentId=' + filterValue;
+      filterUrl = apiUrl + '/byDepartment?departmentId=' + filterValue + '&status=' +statusValue;
       break
     case 'time':
-      filterUrl = apiUrl + '/byTime?time=' + filterValue;
+      filterUrl = apiUrl + '/byTime?time=' + filterValue + '&status=' +statusValue;;
       break
     case 'userId':
       filterUrl = apiUrl + '/byUserId?id=' + filterValue;
@@ -36,7 +37,6 @@ filterButton.addEventListener('click', function() {
       break
   }
 
-	console.log(filterUrl);
 	fetch(filterUrl, {
 		headers: headers
 	})
@@ -114,10 +114,10 @@ const changeFilters = (filterType) => {
       break
     case 'time':
       filter.innerHTML = '<select id="filter-value" class="dropdown-menu" >'
-      + '<option value="99">All</option>'
-      + '<option value="0">Today</option>'
-      + '<option value="7">This week</option>'
-      + '<option value="1">This month</option>'
+      + '<option value=0>All</option>'
+      + '<option value=1>Today</option>'
+      + '<option value=2>This week</option>'
+      + '<option value=3>This month</option>'
       + '</select>';
       break
     case 'userId': 
