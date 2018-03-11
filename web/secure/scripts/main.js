@@ -79,13 +79,13 @@ const notesFetch = notes => {
         }
     }
     mainBoard.innerHTML += htmlString;
-    document.querySelector("#note-count").innerHTML = "You have " + count + " tasks";
+    document.querySelector("#note-count").innerHTML = "" + count + " tasks";
 };
 
 const showContent = content => {
-    if (content.style.display === "none")
-        content.style.display = "flex";
-    else content.style.display = "none";
+    if (content.style.display === "flex")
+        content.style.display = "none";
+    else content.style.display = "flex";
 };
 
 const noteImage = imgUrl => {
@@ -100,28 +100,46 @@ const noteImage = imgUrl => {
 const noteType = departmentId => {
     if (departmentId == null)
         return '<span>Personal task</span>';      
-    else return '<span>Task for your department</span>';  
+    else switch(departmentId)
+    {
+        case 1:
+            return '<span>Task for Restaurant</span>'; 
+            break;
+        case 2:
+            return '<span>Task for Management</span>'; 
+            break;
+        case 3:
+            return '<span>Task for Reception</span>'; 
+            break;
+        case 4:
+            return '<span>Task for Maintenance</span>'; 
+            break;
+    }
 };
 
 const noteStatus = (status, id) => {
-    let returnForm = '<form onsubmit="setTimeout(function(){window.location.reload();},10)" action="/management/r/notes/updateNoteStatus" method="POST">' +
-                     '<input type="hidden" name="id" value=' + id + ' />';
-  switch (status)
+    return '<form action="/management/r/notes/updateNoteStatus" method="POST">' +
+           updateStatus(status, id) +
+           '</form>';
+};
+
+const updateStatus = (status, id) => {
+    switch (status)
   {
     case 0:
-        returnForm += '<input type="hidden" name="status" value=1 />' +
-                      '<label>New task!</label>' +
-                      '<input class="accept-task" type="submit" value="Accept task">';
+        return '<input type="hidden" name="status" value=1 />' +
+                '<label>New task!</label>' +
+                '<input onclick="setTimeout(function(){window.location.reload();},10)" class="accept-task" type="submit" value="Accept task">' +
+                '<input type="hidden" name="id" value=' + id + ' />';
         break;
     case 1:
-        returnForm += '<input type="hidden" name="status" value=2 />' +
-                      '<label>Task in progress</label>' +
-                      '<input class="progress-task" type="submit" value="Complete task">';
+        return '<input type="hidden" name="status" value=2 />' +
+                '<label>Task in progress</label>' +
+                '<input onclick="setTimeout(function(){window.location.reload();},10)" class="progress-task" type="submit" value="Complete task">' +
+                '<input type="hidden" name="id" value=' + id + ' />';
         break;
     case 2:
-        returnForm += '<input class="complete-task" type="submit" name="status" value="Done" disabled>';
+        return'<input class="complete-task" type="submit" name="status" value="Done" disabled>';
         break;
-  }
-  returnForm += '</form>';
-  return returnForm;
+  }  
 };

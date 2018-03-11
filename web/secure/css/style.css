@@ -291,7 +291,7 @@ input[type="file"] {
 
 .notes-content {
     padding: 10px;
-    display: flex;
+    display: none;
 }
 
 .notes-content img {
@@ -370,6 +370,10 @@ input {
     padding: 0.4em;
     margin: 0 0.5em;
     border-radius: 25px;
+}
+
+input:focus {
+    box-shadow: none;
 }
 
 .accept-task {
