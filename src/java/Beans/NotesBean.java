@@ -98,6 +98,13 @@ public class NotesBean {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format((Date) em.createNamedQuery("Notes.getDateByNoteId").setParameter("noteId", id).getSingleResult());
     }
     
+    public void removeNoteById(int id)
+    {
+        refreshEM();
+        Notes note = (Notes) em.createNamedQuery("Notes.findById").setParameter("id", id).getResultList().get(0);
+        em.remove(note);
+    }
+    
     public List<Notes> getNotesByTime(int time, int status) {
         refreshEM();
         Date date;

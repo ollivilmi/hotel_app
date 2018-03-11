@@ -36,7 +36,7 @@ public class ManagerFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
         FilterChain chain)
         throws IOException, ServletException {
-            Cookie user;
+            Cookie user = null;
             try {
                 for (Cookie cookie : ((HttpServletRequest) request).getCookies())
                     if (cookie.getName().equals("user"))
@@ -52,6 +52,7 @@ public class ManagerFilter implements Filter {
                             request.getRequestDispatcher("/error").forward(request, response);
                         }
                     }
+            if (user == null) throw new NullPointerException();
             }
             catch (Exception e)
             {

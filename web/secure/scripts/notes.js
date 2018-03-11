@@ -62,7 +62,10 @@ const notesFetch = notes => {
             '<h1>' + note.title + '</h1>' +
         '<div class="note-manager-buttons">' +
             '<button id="note-edit">Edit</button>' +
+            '<form action="/management/r/notes/manager/deleteNote" method="POST">' +
+            '<input type="hidden" name="noteId" value="'+ note.id +'">' +
             '<button id="note-delete">Delete</button>' +
+            '</form>' +
         "</div>" +
         "</div>" + 
         '<div class="notes-content">' +

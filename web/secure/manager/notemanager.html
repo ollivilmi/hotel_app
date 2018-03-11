@@ -93,7 +93,12 @@
                 <div class="main-board">
 
                     <div class="filter-bar">
-                        <p>Filter notes by:</p>
+                        <p>Filter tasks:</p>
+                        <select id="status-value" class="dropdown-menu" name="statusValue">
+                                <option value="0">New</option>
+                                <option value="1">In progress</option>
+                                <option value="2">Complete</option>
+                        </select>
                         <div class="filter-input">
                             <select id='filter-type' class="dropdown-menu" name="filterType" onchange="changeFilters(this.value)">
                                 <option selected disabled>Filter Option</option>
@@ -104,12 +109,6 @@
                             <div id="filter-option">
 
                             </div>
-                            
-                            <select id="status-value" class="dropdown-menu" name="statusValue">
-                                <option value="0">New</option>
-                                <option value="1">In progress</option>
-                                <option value="2">Complete</option>
-                            </select>
                         </div>
                         <input type="submit" id="filter-apply-button" value="Apply">
                     </div>

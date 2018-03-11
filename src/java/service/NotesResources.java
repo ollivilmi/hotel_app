@@ -59,6 +59,13 @@ public class NotesResources extends AbstractFacade<Notes> {
         nb.addReceiver(noteId, ub.getByUsername(username).getId());
     }
     
+    @POST
+    @Path("/manager/deleteNote")
+    public void deleteNote(@FormParam("noteId") int noteId)
+    {
+        nb.removeNoteById(noteId);
+    }
+    
     @GET
     @Path("byUserId")
     @Produces(MediaType.APPLICATION_JSON)
