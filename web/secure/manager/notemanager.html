@@ -23,6 +23,7 @@
                     </div>
                     
                     <div id="note-button-container" class="nav-menu-items nav-menu-items-style">
+                        <a href="/management/secure/manager/notemanager.html" id="note-button">Manager</a>
                     </div>
 
                     <div class="nav-menu-items nav-menu-items-style">
@@ -36,7 +37,7 @@
                         <div class="add-title">
                             <img id="add-icon" src="../images/main/pen-icon.svg" alt="">
                             <p>Add Notes or Tasks. Title:</p>
-                            <input type="text" name="title" id="note-title">
+                            <input type="text" name="title" maxlength="40" id="note-title">
                         </div>
 
                         <div class="add-content-container">
@@ -65,7 +66,7 @@
                                 </div>
 
                                 <div class="option-2">
-                                    <p>Find employees: </p>
+                                    <p>Add receiver: </p>
                                     <select id="search-type-0" class="dropdown-menu" onchange="changeOptions(this.value, 0)">
                                         <option value="firstname">First name</option>
                                         <option value="lastname">Last name</option>
@@ -113,6 +114,7 @@
             </div>
         </div>
 
+        <script src='../scripts/userFunctions.js'> </script>
         <script src='../scripts/notes.js'> </script>
     </body>
 

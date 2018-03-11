@@ -1,39 +1,3 @@
-/* FOR STYLING <input type="file"> */
-//modify <input> type file name when user chooses a file
-const fileAdd = document.getElementById("file-add");
-
-fileAdd.onchange = () => {
-  const fileSelected = document.getElementById("file-selected");
-  const splitString = fileAdd.value
-    .split(/(\\|\/)/g)
-    .pop()
-    .split(".");
-  console.log(splitString);
-  const name = splitString[0].substr(0, 8);
-  const ext = splitString[splitString.length - 1];
-  splitString[0].length <= 8
-    ? (fileSelected.innerHTML = name + "." + ext)
-    : (fileSelected.innerHTML = name + "...." + ext);
-  fileSelected.style.color = "black";
-};
-
-//Get username through cookie
-const getCookie = cname => {
-  const name = cname + "=";
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const ca = decodedCookie.split(";");
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == " ") {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-};
-
 /*---- FETCH NOTES ----*/
 
 let apiUrl = "/management/r/notes";
@@ -46,34 +10,34 @@ let headers = {
 //Filter notes
 let filterButton = document.querySelector("#filter-apply-button");
 filterButton.addEventListener('click', function() {
-  let filterType = document.querySelector("#filter-type").value
-  let filterValue = document.querySelector('#filter-value').value
-	let filterUrl = ""
+  let filterType = document.querySelector("#filter-type").value;
+  let filterValue = document.querySelector('#filter-value').value;
+	let filterUrl = "";
 
   switch (filterType) {
     case 'department':
-      filterUrl = apiUrl + '/byDepartment?departmentId=' + filterValue
+      filterUrl = apiUrl + '/byDepartment?departmentId=' + filterValue;
       break
     case 'time':
-      filterUrl = apiUrl + '/byTime?time=' + filterValue
+      filterUrl = apiUrl + '/byTime?time=' + filterValue;
       break
     case 'userId':
-      filterUrl = apiUrl + '/byUserId?id=' + filterValue
+      filterUrl = apiUrl + '/byUserId?id=' + filterValue;
       break
     default:
-      filterUrl = apiUrl + '/getNotes'
+      filterUrl = apiUrl + '/getNotes';
       break
   }
 
-	console.log(filterUrl)
+	console.log(filterUrl);
 	fetch(filterUrl, {
 		headers: headers
 	})
 		.then(res => res.json())
 		.then(function(json) {
-			notesFetch(json)
+			notesFetch(json);
 		})
-		.catch(error => console.log)
+		.catch(error => console.log);
 });
 
 
@@ -81,7 +45,6 @@ filterButton.addEventListener('click', function() {
 //Modify DOM element based on fetch notes
 const notesFetch = notes => {
   
-  console.log(notes)
   let htmlString = "";
   for (let note of notes) {
         htmlString +=
@@ -98,8 +61,7 @@ const notesFetch = notes => {
             "<p>" + note.contents + "</p>";
         if (note.imgUrl !== null)
         {
-            let url = '/management/images/'+ note.imgUrl + '';
-            htmlString += '<a class="noteImgLink" href="'+ url +'"><img src="'+ url +'" alt="" style="max-height:5em; width:auto;"/></a>';
+            htmlString += '<a class="noteImgLink" href="'+ note.imgUrl +'"><img src="'+ note.imgUrl +'" alt="" style="max-height:5em; width:auto;"/></a>';
         }
         htmlString +=
         "</div>" +
@@ -131,8 +93,8 @@ const notesFetch = notes => {
 //Filter DOM
 
 const changeFilters = (filterType) => {
-  let filter = document.querySelector('#filter-option')
-  document.querySelector('#notes-container').innerHTML = ''
+  let filter = document.querySelector('#filter-option');
+  document.querySelector('#notes-container').innerHTML = '';
   switch (filterType) {
     case 'department': 
       filter.innerHTML = '<select id="filter-value" class="dropdown-menu">'
@@ -148,16 +110,16 @@ const changeFilters = (filterType) => {
       + '<option value="0">Today</option>'
       + '<option value="7">This week</option>'
       + '<option value="1">This month</option>'
-      + '</select>'
+      + '</select>';
       break
     case 'userId': 
-      filter.innerHTML = '<input type="text" id="filter-value" placeholder="Filter user id">'
+      filter.innerHTML = '<input type="text" id="filter-value" placeholder="Filter user id">';
       break
     default:
-      filter.innerHTML = ''
+      filter.innerHTML = '';
       break;
   }
-}
+};
 
 // Search more users to add note
 const searchButton = (id) => {
@@ -196,16 +158,16 @@ const searchButton = (id) => {
                 searchResults(json, id);
             })
             .catch(error => console.log(error)); 
-}
+};
 
 const searchResults = (users, id) => {
-  let resultString = ""
+  let resultString = "";
   for (let user of users) {
-    resultString += '<option value="' + user.username+ '">' + user.firstName + ' ' + user.lastName + '</option>'
+    resultString += '<option value="' + user.username+ '">' + user.firstName + ' ' + user.lastName + '</option>';
   }
 
   document.querySelector("#user-search-container-" + id).innerHTML = resultString;
-}
+};
 
 const changeOptions = (searchType, id) => {
   let search = document.querySelector("#search-option-" + id);
@@ -213,14 +175,12 @@ const changeOptions = (searchType, id) => {
   document.querySelector("#user-search-container-" + id).innerHTML = "";
 };
 
-let jobs = []
+let jobs = [];
 
 const getOptions = (searchType, id) => {
-  console.log(id)
   switch (searchType)
   {
       case "department":
-        console.log('here')
           return  '<select id="search-user-' + id + '" class="dropdown-menu">'
                   + '<option selected disabled>Choose department</option>'
                   + getManagementOptions()
@@ -243,13 +203,6 @@ const getOptions = (searchType, id) => {
   }
 };
 
-const getManagementOptions = () => {
-  return  '<option value="1">Restaurant</option>'
-          + '<option value="2">Management</option>'
-          + '<option value="3">Reception</option>'
-          + '<option value="4">Maintenance</option>';
-};
-
 const changeJobOptions = (department, id) => {
   let search = document.querySelector("#search-user-" + id);
   getJobOptions(department).then(function(result) {
@@ -257,35 +210,13 @@ const changeJobOptions = (department, id) => {
   });
 };
 
-const getJobOptions = (department) => {
-  
-  return fetch("/management/r/jobs/byDepartment?dptId="+department)
-        .then(response => response.json())
-        .then(function(json) 
-  {
-      let jobSelect = "";
-      
-      for(let job of json)
-          jobSelect += '<option value="' + job.id + '">' + job.title + '</option>';
-      
-      return jobSelect;
-  })
-          .catch(error => console.log(error));  
-};
-
-const jobOptions = (element, value) =>
-{
-element.innerHTML = jobs[value];  
-};
-
-
 //Send note to more receivers
 
 const sendNote = (id) => {
-  receiverUsername = document.getElementById('user-search-container-' + id).value
+  receiverUsername = document.getElementById('user-search-container-' + id).value;
   fetch(apiUrl + '/newReceiver?noteId='+ id + '&username=' + receiverUsername, {
     method: 'POST'
   })
-  .catch(error => console.log(error))
-  console.log("note sent")
-} 
+  .catch(error => console.log(error));
+  console.log("note sent");
+} ;
