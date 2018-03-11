@@ -105,6 +105,14 @@ public class NotesBean {
         em.remove(note);
     }
     
+    public void editNoteText(int id, String text)
+    {
+        refreshEM();
+        Notes note = (Notes) em.createNamedQuery("Notes.findById").setParameter("id", id).getResultList().get(0);
+        note.setContents(text);
+        em.persist(note);
+    }
+    
     public List<Notes> getNotesByTime(int time, int status) {
         refreshEM();
         Date date;

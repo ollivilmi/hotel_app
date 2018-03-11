@@ -66,6 +66,13 @@ public class NotesResources extends AbstractFacade<Notes> {
         nb.removeNoteById(noteId);
     }
     
+    @POST
+    @Path("/manager/editNote")
+    public void editNote(@FormParam("noteId") int noteId, @FormParam("text") String text)
+    {
+        nb.editNoteText(noteId, text);
+    }
+    
     @GET
     @Path("byUserId")
     @Produces(MediaType.APPLICATION_JSON)

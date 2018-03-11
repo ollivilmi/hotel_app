@@ -15,7 +15,7 @@ const notesFetch = notes => {
                           '<button class="note-title" onclick="showContent(this.parentNode.nextSibling)">'+ note.title +'</button>' +
                           '</div>' +
                           '<div class="notes-content">' +
-                          "<p class='note-text'>" + note.contents + "</p>" +
+                          "<p class='note-text'>" + note.contents.replace("\n", "<br>") + "</p>" +
                           noteImage(note.imgUrl) +
                           "</div>" +
                           '<div class="notes-footer">' +
@@ -39,7 +39,7 @@ const showContent = content => {
 };
 
 const noteImage = imgUrl => {
-    if (imgUrl !== null)
+    if (imgUrl != null)
     {
       return '<a class="noteImgLink" href="'+ imgUrl +'"><img src="'+ imgUrl +'" alt="" style="max-height:5em; width:auto;"/></a>';
     }

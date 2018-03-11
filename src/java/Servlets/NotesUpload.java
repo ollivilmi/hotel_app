@@ -59,7 +59,6 @@ public class NotesUpload extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String content = request.getParameter("content");
             String title = request.getParameter("title");
-            content = content.replace("\n", "<br>"); //read new line break for textarea
             int departmentId;
             if (request.getParameter("departmentId") == null)
                 departmentId = 0;

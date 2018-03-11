@@ -7,8 +7,6 @@ var headers = {
 window.onload = function() {
 /*---- FETCH NOTES ----*/
 
-let apiUrl = "/management/r/notes";
-
 for(let i = 1; i<5; i++)
     getJobOptions(i).then(function(result) {
        jobs[i] = result;
@@ -16,39 +14,40 @@ for(let i = 1; i<5; i++)
 
 //Filter notes
 let filterButton = document.querySelector("#filter-apply-button");
-filterButton.addEventListener('click', function() {
-  let filterType = document.querySelector("#filter-type").value;
-  let filterValue = document.querySelector('#filter-value').value;
-  let statusValue = document.querySelector('#status-value').value;
-	let filterUrl = "";
-
-  switch (filterType) {
-    case 'department':
-      filterUrl = apiUrl + '/byDepartment?departmentId=' + filterValue + '&status=' +statusValue;
-      break
-    case 'time':
-      filterUrl = apiUrl + '/byTime?time=' + filterValue + '&status=' +statusValue;;
-      break
-    case 'userId':
-      filterUrl = apiUrl + '/byUserId?id=' + filterValue;
-      break
-    default:
-      filterUrl = apiUrl + '/getNotes';
-      break
-  }
-
-	fetch(filterUrl, {
-		headers: headers
-	})
-		.then(res => res.json())
-		.then(function(json) {
-			notesFetch(json);
-		})
-		.catch(error => console.log);
-});
+filterButton.addEventListener('click', updateFilter);
 };
 
+const updateFilter = () => {
+    let filterType = document.querySelector("#filter-type").value;
+    let filterValue = document.querySelector('#filter-value').value;
+    let statusValue = document.querySelector('#status-value').value;
+    let filterUrl = "";
+    let apiUrl = "/management/r/notes";
 
+    switch (filterType) {
+      case 'department':
+        filterUrl = apiUrl + '/byDepartment?departmentId=' + filterValue + '&status=' +statusValue;
+        break
+      case 'time':
+        filterUrl = apiUrl + '/byTime?time=' + filterValue + '&status=' +statusValue;;
+        break
+      case 'userId':
+        filterUrl = apiUrl + '/byUserId?id=' + filterValue;
+        break
+      default:
+        filterUrl = apiUrl + '/getNotes';
+        break
+    }
+
+          fetch(filterUrl, {
+                  headers: headers
+          })
+                  .then(res => res.json())
+                  .then(function(json) {
+                          notesFetch(json);
+                  })
+                  .catch(error => console.log); 
+};
 
 //Modify DOM element based on fetch notes
 const notesFetch = notes => {
@@ -61,16 +60,19 @@ const notesFetch = notes => {
         '<div class="notes-header">' +
             '<h1>' + note.title + '</h1>' +
         '<div class="note-manager-buttons">' +
-            '<button id="note-edit">Edit</button>' +
             '<form action="/management/r/notes/manager/deleteNote" method="POST">' +
-            '<input type="hidden" name="noteId" value="'+ note.id +'">' +
-            '<button id="note-delete">Delete</button>' +
+                '<input type="hidden" name="noteId" value="'+ note.id +'">' +
+                '<button id="note-delete">Delete</button>' +
             '</form>' +
         "</div>" +
         "</div>" + 
         '<div class="notes-content">' +
-            "<p>" + note.contents + "</p>";
-        if (note.imgUrl !== null)
+            '<form action="/management/r/notes/manager/editNote" method="POST">' +
+            '<input type="hidden" name="noteId" value="'+ note.id +'">' +
+            '<textarea name="text" id="add-content" cols="50" rows="5" required>'+ note.contents +'</textarea>' +
+            '<button id="note-edit">Edit text</button>' +
+            '</form>';
+        if (note.imgUrl != null)
         {
             htmlString += '<a class="noteImgLink" href="'+ note.imgUrl +'"><img src="'+ note.imgUrl +'" alt="" style="max-height:5em; width:auto;"/></a>';
         }
