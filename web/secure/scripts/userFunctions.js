@@ -1,25 +1,3 @@
-/* FOR STYLING <input type="file"> */
-//modify <input> type file name when user chooses a file
-window.onload = function() {
-    const fileAdd = document.getElementById("file-add");
-
-    // Show the new selected file to the user
-    fileAdd.onchange = () => {
-      const fileSelected = document.getElementById("file-selected");
-      const splitString = fileAdd.value
-        .split(/(\\|\/)/g)
-        .pop()
-        .split(".");
-      console.log(splitString);
-      const name = splitString[0].substr(0, 8);
-      const ext = splitString[splitString.length - 1];
-      splitString[0].length <= 8
-        ? (fileSelected.innerHTML = name + "." + ext)
-        : (fileSelected.innerHTML = name + "...." + ext);
-      fileSelected.style.color = "black";
-    };
-};
-
 const getJobOptions = (department) => {
     
     return fetch("/management/r/jobs/byDepartment?dptId="+department)

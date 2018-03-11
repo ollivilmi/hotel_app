@@ -1,11 +1,18 @@
+var jobs = [];
+var username = getCookie("user");
+var headers = {
+  user: username
+};
+
+window.onload = function() {
 /*---- FETCH NOTES ----*/
 
 let apiUrl = "/management/r/notes";
-let username = getCookie("user");
 
-let headers = {
-  user: username
-};
+for(let i = 1; i<5; i++)
+    getJobOptions(i).then(function(result) {
+       jobs[i] = result;
+    });
 
 //Filter notes
 let filterButton = document.querySelector("#filter-apply-button");
@@ -39,6 +46,7 @@ filterButton.addEventListener('click', function() {
 		})
 		.catch(error => console.log);
 });
+};
 
 
 
@@ -174,8 +182,6 @@ const changeOptions = (searchType, id) => {
   search.innerHTML = getOptions(searchType, id);
   document.querySelector("#user-search-container-" + id).innerHTML = "";
 };
-
-let jobs = [];
 
 const getOptions = (searchType, id) => {
   switch (searchType)

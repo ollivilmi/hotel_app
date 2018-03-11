@@ -15,6 +15,7 @@ var closeButton;
 var jobs = [];
 
 window.onload = function () {
+
     //Get elements for modal container
     modal = document.getElementById('modal-edit-id');
     registerContainer = document.getElementById('register-container');
@@ -28,6 +29,25 @@ window.onload = function () {
         getJobOptions(i).then(function(result) {
            jobs[i] = result;
         });
+    
+    /* FOR STYLING <input type="file"> */
+    //modify <input> type file name when user chooses a file 
+    const fileAdd = document.getElementById("file-add");
+
+    // Show the new selected file to the user
+    fileAdd.onchange = () => {
+      const fileSelected = document.getElementById("file-selected");
+      const splitString = fileAdd.value
+        .split(/(\\|\/)/g)
+        .pop()
+        .split(".");
+      const name = splitString[0].substr(0, 8);
+      const ext = splitString[splitString.length - 1];
+      splitString[0].length <= 8
+        ? (fileSelected.innerHTML = name + "." + ext)
+        : (fileSelected.innerHTML = name + "...." + ext);
+      fileSelected.style.color = "black";
+    };
     
     //Current session cookie to identify we are logged in for resources
     user = getCookie("user");
