@@ -71,7 +71,7 @@ public class Update extends HttpServlet {
                         u.setPwHash(Password.hash(request.getParameter("password")));
 
                 //File location for new profile picture
-                File uploads = new File("C:\\Users\\Hillo\\Desktop\\HotelManagement\\hotel_app\\web\\images");
+                File uploads = new File("/home/glassfish/glassfish5/glassfish/domains/domain1/applications/Management/assets/images/uploads");
                 
                 
                 String fileName = null;

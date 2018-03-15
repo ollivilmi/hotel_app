@@ -55,7 +55,7 @@ public class NotesUpload extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
 
-        File uploads = new File("C:\\Users\\Hillo\\Desktop\\HotelManagement\\hotel_app\\web\\images"); //define storage location
+        File uploads = new File("/home/glassfish/glassfish5/glassfish/domains/domain1/applications/Management/assets/images/uploads"); //define storage location
         try (PrintWriter out = response.getWriter()) {
             String content = request.getParameter("content");
             String title = request.getParameter("title");

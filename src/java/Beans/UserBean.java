@@ -55,7 +55,7 @@ public class UserBean {
     
     public void updateUserPicture(Users user, String url)
     {
-        user.setPicture("/management/images/"+url);
+        user.setPicture("/management/assets/images/uploads/"+url);
         em.merge(user);
     }
     
