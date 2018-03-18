@@ -5,7 +5,7 @@ Metropolia course
 Application Development Methods TX00CK90-3003
 
 
-## [The website (Hosted on Metropolia UAS server)](http://10.114.32.46:8080/management/login)
+## [The website/application (Hosted on Metropolia UAS server)](http://10.114.32.46:8080/management/login)
 
 ## Team VietFi
 
